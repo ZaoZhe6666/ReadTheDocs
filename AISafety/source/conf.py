@@ -16,10 +16,10 @@ from recommonmark.parser import CommonMarkParser
 # import os
 # import sys
 # sys.path.insert(0, os.path.abspath('.'))
-source_parsers = {
-    '.md': CommonMarkParser,
-}
-source_suffix = ['.rst', '.md']
+# source_parsers = {
+#     '.md': CommonMarkParser,
+# }
+# source_suffix = ['.rst', '.md']
 
 # -- Project information -----------------------------------------------------
 
