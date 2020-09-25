@@ -10,9 +10,10 @@ Welcome to AISafety's documentation!
    :maxdepth: 2
    :caption: Contents:
 
-   hello.rst
-   test.md
    Start/index.rst
+   Attack/index.rst
+   Evaluation/index.rst
+   Defense/index.rst
 
 Indices and tables
 ==================

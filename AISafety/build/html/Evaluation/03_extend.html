@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>评测算法介绍 &mdash; AISafety 1.0 文档</title>
+  <title>3. 扩展评测算法 &mdash; AISafety 1.0 文档</title>
   
 
   
@@ -37,8 +37,8 @@
     
     <link rel="index" title="索引" href="../genindex.html" />
     <link rel="search" title="搜索" href="../search.html" />
-    <link rel="next" title="1. 评测算法总览" href="01_basic_introduce.html" />
-    <link rel="prev" title="2. 开始运行项目" href="../Attack/02_extend.html" /> 
+    <link rel="next" title="防御算法介绍" href="../Defense/index.html" />
+    <link rel="prev" title="2. 评测算法详细介绍" href="02_detail_introduce.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -87,10 +87,10 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../Start/index.html">开始使用</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Attack/index.html">攻击算法介绍</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">评测算法介绍</a><ul>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">评测算法介绍</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="01_basic_introduce.html">1. 评测算法总览</a></li>
 <li class="toctree-l2"><a class="reference internal" href="02_detail_introduce.html">2. 评测算法详细介绍</a></li>
-<li class="toctree-l2"><a class="reference internal" href="03_extend.html">3. 扩展评测算法</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">3. 扩展评测算法</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../Defense/index.html">防御算法介绍</a></li>
@@ -140,13 +140,15 @@
     
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
         
-      <li>评测算法介绍</li>
+          <li><a href="index.html">评测算法介绍</a> &raquo;</li>
+        
+      <li><span class="section-number">3. </span>扩展评测算法</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="../_sources/Evaluation/index.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/Evaluation/03_extend.md.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -160,39 +162,8 @@
            <div itemprop="articleBody">
             
   <div class="section" id="id1">
-<h1>评测算法介绍<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
-<p>本平台目前已集成的评测方法体系的整体结构如下所示，从两个维度进行评测：针对模型本身以及针对模型使用的数据（测试样本）。</p>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="01_basic_introduce.html">1. 评测算法总览</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="01_basic_introduce.html#id2">1.1. 第一类评测算法</a></li>
-<li class="toctree-l2"><a class="reference internal" href="01_basic_introduce.html#id3">1.2. 第二类评测算法</a></li>
-<li class="toctree-l2"><a class="reference internal" href="01_basic_introduce.html#id4">1.3. 第三类评测算法</a></li>
-<li class="toctree-l2"><a class="reference internal" href="01_basic_introduce.html#id5">1.4. 第四类评测算法</a></li>
-<li class="toctree-l2"><a class="reference internal" href="01_basic_introduce.html#id6">1.5. 第五类评测算法</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="02_detail_introduce.html">2. 评测算法详细介绍</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="02_detail_introduce.html#acc">2.1. ACC 精确度</a></li>
-<li class="toctree-l2"><a class="reference internal" href="02_detail_introduce.html#acac">2.2. ACAC 平均置信度</a></li>
-<li class="toctree-l2"><a class="reference internal" href="02_detail_introduce.html#actc">2.3. ACTC 对抗成功时正确标签平均置信度</a></li>
-<li class="toctree-l2"><a class="reference internal" href="02_detail_introduce.html#aldp">2.4. ALDp 对抗攻击失真度</a></li>
-<li class="toctree-l2"><a class="reference internal" href="02_detail_introduce.html#ass-ssim">2.5. ASS 对抗样本数据与原数据的结构相似度（SSIM）</a></li>
-<li class="toctree-l2"><a class="reference internal" href="02_detail_introduce.html#bd">2.6. BD 最大边界距离</a></li>
-<li class="toctree-l2"><a class="reference internal" href="02_detail_introduce.html#cav">2.7. CAV 分类准确度方差</a></li>
-<li class="toctree-l2"><a class="reference internal" href="02_detail_introduce.html#ccv">2.8. CCV 分类置信方差</a></li>
-<li class="toctree-l2"><a class="reference internal" href="02_detail_introduce.html#cos">2.9. COS 分类输出稳定性</a></li>
-<li class="toctree-l2"><a class="reference internal" href="02_detail_introduce.html#crr-csr">2.10. CRR/CSR 分类校正/补偿比率</a></li>
-<li class="toctree-l2"><a class="reference internal" href="02_detail_introduce.html#eni">2.11. ENI</a></li>
-<li class="toctree-l2"><a class="reference internal" href="02_detail_introduce.html#nte">2.12. NTE 噪声容量估计</a></li>
-<li class="toctree-l2"><a class="reference internal" href="02_detail_introduce.html#psd">2.13. PSD 扰动敏感距离</a></li>
-<li class="toctree-l2"><a class="reference internal" href="02_detail_introduce.html#rgb">2.14. RGB 对高斯模糊鲁棒性</a></li>
-<li class="toctree-l2"><a class="reference internal" href="02_detail_introduce.html#ric">2.15. RIC 对图像压缩鲁棒性</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="03_extend.html">3. 扩展评测算法</a></li>
-</ul>
-</div>
+<h1><span class="section-number">3. </span>扩展评测算法<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
+<p>   用户可参照如下指令，扩展并集成个人评测算法执行评测过程</p>
 </div>
 
 
@@ -203,10 +174,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="01_basic_introduce.html" class="btn btn-neutral float-right" title="1. 评测算法总览" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="../Defense/index.html" class="btn btn-neutral float-right" title="防御算法介绍" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="../Attack/02_extend.html" class="btn btn-neutral float-left" title="2. 开始运行项目" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="02_detail_introduce.html" class="btn btn-neutral float-left" title="2. 评测算法详细介绍" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

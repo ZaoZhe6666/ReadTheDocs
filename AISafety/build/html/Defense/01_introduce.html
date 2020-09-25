@@ -1,0 +1,368 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-CN" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>1. 防御算法介绍 &mdash; AISafety 1.0 文档</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/translations.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="2. 扩展评测算法" href="02_extend.html" />
+    <link rel="prev" title="防御算法介绍" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> AISafety
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../Start/index.html">开始使用</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Attack/index.html">攻击算法介绍</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Evaluation/index.html">评测算法介绍</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">防御算法介绍</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">1. 防御算法介绍</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#eat">1.1. EAT加固算法</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id2">算法介绍</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id3">参数说明</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#nat">1.2. NAT加固算法</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id4">算法介绍</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id5">参数说明</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#oat">1.3. OAT加固算法</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id6">算法介绍</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id7">参数说明</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#pat">1.4. PAT加固算法</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id8">算法介绍</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id9">参数说明</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#rand">1.5. RAND加固算法</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id10">算法介绍</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id11">参数说明</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="02_extend.html">2. 扩展评测算法</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">AISafety</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">防御算法介绍</a> &raquo;</li>
+        
+      <li><span class="section-number">1. </span>防御算法介绍</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/Defense/01_introduce.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="id1">
+<h1><span class="section-number">1. </span>防御算法介绍<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
+<div class="section" id="eat">
+<h2><span class="section-number">1.1. </span>EAT加固算法<a class="headerlink" href="#eat" title="永久链接至标题">¶</a></h2>
+<div class="section" id="id2">
+<h3>算法介绍<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h3>
+<p>EAT的全称是Ensemble adversarial training (集成对抗训练），具体是指使用多种方式生成对抗样本对模型进行对抗训练的方法，通过使用在其他静态预训练模型上产生的对抗样本来扩充模型的训练数据，能有效应对对抗样本的可迁移攻击。</p>
+<p>与之相关的基础方法是对抗训练，该方法旨在从随机初始化的权重中训练一个鲁棒的模型，其训练集由真实数据集和加入了对抗扰动的数据集组成，因此叫做对抗训练。其表达式如下：</p>
+<p>$$
+\tilde{J}(\theta,x,y)=\alpha \cdot J(\theta,x,y)+(1-\alpha)\cdot J(\theta,x+\epsilon \cdot sign(\triangledown_x J(\theta,x,y)))
+$$</p>
+<p>其中 $  J(\theta, x, y) $ 是模型对于普通样本的损失函数，作者通过 $ x + \epsilon \cdot sign(\triangledown_x J(\theta,x,y)) $ 来构造对抗样本，并要求模型能正确对其分类。</p>
+</div>
+<div class="section" id="id3">
+<h3>参数说明<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h3>
+<p>| 参数名          | 参数含义               |
+| ————— | ———————- |
+| dataset         | 数据集类型             |
+| num_epochs      | 对抗训练迭代的次数     |
+| epsilon         | 样本扰动的偏移值       |
+| learn_rate      | 训练的学习率           |
+| alpha           | 参与对抗样本一次的比例 |
+| train_externals | 是否使用外部预训练模型 |</p>
+</div>
+</div>
+<div class="section" id="nat">
+<h2><span class="section-number">1.2. </span>NAT加固算法<a class="headerlink" href="#nat" title="永久链接至标题">¶</a></h2>
+<div class="section" id="id4">
+<h3>算法介绍<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h3>
+<p>New adversarial training (NAT)</p>
+<p>对抗训练（adversarial training）是增强神经网络鲁棒性的重要方式。在对抗训练的过程中，样本会被混合一些微小的扰动（改变很小，但是很可能造成误分类），然后使神经网络适应这种改变，从而对对抗样本具有鲁棒性。</p>
+<p>对抗训练的一般性原理，对抗训练可以概括为如下的最大最小化公式：
+$$
+{min}<em>{\theta}E</em>{(Z,y)} \sim D[{max}<em>{||\delta|| \leq \epsilon} L(f</em>\theta (X + \delta),y)]
+$$
+内层（中括号内）是一个最大化，其中X表示样本的输入表示，$ \delta $表示叠加在输入上的扰动，$ f_\theta $是神经网络函数，y是样本的标签，$ L(f_theta (X + \delta ), y) $ 则表示在样本<img alt="img" src="file:///C:%5CUsers%5C%E8%B5%B5%E4%BA%8C%E7%8B%97%5CAppData%5CLocal%5CTemp%5Cksohtml10700%5Cwps1.jpg" />上叠加一个扰动$ \delta $，再经过神经网络函数，与标签<img alt="img" src="file:///C:%5CUsers%5C%E8%B5%B5%E4%BA%8C%E7%8B%97%5CAppData%5CLocal%5CTemp%5Cksohtml10700%5Cwps2.jpg" />比较得到的损失。 maxL是优化目标，即寻找使损失函数最大的扰动，简单来讲就是添加的扰动要尽量让神经网络迷惑。</p>
+<p>外层就是对神经网络进行优化的最小化公式，即当扰动固定的情况下，我们训练神经网络模型使得在训练数据上的损失最小，也就是说，使模型具有一定的鲁棒性能够适应这种扰动。</p>
+<p>这里过程中生成的对抗样本采用RLLC的方式生成，其他的过程和OAT的类似。</p>
+</div>
+<div class="section" id="id5">
+<h3>参数说明<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h3>
+<p>| 参数名       | 参数含义                                     |
+| ———— | ——————————————– |
+| num_epochs   | 对抗训练迭代的次数，该数值越大，时间开销越大 |
+| clip_eps_min | 随机样本生成的下限                           |
+| clip_eps_max | 随机样本生成的上限                           |
+| adv_radio    | 求loss的时候对抗样本占比                     |
+| eps_mu       | 随机样本分布的中心                           |
+| eps_sigma    | 随机样本分布的标准差                         |</p>
+</div>
+</div>
+<div class="section" id="oat">
+<h2><span class="section-number">1.3. </span>OAT加固算法<a class="headerlink" href="#oat" title="永久链接至标题">¶</a></h2>
+<div class="section" id="id6">
+<h3>算法介绍<a class="headerlink" href="#id6" title="永久链接至标题">¶</a></h3>
+<p>Original adversarial training (OAT)</p>
+<p>对抗训练（adversarial training）是增强神经网络鲁棒性的重要方式。在对抗训练的过程中，样本会被混合一些微小的扰动（改变很小，但是很可能造成误分类），然后使神经网络适应这种改变，从而对对抗样本具有鲁棒性。</p>
+<p>对抗训练的一般性原理，对抗训练可以概括为如下的最大最小化公式：
+$$
+{min}<em>{\theta}E</em>{(Z,y)} \sim D[{max}<em>{||\delta|| \leq \epsilon} L(f</em>\theta (X + \delta),y)]
+$$
+内层（中括号内）是一个最大化，其中X表示样本的输入表示，$ \delta $表示叠加在输入上的扰动，$ f_\theta $是神经网络函数，y是样本的标签，$ L(f_theta (X + \delta ), y) $ 则表示在样本<img alt="img" src="file:///C:%5CUsers%5C%E8%B5%B5%E4%BA%8C%E7%8B%97%5CAppData%5CLocal%5CTemp%5Cksohtml10700%5Cwps1.jpg" />上叠加一个扰动$ \delta $，再经过神经网络函数，与标签<img alt="img" src="file:///C:%5CUsers%5C%E8%B5%B5%E4%BA%8C%E7%8B%97%5CAppData%5CLocal%5CTemp%5Cksohtml10700%5Cwps2.jpg" />比较得到的损失。 maxL是优化目标，即寻找使损失函数最大的扰动，简单来讲就是添加的扰动要尽量让神经网络迷惑。</p>
+<p>外层就是对神经网络进行优化的最小化公式，即当扰动固定的情况下，我们训练神经网络模型使得在训练数据上的损失最小，也就是说，使模型具有一定的鲁棒性能够适应这种扰动。</p>
+</div>
+<div class="section" id="id7">
+<h3>参数说明<a class="headerlink" href="#id7" title="永久链接至标题">¶</a></h3>
+<p>| 参数名         | 参数含义                                     |
+| ————– | ——————————————– |
+| num_epochs     | 对抗训练迭代的次数，该数值越大，时间开销越大 |
+| epsilon        | 样本扰动的偏移值                             |
+| attak_step_num | 对抗攻击训练中一次选用的样本数目             |
+| alpha          | 参与对抗样本一次的比例                       |</p>
+</div>
+</div>
+<div class="section" id="pat">
+<h2><span class="section-number">1.4. </span>PAT加固算法<a class="headerlink" href="#pat" title="永久链接至标题">¶</a></h2>
+<div class="section" id="id8">
+<h3>算法介绍<a class="headerlink" href="#id8" title="永久链接至标题">¶</a></h3>
+<p>PAT的全称是PGD adversarial training（PGD对抗训练），在白盒环境下，通过PGD攻击算法生成对抗样本，然后用对抗样本和普通样本混合训练模型。</p>
+<p>基于FGSM攻击方法，Madry等人引入迭代的过程，并且每次将噪音映射到某个特定空间中形成了目前最为常用的PGD攻击方法：</p>
+<p>$$
+\ x_0^{‘}=x
+\x_{n+1}^{‘}=\prod_{x+S}{x_n^{‘}+\epsilon \cdot sign(\triangledown_xJ(\theta,x_n^{‘},y))}
+$$</p>
+<p>Goodfellow等人最早提出对抗训练的思想，该论文尝试在训练过程中加入对抗样本来提升模型的鲁棒性，其损失函数定义如下：</p>
+<p>$$
+\tilde{J}(\theta,x,y)=\alpha \cdot J(\theta,x,y)+(1-\alpha)\cdot J(\theta,x+\epsilon \cdot sign(\triangledown_x J(\theta,x,y)))
+$$
+其中 $  J(\theta, x, y) $ 是模型对于普通样本的损失函数，作者通过 $ x + \epsilon \cdot sign(\triangledown_x J(\theta,x,y)) $ 来构造对抗样本，并要求模型能正确对其分类。</p>
+<p>PAT对抗训练优化的目标函数如下：
+$$
+\theta^*={min}<em>\theta E</em>{(x,y)}[{max}<em>\sigma l(x+\sigma;y;F</em>\theta)]
+$$
+其中$ l(x+\sigma;y;F_\theta) $为模型 $ F_\theta $ 在对抗噪音大小为σ下的损失函数。</p>
+<p>在优化目标函数过程中，该方法在每一个批数据（mini-batch）中加入同样数量的普通样本和对抗样本（由PGD攻击生成）。</p>
+</div>
+<div class="section" id="id9">
+<h3>参数说明<a class="headerlink" href="#id9" title="永久链接至标题">¶</a></h3>
+<p>| 参数名 | 参数含义                                                |
+| —— | ——————————————————- |
+| α      | 对抗训练中普通样本和对抗样本的混合比例，一般设置为1:1。 |</p>
+</div>
+</div>
+<div class="section" id="rand">
+<h2><span class="section-number">1.5. </span>RAND加固算法<a class="headerlink" href="#rand" title="永久链接至标题">¶</a></h2>
+<div class="section" id="id10">
+<h3>算法介绍<a class="headerlink" href="#id10" title="永久链接至标题">¶</a></h3>
+<p>Rand方法利用随机化的方法来对输入图片引入随机性操作，作为一个预处理模块，该方法可以有效的提升深度神经网络对于对抗样本噪音的防御能力和鲁棒性。</p>
+<p>该方法的具体操作有如下两种方式：
+（1）对于原始图片X，对其大小W*H*3进行随机修改，变化为W’*H’*3，这其中大小的变换要在合理范围内（如：2个像素值）；</p>
+<p>（2）第二种方式是对原始图片X进行随机填充。使用值为0的像素在原始图片的四周进行填充。</p>
+<p>这两种方式对于输入图片引入很多随机性，从而削弱了对抗攻击的效果，提升了模型对抗鲁棒性。</p>
+</div>
+<div class="section" id="id11">
+<h3>参数说明<a class="headerlink" href="#id11" title="永久链接至标题">¶</a></h3>
+<p>| 参数名 | 参数含义               |
+| —— | ———————- |
+| rnd    | 随机变化后的图片大小。 |</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="02_extend.html" class="btn btn-neutral float-right" title="2. 扩展评测算法" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral float-left" title="防御算法介绍" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; 版权所有 2020, DIG
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
