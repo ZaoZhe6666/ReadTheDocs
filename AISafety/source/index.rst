@@ -10,7 +10,9 @@ Welcome to AISafety's documentation!
    :maxdepth: 2
    :caption: Contents:
 
-   hello
+   hello.rst
+   test.md
+   Start/index.rst
 
 Indices and tables
 ==================
