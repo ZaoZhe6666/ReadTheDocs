@@ -90,19 +90,21 @@
 <li class="toctree-l2"><a class="reference internal" href="01_introduce.html">1. 项目简介</a></li>
 <li class="toctree-l2"><a class="reference internal" href="02_requirment.html">2. 开始运行项目</a></li>
 <li class="toctree-l2"><a class="reference internal" href="03_cpu_config.html">3. CPU/GPU模式和设置说明</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">4. Docker模式和设置说明</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#docker-ce-linux">5. Docker CE安装（Linux环境）</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id1">5.1. 软件下载</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id2">5.2. 内核要求</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id3">5.3. 软件安装</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id4">5.4. Docker使用</a><ul>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">4. Docker模式和设置说明</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#docker-ce-linux">4.1. Docker CE安装（Linux环境）</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id1">软件下载</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id2">内核要求</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id3">软件安装</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">4.2. Docker使用</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#dockfile">创建dockfile</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#id5">运行镜像</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#image">查看image镜像</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#id6">其他Docker命令</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#id7">5.5. Docker运行</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id7">4.3. Docker运行</a></li>
 </ul>
 </li>
 </ul>
@@ -176,52 +178,88 @@
             
   <div class="section" id="docker">
 <h1><span class="section-number">4. </span>Docker模式和设置说明<a class="headerlink" href="#docker" title="永久链接至标题">¶</a></h1>
-</div>
 <div class="section" id="docker-ce-linux">
-<h1><span class="section-number">5. </span>Docker CE安装（Linux环境）<a class="headerlink" href="#docker-ce-linux" title="永久链接至标题">¶</a></h1>
+<h2><span class="section-number">4.1. </span>Docker CE安装（Linux环境）<a class="headerlink" href="#docker-ce-linux" title="永久链接至标题">¶</a></h2>
 <div class="section" id="id1">
-<h2><span class="section-number">5.1. </span>软件下载<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h2>
+<h3>软件下载<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h3>
 <p>官方地址：<a class="reference external" href="https://www.docker.com/community-edition">Docker官网</a>
 阿里docker-ce镜像：<a class="reference external" href="https://developer.aliyun.com/mirror/docker-ce">Docker镜像</a></p>
 </div>
 <div class="section" id="id2">
-<h2><span class="section-number">5.2. </span>内核要求<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
+<h3>内核要求<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h3>
 <p>docker 要求centos系统内核版本必须高于3.10
 centos下通过 uname -r 查看内核版本。</p>
 </div>
 <div class="section" id="id3">
-<h2><span class="section-number">5.3. </span>软件安装<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h2>
+<h3>软件安装<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h3>
 <ol class="simple">
-<li><p><strong>卸载旧版本docker相关包</strong>
-<code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">yum</span> <span class="pre">remove</span> <span class="pre">docker</span>&#160; <span class="pre">docker-common</span> <span class="pre">docker-selinux</span> <span class="pre">docker-engine</span></code></p></li>
-<li><p><strong>安装需要的软件包</strong>， yum-util 提供yum-config-manager功能，另外两个是devicemapper驱动依赖的
-<code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">yum</span> <span class="pre">install</span> <span class="pre">-y</span> <span class="pre">yum-utils</span> <span class="pre">device-mapper-persistent-data</span> <span class="pre">lvm2</span></code></p></li>
-<li><p><strong>设置yum源</strong>
-设置官方源：
-<code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">yum-config-manager</span> <span class="pre">--add-repo</span> <span class="pre">https://download.docker.com/linux/centos/docker-ce.repo</span></code>
-设置阿里源：
-<code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">yum-config-manager</span> <span class="pre">--add-repo</span> <span class="pre">https://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo</span></code></p></li>
-<li><p><strong>刷新yum源</strong>
-<code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">yum</span> <span class="pre">makecache</span> <span class="pre">fast</span></code></p></li>
-<li><p><strong>安装docker-ce</strong>
-查看全部版本：（如果匹配不到docker-ce包，执行4刷新yum源）</p></li>
+<li><p><strong>卸载旧版本docker相关包</strong></p></li>
 </ol>
-<p><code class="docutils literal notranslate"><span class="pre">yum</span> <span class="pre">list</span> <span class="pre">docker-ce</span> <span class="pre">--showduplicates</span> <span class="pre">|</span> <span class="pre">sort</span> <span class="pre">-r</span> </code><br />安装指定版本：</p>
-<p><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">yum</span> <span class="pre">-y</span> <span class="pre">install</span> <span class="pre">docker-ce-18.03.0.ce</span></code></p>
-<p>（安装最新版：  <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">yum</span> <span class="pre">-y</span> <span class="pre">install</span> <span class="pre">docker-ce</span></code>）</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>    <span class="n">sudo</span> <span class="n">yum</span> <span class="n">remove</span> <span class="n">docker</span>  <span class="n">docker</span><span class="o">-</span><span class="n">common</span> <span class="n">docker</span><span class="o">-</span><span class="n">selinux</span> <span class="n">docker</span><span class="o">-</span><span class="n">engine</span>
+</pre></div>
+</div>
+<ol class="simple">
+<li><p><strong>安装需要的软件包</strong></p></li>
+</ol>
+<p>yum-util 提供yum-config-manager功能，另外两个是devicemapper驱动依赖的</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>        <span class="n">sudo</span> <span class="n">yum</span> <span class="n">install</span> <span class="o">-</span><span class="n">y</span> <span class="n">yum</span><span class="o">-</span><span class="n">utils</span> <span class="n">device</span><span class="o">-</span><span class="n">mapper</span><span class="o">-</span><span class="n">persistent</span><span class="o">-</span><span class="n">data</span> <span class="n">lvm2</span>
+</pre></div>
+</div>
+<ol class="simple">
+<li><p><strong>设置yum源</strong></p></li>
+</ol>
+<p>设置官方源：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>    <span class="n">sudo</span> <span class="n">yum</span><span class="o">-</span><span class="n">config</span><span class="o">-</span><span class="n">manager</span> <span class="o">--</span><span class="n">add</span><span class="o">-</span><span class="n">repo</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">download</span><span class="o">.</span><span class="n">docker</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">linux</span><span class="o">/</span><span class="n">centos</span><span class="o">/</span><span class="n">docker</span><span class="o">-</span><span class="n">ce</span><span class="o">.</span><span class="n">repo</span>
+</pre></div>
+</div>
+<p>设置阿里源：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>    <span class="n">sudo</span> <span class="n">yum</span><span class="o">-</span><span class="n">config</span><span class="o">-</span><span class="n">manager</span> <span class="o">--</span><span class="n">add</span><span class="o">-</span><span class="n">repo</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">mirrors</span><span class="o">.</span><span class="n">aliyun</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">docker</span><span class="o">-</span><span class="n">ce</span><span class="o">/</span><span class="n">linux</span><span class="o">/</span><span class="n">centos</span><span class="o">/</span><span class="n">docker</span><span class="o">-</span><span class="n">ce</span><span class="o">.</span><span class="n">repo</span>
+</pre></div>
+</div>
+<ol class="simple">
+<li><p><strong>刷新yum源</strong></p></li>
+</ol>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>    <span class="n">sudo</span> <span class="n">yum</span> <span class="n">makecache</span> <span class="n">fast</span>
+</pre></div>
+</div>
+<ol class="simple">
+<li><p><strong>安装docker-ce</strong></p></li>
+</ol>
+<p>查看全部版本：（如果匹配不到docker-ce包，执行4刷新yum源）</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>  <span class="n">yum</span> <span class="nb">list</span> <span class="n">docker</span><span class="o">-</span><span class="n">ce</span> <span class="o">--</span><span class="n">showduplicates</span> <span class="o">|</span> <span class="n">sort</span> <span class="o">-</span><span class="n">r</span> 
+</pre></div>
+</div>
+<p>安装指定版本：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>  <span class="n">sudo</span> <span class="n">yum</span> <span class="o">-</span><span class="n">y</span> <span class="n">install</span> <span class="n">docker</span><span class="o">-</span><span class="n">ce</span><span class="o">-</span><span class="mf">18.03</span><span class="o">.</span><span class="mf">0.</span><span class="n">ce</span>
+</pre></div>
+</div>
+<p>安装最新版：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>  <span class="n">sudo</span> <span class="n">yum</span> <span class="o">-</span><span class="n">y</span> <span class="n">install</span> <span class="n">docker</span><span class="o">-</span><span class="n">ce</span>
+</pre></div>
+</div>
 <ol class="simple">
 <li><p><strong>启动&amp;开机启动</strong></p></li>
 </ol>
-<p>启动：<code class="docutils literal notranslate"><span class="pre">systemctl</span> <span class="pre">start</span> <span class="pre">docker</span></code></p>
-<p>开机启动：<code class="docutils literal notranslate"><span class="pre">systemctl</span> <span class="pre">enable</span> <span class="pre">docker</span></code></p>
-<p>重启（按顺序执行1,2）：
-1. <code class="docutils literal notranslate"><span class="pre">systemctl</span> <span class="pre">daemon-reload</span>&#160; </code>
-2. <code class="docutils literal notranslate"><span class="pre">systemctl</span> <span class="pre">restart</span> <span class="pre">docker</span> </code></p>
+<p>启动：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>  <span class="n">systemctl</span> <span class="n">start</span> <span class="n">docker</span>
+</pre></div>
+</div>
+<p>开机启动：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>  <span class="n">systemctl</span> <span class="n">enable</span> <span class="n">docker</span>
+</pre></div>
+</div>
+<p>重启（按顺序执行1,2）：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>    <span class="n">systemctl</span> <span class="n">daemon</span><span class="o">-</span><span class="n">reload</span>
+	  <span class="n">systemctl</span> <span class="n">restart</span> <span class="n">docker</span> 
+</pre></div>
+</div>
 <ol class="simple">
-<li><p><strong>验证是否安装成功</strong>
-<code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">version</span> </code>
-输出：</p></li>
+<li><p><strong>验证是否安装成功</strong></p></li>
 </ol>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>    <span class="n">docker</span> <span class="n">version</span> 
+</pre></div>
+</div>
+<p>输出：</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>   <span class="n">Client</span><span class="p">:</span>
    <span class="n">Version</span><span class="p">:</span>       <span class="mf">18.03</span><span class="o">.</span><span class="mi">0</span><span class="o">-</span><span class="n">ce</span>
    <span class="n">API</span> <span class="n">version</span><span class="p">:</span>   <span class="mf">1.37</span>
@@ -244,8 +282,9 @@ centos下通过 uname -r 查看内核版本。</p>
 </pre></div>
 </div>
 </div>
+</div>
 <div class="section" id="id4">
-<h2><span class="section-number">5.4. </span>Docker使用<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h2>
+<h2><span class="section-number">4.2. </span>Docker使用<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h2>
 <div class="section" id="dockfile">
 <h3>创建dockfile<a class="headerlink" href="#dockfile" title="永久链接至标题">¶</a></h3>
 <p>详见<a class="reference external" href="https://www.cnblogs.com/panwenbin-logs/p/8007348.html">dockfile创建说明</a>，或参考附件中样例，<a class="reference external" href="https://www.cnblogs.com/panwenbin-logs/p/8007348.html">下载链接</a></p>
@@ -269,7 +308,7 @@ centos下通过 uname -r 查看内核版本。</p>
 </div>
 </div>
 <div class="section" id="id7">
-<h2><span class="section-number">5.5. </span>Docker运行<a class="headerlink" href="#id7" title="永久链接至标题">¶</a></h2>
+<h2><span class="section-number">4.3. </span>Docker运行<a class="headerlink" href="#id7" title="永久链接至标题">¶</a></h2>
 </div>
 </div>
 

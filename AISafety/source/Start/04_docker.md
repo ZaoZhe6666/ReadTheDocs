@@ -1,8 +1,6 @@
 ### Docker模式和设置说明
 
-
-
-### Docker CE安装（Linux环境）
+#### Docker CE安装（Linux环境）
 
 ##### 软件下载
 
@@ -21,56 +19,100 @@ centos下通过 uname -r 查看内核版本。
 ##### 软件安装
 
 1. **卸载旧版本docker相关包**
-   	`sudo yum remove docker  docker-common docker-selinux docker-engine`
+
+```
+    sudo yum remove docker  docker-common docker-selinux docker-engine
+```
 
 
    	
-2. **安装需要的软件包**， yum-util 提供yum-config-manager功能，另外两个是devicemapper驱动依赖的
-      	`sudo yum install -y yum-utils device-mapper-persistent-data lvm2`
+2. **安装需要的软件包**
+
+yum-util 提供yum-config-manager功能，另外两个是devicemapper驱动依赖的
+
+```
+        sudo yum install -y yum-utils device-mapper-persistent-data lvm2
+```
 
    
 
 3. **设置yum源**
-    设置官方源：
-    `sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo`
-    设置阿里源：
-    `sudo yum-config-manager --add-repo https://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo`
+  
+  设置官方源：
+
+```
+    sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+```
+    
+  设置阿里源：
+
+```
+    sudo yum-config-manager --add-repo https://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
+```
 
   
 
 4. **刷新yum源**
-    `sudo yum makecache fast`
+
+```
+    sudo yum makecache fast
+```
 
   
 
 5. **安装docker-ce**
-    查看全部版本：（如果匹配不到docker-ce包，执行4刷新yum源）
 
-  `yum list docker-ce --showduplicates | sort -r `  
+  查看全部版本：（如果匹配不到docker-ce包，执行4刷新yum源）
+
+```
+  yum list docker-ce --showduplicates | sort -r 
+```  
+
   安装指定版本：
 
-  `sudo yum -y install docker-ce-18.03.0.ce`       
+```
+  sudo yum -y install docker-ce-18.03.0.ce
+```       
 
-  （安装最新版：  `sudo yum -y install docker-ce`）
+  安装最新版：  
+
+```
+  sudo yum -y install docker-ce
+```
 
   
 
 6. **启动&开机启动**
 
+  启动：
 
-  启动：`systemctl start docker`
+```
+  systemctl start docker
+```
 
-  开机启动：`systemctl enable docker`
+  开机启动：
+
+```
+  systemctl enable docker
+```
 
   重启（按顺序执行1,2）：
-	1. `systemctl daemon-reload  `
-	2. `systemctl restart docker `
+
+```
+    systemctl daemon-reload
+	  systemctl restart docker 
+```
 
 
 
 7. **验证是否安装成功**
-    `docker version `
-    输出：
+
+```
+    docker version 
+```
+    
+  输出：
+
 ```
    Client:
    Version:       18.03.0-ce
