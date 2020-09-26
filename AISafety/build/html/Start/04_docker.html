@@ -31,6 +31,7 @@
         <script src="../_static/doctools.js"></script>
         <script src="../_static/language_data.js"></script>
         <script src="../_static/translations.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -96,16 +97,16 @@
 <li class="toctree-l4"><a class="reference internal" href="#id3">软件安装</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#id4">4.2. Docker使用</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#dockfile">创建dockfile</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id5">运行镜像</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#image">查看image镜像</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id6">其他Docker命令</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#id7">4.3. Docker运行</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id6">5. Docker使用</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#dockfile">5.1. 创建dockfile</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id7">5.2. 运行镜像</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#image">5.3. 查看image镜像</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id8">5.4. 其他Docker命令</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#id9">6. Docker运行</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../Attack/index.html">攻击算法介绍</a></li>
@@ -165,7 +166,7 @@
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="../_sources/Start/04_docker.md.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/Start/04_docker.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -184,119 +185,119 @@
 <h2><span class="section-number">4.1. </span>Docker CE安装（Linux环境）<a class="headerlink" href="#docker-ce-linux" title="永久链接至标题">¶</a></h2>
 <div class="section" id="id1">
 <h3>软件下载<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h3>
-<p>官方地址：<a class="reference external" href="https://www.docker.com/community-edition">Docker官网</a>
-阿里docker-ce镜像：<a class="reference external" href="https://developer.aliyun.com/mirror/docker-ce">Docker镜像</a></p>
+<p>官方地址：<a href="#id13"><span class="problematic" id="id14">`Docker官网`_</span></a> 阿里docker-ce镜像：<a class="reference external" href="https://developer.aliyun.com/mirror/docker-ce">Docker镜像</a></p>
 </div>
 <div class="section" id="id2">
 <h3>内核要求<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h3>
-<p>docker 要求centos系统内核版本必须高于3.10
-centos下通过 uname -r 查看内核版本。</p>
+<p>docker 要求centos系统内核版本必须高于3.10 centos下通过 uname -r
+查看内核版本。</p>
 </div>
 <div class="section" id="id3">
 <h3>软件安装<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h3>
-<ol class="simple">
+<ol class="arabic simple">
 <li><p><strong>卸载旧版本docker相关包</strong></p></li>
 </ol>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>    <span class="n">sudo</span> <span class="n">yum</span> <span class="n">remove</span> <span class="n">docker</span>  <span class="n">docker</span><span class="o">-</span><span class="n">common</span> <span class="n">docker</span><span class="o">-</span><span class="n">selinux</span> <span class="n">docker</span><span class="o">-</span><span class="n">engine</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">yum</span> <span class="n">remove</span> <span class="n">docker</span>  <span class="n">docker</span><span class="o">-</span><span class="n">common</span> <span class="n">docker</span><span class="o">-</span><span class="n">selinux</span> <span class="n">docker</span><span class="o">-</span><span class="n">engine</span>
 </pre></div>
 </div>
-<ol class="simple">
+<ol class="arabic simple" start="2">
 <li><p><strong>安装需要的软件包</strong></p></li>
 </ol>
 <p>yum-util 提供yum-config-manager功能，另外两个是devicemapper驱动依赖的</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>        <span class="n">sudo</span> <span class="n">yum</span> <span class="n">install</span> <span class="o">-</span><span class="n">y</span> <span class="n">yum</span><span class="o">-</span><span class="n">utils</span> <span class="n">device</span><span class="o">-</span><span class="n">mapper</span><span class="o">-</span><span class="n">persistent</span><span class="o">-</span><span class="n">data</span> <span class="n">lvm2</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">yum</span> <span class="n">install</span> <span class="o">-</span><span class="n">y</span> <span class="n">yum</span><span class="o">-</span><span class="n">utils</span> <span class="n">device</span><span class="o">-</span><span class="n">mapper</span><span class="o">-</span><span class="n">persistent</span><span class="o">-</span><span class="n">data</span> <span class="n">lvm2</span>
 </pre></div>
 </div>
-<ol class="simple">
+<ol class="arabic simple" start="3">
 <li><p><strong>设置yum源</strong></p></li>
 </ol>
 <p>设置官方源：</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>    <span class="n">sudo</span> <span class="n">yum</span><span class="o">-</span><span class="n">config</span><span class="o">-</span><span class="n">manager</span> <span class="o">--</span><span class="n">add</span><span class="o">-</span><span class="n">repo</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">download</span><span class="o">.</span><span class="n">docker</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">linux</span><span class="o">/</span><span class="n">centos</span><span class="o">/</span><span class="n">docker</span><span class="o">-</span><span class="n">ce</span><span class="o">.</span><span class="n">repo</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">yum</span><span class="o">-</span><span class="n">config</span><span class="o">-</span><span class="n">manager</span> <span class="o">--</span><span class="n">add</span><span class="o">-</span><span class="n">repo</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">download</span><span class="o">.</span><span class="n">docker</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">linux</span><span class="o">/</span><span class="n">centos</span><span class="o">/</span><span class="n">docker</span><span class="o">-</span><span class="n">ce</span><span class="o">.</span><span class="n">repo</span>
 </pre></div>
 </div>
 <p>设置阿里源：</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>    <span class="n">sudo</span> <span class="n">yum</span><span class="o">-</span><span class="n">config</span><span class="o">-</span><span class="n">manager</span> <span class="o">--</span><span class="n">add</span><span class="o">-</span><span class="n">repo</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">mirrors</span><span class="o">.</span><span class="n">aliyun</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">docker</span><span class="o">-</span><span class="n">ce</span><span class="o">/</span><span class="n">linux</span><span class="o">/</span><span class="n">centos</span><span class="o">/</span><span class="n">docker</span><span class="o">-</span><span class="n">ce</span><span class="o">.</span><span class="n">repo</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">yum</span><span class="o">-</span><span class="n">config</span><span class="o">-</span><span class="n">manager</span> <span class="o">--</span><span class="n">add</span><span class="o">-</span><span class="n">repo</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">mirrors</span><span class="o">.</span><span class="n">aliyun</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">docker</span><span class="o">-</span><span class="n">ce</span><span class="o">/</span><span class="n">linux</span><span class="o">/</span><span class="n">centos</span><span class="o">/</span><span class="n">docker</span><span class="o">-</span><span class="n">ce</span><span class="o">.</span><span class="n">repo</span>
 </pre></div>
 </div>
-<ol class="simple">
+<ol class="arabic simple" start="4">
 <li><p><strong>刷新yum源</strong></p></li>
 </ol>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>    <span class="n">sudo</span> <span class="n">yum</span> <span class="n">makecache</span> <span class="n">fast</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">yum</span> <span class="n">makecache</span> <span class="n">fast</span>
 </pre></div>
 </div>
-<ol class="simple">
+<ol class="arabic simple" start="5">
 <li><p><strong>安装docker-ce</strong></p></li>
 </ol>
 <p>查看全部版本：（如果匹配不到docker-ce包，执行4刷新yum源）</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>  <span class="n">yum</span> <span class="nb">list</span> <span class="n">docker</span><span class="o">-</span><span class="n">ce</span> <span class="o">--</span><span class="n">showduplicates</span> <span class="o">|</span> <span class="n">sort</span> <span class="o">-</span><span class="n">r</span> 
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">yum</span> <span class="nb">list</span> <span class="n">docker</span><span class="o">-</span><span class="n">ce</span> <span class="o">--</span><span class="n">showduplicates</span> <span class="o">|</span> <span class="n">sort</span> <span class="o">-</span><span class="n">r</span>
 </pre></div>
 </div>
 <p>安装指定版本：</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>  <span class="n">sudo</span> <span class="n">yum</span> <span class="o">-</span><span class="n">y</span> <span class="n">install</span> <span class="n">docker</span><span class="o">-</span><span class="n">ce</span><span class="o">-</span><span class="mf">18.03</span><span class="o">.</span><span class="mf">0.</span><span class="n">ce</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">yum</span> <span class="o">-</span><span class="n">y</span> <span class="n">install</span> <span class="n">docker</span><span class="o">-</span><span class="n">ce</span><span class="o">-</span><span class="mf">18.03</span><span class="o">.</span><span class="mf">0.</span><span class="n">ce</span>
 </pre></div>
 </div>
 <p>安装最新版：</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>  <span class="n">sudo</span> <span class="n">yum</span> <span class="o">-</span><span class="n">y</span> <span class="n">install</span> <span class="n">docker</span><span class="o">-</span><span class="n">ce</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">yum</span> <span class="o">-</span><span class="n">y</span> <span class="n">install</span> <span class="n">docker</span><span class="o">-</span><span class="n">ce</span>
 </pre></div>
 </div>
-<ol class="simple">
+<ol class="arabic simple" start="6">
 <li><p><strong>启动&amp;开机启动</strong></p></li>
 </ol>
 <p>启动：</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>  <span class="n">systemctl</span> <span class="n">start</span> <span class="n">docker</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">systemctl</span> <span class="n">start</span> <span class="n">docker</span>
 </pre></div>
 </div>
 <p>开机启动：</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>  <span class="n">systemctl</span> <span class="n">enable</span> <span class="n">docker</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">systemctl</span> <span class="n">enable</span> <span class="n">docker</span>
 </pre></div>
 </div>
 <p>重启（按顺序执行1,2）：</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>    <span class="n">systemctl</span> <span class="n">daemon</span><span class="o">-</span><span class="n">reload</span>
-	  <span class="n">systemctl</span> <span class="n">restart</span> <span class="n">docker</span> 
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">systemctl</span> <span class="n">daemon</span><span class="o">-</span><span class="n">reload</span>
+<span class="n">systemctl</span> <span class="n">restart</span> <span class="n">docker</span>
 </pre></div>
 </div>
-<ol class="simple">
+<ol class="arabic simple" start="7">
 <li><p><strong>验证是否安装成功</strong></p></li>
 </ol>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>    <span class="n">docker</span> <span class="n">version</span> 
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">docker</span> <span class="n">version</span>
 </pre></div>
 </div>
 <p>输出：</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>   <span class="n">Client</span><span class="p">:</span>
-   <span class="n">Version</span><span class="p">:</span>       <span class="mf">18.03</span><span class="o">.</span><span class="mi">0</span><span class="o">-</span><span class="n">ce</span>
-   <span class="n">API</span> <span class="n">version</span><span class="p">:</span>   <span class="mf">1.37</span>
-   <span class="n">Go</span> <span class="n">version</span><span class="p">:</span>    <span class="n">go1</span><span class="o">.</span><span class="mf">9.4</span>
-   <span class="n">Git</span> <span class="n">commit</span><span class="p">:</span>    <span class="mf">0520e24</span>
-   <span class="n">Built</span><span class="p">:</span> <span class="n">Wed</span> <span class="n">Mar</span> <span class="mi">21</span> <span class="mi">23</span><span class="p">:</span><span class="mi">09</span><span class="p">:</span><span class="mi">15</span> <span class="mi">2018</span>
-   <span class="n">OS</span><span class="o">/</span><span class="n">Arch</span><span class="p">:</span>       <span class="n">linux</span><span class="o">/</span><span class="n">amd64</span>
-   <span class="n">Experimental</span><span class="p">:</span>  <span class="n">false</span>
-   <span class="n">Orchestrator</span><span class="p">:</span>  <span class="n">swarm</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span> <span class="n">Client</span><span class="p">:</span>
+ <span class="n">Version</span><span class="p">:</span>       <span class="mf">18.03</span><span class="o">.</span><span class="mi">0</span><span class="o">-</span><span class="n">ce</span>
+ <span class="n">API</span> <span class="n">version</span><span class="p">:</span>   <span class="mf">1.37</span>
+ <span class="n">Go</span> <span class="n">version</span><span class="p">:</span>    <span class="n">go1</span><span class="o">.</span><span class="mf">9.4</span>
+ <span class="n">Git</span> <span class="n">commit</span><span class="p">:</span>    <span class="mf">0520e24</span>
+ <span class="n">Built</span><span class="p">:</span> <span class="n">Wed</span> <span class="n">Mar</span> <span class="mi">21</span> <span class="mi">23</span><span class="p">:</span><span class="mi">09</span><span class="p">:</span><span class="mi">15</span> <span class="mi">2018</span>
+ <span class="n">OS</span><span class="o">/</span><span class="n">Arch</span><span class="p">:</span>       <span class="n">linux</span><span class="o">/</span><span class="n">amd64</span>
+ <span class="n">Experimental</span><span class="p">:</span>  <span class="n">false</span>
+ <span class="n">Orchestrator</span><span class="p">:</span>  <span class="n">swarm</span>
 
-  <span class="n">Server</span><span class="p">:</span>
-   <span class="n">Engine</span><span class="p">:</span>
-    <span class="n">Version</span><span class="p">:</span>      <span class="mf">18.03</span><span class="o">.</span><span class="mi">0</span><span class="o">-</span><span class="n">ce</span>
-    <span class="n">API</span> <span class="n">version</span><span class="p">:</span>  <span class="mf">1.37</span> <span class="p">(</span><span class="n">minimum</span> <span class="n">version</span> <span class="mf">1.12</span><span class="p">)</span>
-    <span class="n">Go</span> <span class="n">version</span><span class="p">:</span>   <span class="n">go1</span><span class="o">.</span><span class="mf">9.4</span>
-    <span class="n">Git</span> <span class="n">commit</span><span class="p">:</span>   <span class="mf">0520e24</span>
-    <span class="n">Built</span><span class="p">:</span>        <span class="n">Wed</span> <span class="n">Mar</span> <span class="mi">21</span> <span class="mi">23</span><span class="p">:</span><span class="mi">13</span><span class="p">:</span><span class="mi">03</span> <span class="mi">2018</span>
-    <span class="n">OS</span><span class="o">/</span><span class="n">Arch</span><span class="p">:</span>      <span class="n">linux</span><span class="o">/</span><span class="n">amd64</span>
-    <span class="n">Experimental</span><span class="p">:</span> <span class="n">false</span>
+<span class="n">Server</span><span class="p">:</span>
+ <span class="n">Engine</span><span class="p">:</span>
+  <span class="n">Version</span><span class="p">:</span>      <span class="mf">18.03</span><span class="o">.</span><span class="mi">0</span><span class="o">-</span><span class="n">ce</span>
+  <span class="n">API</span> <span class="n">version</span><span class="p">:</span>  <span class="mf">1.37</span> <span class="p">(</span><span class="n">minimum</span> <span class="n">version</span> <span class="mf">1.12</span><span class="p">)</span>
+  <span class="n">Go</span> <span class="n">version</span><span class="p">:</span>   <span class="n">go1</span><span class="o">.</span><span class="mf">9.4</span>
+  <span class="n">Git</span> <span class="n">commit</span><span class="p">:</span>   <span class="mf">0520e24</span>
+  <span class="n">Built</span><span class="p">:</span>        <span class="n">Wed</span> <span class="n">Mar</span> <span class="mi">21</span> <span class="mi">23</span><span class="p">:</span><span class="mi">13</span><span class="p">:</span><span class="mi">03</span> <span class="mi">2018</span>
+  <span class="n">OS</span><span class="o">/</span><span class="n">Arch</span><span class="p">:</span>      <span class="n">linux</span><span class="o">/</span><span class="n">amd64</span>
+  <span class="n">Experimental</span><span class="p">:</span> <span class="n">false</span>
 </pre></div>
 </div>
 </div>
 </div>
-<div class="section" id="id4">
-<h2><span class="section-number">4.2. </span>Docker使用<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h2>
+</div>
+<div class="section" id="id6">
+<h1><span class="section-number">5. </span>Docker使用<a class="headerlink" href="#id6" title="永久链接至标题">¶</a></h1>
 <div class="section" id="dockfile">
-<h3>创建dockfile<a class="headerlink" href="#dockfile" title="永久链接至标题">¶</a></h3>
+<h2><span class="section-number">5.1. </span>创建dockfile<a class="headerlink" href="#dockfile" title="永久链接至标题">¶</a></h2>
 <p>详见<a class="reference external" href="https://www.cnblogs.com/panwenbin-logs/p/8007348.html">dockfile创建说明</a>，或参考附件中样例，<a class="reference external" href="https://www.cnblogs.com/panwenbin-logs/p/8007348.html">下载链接</a></p>
 </div>
-<div class="section" id="id5">
-<h3>运行镜像<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h3>
+<div class="section" id="id7">
+<h2><span class="section-number">5.2. </span>运行镜像<a class="headerlink" href="#id7" title="永久链接至标题">¶</a></h2>
 <p>将dockfile文件与项目放在同一路径下；进入项目路径，运行<code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">build</span></code>创建镜像；</p>
 </div>
 <div class="section" id="image">
-<h3>查看image镜像<a class="headerlink" href="#image" title="永久链接至标题">¶</a></h3>
+<h2><span class="section-number">5.3. </span>查看image镜像<a class="headerlink" href="#image" title="永久链接至标题">¶</a></h2>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">docker</span> <span class="n">images</span>
 <span class="n">docker</span> <span class="n">images</span> <span class="o">-</span><span class="n">a</span>
 <span class="n">docker</span> <span class="n">image</span> <span class="n">ls</span>
@@ -304,14 +305,13 @@ centos下通过 uname -r 查看内核版本。</p>
 </pre></div>
 </div>
 </div>
-<div class="section" id="id6">
-<h3>其他Docker命令<a class="headerlink" href="#id6" title="永久链接至标题">¶</a></h3>
-<p>详见<a class="reference external" href="https://docs.docker.com/engine/reference/commandline/cli/">Docker官网</a></p>
+<div class="section" id="id8">
+<h2><span class="section-number">5.4. </span>其他Docker命令<a class="headerlink" href="#id8" title="永久链接至标题">¶</a></h2>
+<p>详见<a href="#id15"><span class="problematic" id="id16">`Docker官网`_</span></a></p>
 </div>
 </div>
-<div class="section" id="id7">
-<h2><span class="section-number">4.3. </span>Docker运行<a class="headerlink" href="#id7" title="永久链接至标题">¶</a></h2>
-</div>
+<div class="section" id="id9">
+<h1><span class="section-number">6. </span>Docker运行<a class="headerlink" href="#id9" title="永久链接至标题">¶</a></h1>
 </div>
 
 

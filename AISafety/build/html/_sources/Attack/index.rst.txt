@@ -8,5 +8,5 @@
     :maxdepth: 2
     :numbered: 2
 
-    01_introduce.md
-    02_extend.md
+    01_introduce.rst
+    02_extend.rst

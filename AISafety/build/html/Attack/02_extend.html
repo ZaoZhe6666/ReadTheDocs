@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>2. 开始运行项目 &mdash; AISafety 1.0 文档</title>
+  <title>&lt;no title&gt; &mdash; AISafety 1.0 文档</title>
   
 
   
@@ -31,6 +31,7 @@
         <script src="../_static/doctools.js"></script>
         <script src="../_static/language_data.js"></script>
         <script src="../_static/translations.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -84,17 +85,9 @@
             
             
               <p class="caption"><span class="caption-text">Contents:</span></p>
-<ul class="current">
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../Start/index.html">开始使用</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="index.html">攻击算法介绍</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="01_introduce.html">1. 攻击算法说明</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">2. 开始运行项目</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#python">2.1. 基础Python环境</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id2">2.2. 辅助环境</a></li>
-</ul>
-</li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="index.html">攻击算法介绍</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Evaluation/index.html">评测算法介绍</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Defense/index.html">防御算法介绍</a></li>
 </ul>
@@ -145,13 +138,13 @@
         
           <li><a href="index.html">攻击算法介绍</a> &raquo;</li>
         
-      <li><span class="section-number">2. </span>开始运行项目</li>
+      <li>&lt;no title&gt;</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="../_sources/Attack/02_extend.md.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/Attack/02_extend.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -164,47 +157,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="id1">
-<h1><span class="section-number">2. </span>开始运行项目<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
-<p>    运行项目前，需要先安装项目对应依赖环境</p>
-<div class="section" id="python">
-<h2><span class="section-number">2.1. </span>基础Python环境<a class="headerlink" href="#python" title="永久链接至标题">¶</a></h2>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span><span class="o">==</span><span class="mf">3.6</span><span class="o">.</span><span class="mi">5</span>
-</pre></div>
-</div>
-</div>
-<div class="section" id="id2">
-<h2><span class="section-number">2.2. </span>辅助环境<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>	<span class="n">certifi</span><span class="o">==</span><span class="mf">2020.6</span><span class="o">.</span><span class="mi">20</span>
-	<span class="n">cloudpickle</span><span class="o">==</span><span class="mf">1.6</span><span class="o">.</span><span class="mi">0</span>
-	<span class="n">cycler</span><span class="o">==</span><span class="mf">0.10</span><span class="o">.</span><span class="mi">0</span>
-	<span class="n">dask</span><span class="o">==</span><span class="mf">2.27</span><span class="o">.</span><span class="mi">0</span>
-	<span class="n">decorator</span><span class="o">==</span><span class="mf">4.4</span><span class="o">.</span><span class="mi">2</span>
-	<span class="n">future</span><span class="o">==</span><span class="mf">0.18</span><span class="o">.</span><span class="mi">2</span>
-	<span class="n">imageio</span><span class="o">==</span><span class="mf">2.9</span><span class="o">.</span><span class="mi">0</span>
-	<span class="n">kiwisolver</span><span class="o">==</span><span class="mf">1.2</span><span class="o">.</span><span class="mi">0</span>
-	<span class="n">matplotlib</span><span class="o">==</span><span class="mf">3.3</span><span class="o">.</span><span class="mi">0</span>
-	<span class="n">networkx</span><span class="o">==</span><span class="mf">2.5</span>
-	<span class="n">numpy</span><span class="o">==</span><span class="mf">1.19</span><span class="o">.</span><span class="mi">2</span>
-	<span class="n">opencv</span><span class="o">-</span><span class="n">python</span><span class="o">==</span><span class="mf">3.4</span><span class="o">.</span><span class="mf">2.16</span>
-	<span class="n">pandas</span><span class="o">==</span><span class="mf">0.23</span><span class="o">.</span><span class="mi">4</span>
-	<span class="n">Pillow</span><span class="o">==</span><span class="mf">7.2</span><span class="o">.</span><span class="mi">0</span>
-	<span class="n">pyparsing</span><span class="o">==</span><span class="mf">2.4</span><span class="o">.</span><span class="mi">7</span>
-	<span class="n">python</span><span class="o">-</span><span class="n">dateutil</span><span class="o">==</span><span class="mf">2.8</span><span class="o">.</span><span class="mi">1</span>
-	<span class="n">pytz</span><span class="o">==</span><span class="mf">2020.1</span>
-	<span class="n">PyWavelets</span><span class="o">==</span><span class="mf">1.1</span><span class="o">.</span><span class="mi">1</span>
-	<span class="n">PyYAML</span><span class="o">==</span><span class="mf">5.3</span><span class="o">.</span><span class="mi">1</span>
-	<span class="n">scikit</span><span class="o">-</span><span class="n">image</span><span class="o">==</span><span class="mf">0.17</span><span class="o">.</span><span class="mi">2</span>
-	<span class="n">scipy</span><span class="o">==</span><span class="mf">1.5</span><span class="o">.</span><span class="mi">2</span>
-	<span class="n">six</span><span class="o">==</span><span class="mf">1.15</span><span class="o">.</span><span class="mi">0</span>
-	<span class="n">tifffile</span><span class="o">==</span><span class="mf">2020.9</span><span class="o">.</span><span class="mi">3</span>
-	<span class="n">toolz</span><span class="o">==</span><span class="mf">0.10</span><span class="o">.</span><span class="mi">0</span>
-	<span class="n">Wand</span><span class="o">==</span><span class="mf">0.5</span><span class="o">.</span><span class="mi">2</span>
-</pre></div>
-</div>
-</div>
-</div>
-
+  
 
            </div>
            

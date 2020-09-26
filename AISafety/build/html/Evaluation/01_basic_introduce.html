@@ -31,6 +31,7 @@
         <script src="../_static/doctools.js"></script>
         <script src="../_static/language_data.js"></script>
         <script src="../_static/translations.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -89,15 +90,30 @@
 <li class="toctree-l1"><a class="reference internal" href="../Attack/index.html">攻击算法介绍</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">评测算法介绍</a><ul class="current">
 <li class="toctree-l2 current"><a class="current reference internal" href="#">1. 评测算法总览</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id2">1.1. 第一类评测算法</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id3">1.2. 第二类评测算法</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id4">1.3. 第三类评测算法</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id5">1.4. 第四类评测算法</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id6">1.5. 第五类评测算法</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">1.1. 第一类评测算法</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id3">第二类评测算法</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id4">第三类评测算法</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id5">第四类评测算法</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id6">第五类评测算法</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="02_detail_introduce.html">2. 评测算法详细介绍</a></li>
-<li class="toctree-l2"><a class="reference internal" href="03_extend.html">3. 扩展评测算法</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_detail_introduce.html#actc">3. ACTC 对抗成功时正确标签平均置信度</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_detail_introduce.html#aldp">4. ALDp 对抗攻击失真度</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_detail_introduce.html#ass-ssim">5. ASS 对抗样本数据与原数据的结构相似度（SSIM）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_detail_introduce.html#bd">6. BD 最大边界距离</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_detail_introduce.html#cav">7. CAV 分类准确度方差</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_detail_introduce.html#ccv">8. CCV 分类置信方差</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_detail_introduce.html#cos">9. COS 分类输出稳定性</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_detail_introduce.html#crr-csr">10. CRR/CSR 分类校正/补偿比率</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_detail_introduce.html#eni">11. ENI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_detail_introduce.html#nte">12. NTE 噪声容量估计</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_detail_introduce.html#psd">13. PSD 扰动敏感距离</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_detail_introduce.html#rgb">14. RGB 对高斯模糊鲁棒性</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_detail_introduce.html#ric">15. RIC 对图像压缩鲁棒性</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_extend.html">16. 扩展评测算法</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../Defense/index.html">防御算法介绍</a></li>
@@ -155,7 +171,7 @@
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="../_sources/Evaluation/01_basic_introduce.md.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/Evaluation/01_basic_introduce.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -177,73 +193,281 @@
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">~/</span><span class="n">AISafety</span><span class="o">/</span><span class="n">EvalBox</span><span class="o">/</span><span class="n">Evaluation</span>
 </pre></div>
 </div>
-<p>| 评测算法名称 | 评测方法缩写 | 评测方法简要说明 |
-| — | — | ——- |
-| clean accuracy | ACC | 未受攻击时，模型预测准确率 |
-|      |   ACAC   |    对错误类别的平均预测置信度。其定义为经过对抗攻击后，对于所有攻击成功对抗样本（FGSM、PGD、C&amp;W），所有误分类类别的平均概率。   |
-|      |   ACTC   |   正确类别平均置信度。通过对对抗攻击样本（FGSM、PGD、C&amp;W）的真实类，计算预测可信度的平均值。用来评估攻击在多大程度上偏离真实值。    |
-|      |   ALDp   |    平均Lp失真度（使用I-FGSM，对于每个样本，直到模型产生误分类）。具体来说，计算扰动后发生改变的像素数量；计算原始示例和扰动示例之间的欧氏距离；测量对抗样本全维度下最大变化量。ALDp为所有攻击成功的对抗样本的平均归一化Lp失真度，ALDp越小，对抗样本的不可感知性越强。   |
-|  |  ASS  |   平均结构相似性（使用I-FGSM，对于每个样本，直到模型产生误分类）。为了评估对抗样本的不可感知性，ASS被定义为所有攻击成功对抗样本与其原始样本间的平均相似性。  |
-|  | PSD | 扰动敏感距离。用于评测人类对扰动的感知能力。其中m为像素点总数，表示第i个样例的第j个像素点，表示附近平方区域，std表示标准偏差函数。  |
-|      |   NTE   |    NTE计算了误分类概率与其他类最大概率之间的差值。，其中，且    |
-|      |   RGB   |    高斯模糊前后分类准确率比值   |
-|      |    RIC  |    图像压缩前后分类准确率比值   |</p>
-</div>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 49%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>评测算法名称</p></th>
+<th class="head"><p>评测方法缩写</p></th>
+<th class="head"><p>评测方法简要说明</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>clean accuracy</p></td>
+<td><p>ACC</p></td>
+<td><p>未受攻击时，模型预测准确率</p></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td><p>ACAC</p></td>
+<td><p>对错误类别的平均预测置信度。其
+定义为经过对抗攻击后，对于所有
+攻击成功对抗样本（FGSM、PGD、C&amp;
+W），所有误分类类别的平均概率。</p></td>
+</tr>
+<tr class="row-even"><td></td>
+<td><p>ACTC</p></td>
+<td><p>正确类
+别平均置信度。通过对对抗攻击样
+本（FGSM、PGD、C&amp;W）的真实类，
+计算预测可信度的平均值。用来评
+估攻击在多大程度上偏离真实值。</p></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td><p>ALDp</p></td>
+<td><p>平均Lp失真度（使用
+I-FGSM，对于每个样本，直到模型
+产生误分类）。具体来说，计算扰
+动后发生改变的像素数量；计算原
+始示例和扰动示例之间的欧氏距离
+；测量对抗样本全维度下最大变化
+量。ALDp为所有攻击成功的对抗样
+本的平均归一化Lp失真度，ALDp越
+小，对抗样本的不可感知性越强。</p></td>
+</tr>
+<tr class="row-even"><td></td>
+<td><p>ASS</p></td>
+<td><p>平
+均结构相似性（使用I-FGSM，对于
+每个样本，直到模型产生误分类）
+。为了评估对抗样本的不可感知性
+，ASS被定义为所有攻击成功对抗样
+本与其原始样本间的平均相似性。</p></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td><p>PSD</p></td>
+<td><p>扰动敏感
+距离。用于评测人类对扰动的感知
+能力。其中m为像素点总数，表示第
+i个样例的第j个像素点，表示附近
+平方区域，std表示标准偏差函数。</p></td>
+</tr>
+<tr class="row-even"><td></td>
+<td><p>NTE</p></td>
+<td><p>NTE计算了误分类概率与其他类
+最大概率之间的差值。，其中，且</p></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td><p>RGB</p></td>
+<td><p>高斯模糊前后分类准确率比值</p></td>
+</tr>
+<tr class="row-even"><td></td>
+<td><p>RIC</p></td>
+<td><p>图像压缩前后分类准确率比值</p></td>
+</tr>
+</tbody>
+</table>
 <div class="section" id="id3">
-<h2><span class="section-number">1.2. </span>第二类评测算法<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h2>
+<h3>第二类评测算法<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h3>
 <p>第二类评测算法指：针对模型行为鲁棒性，通过对输入样本添加自然噪音，测试在自然噪音攻击下模型鲁棒性的一类评测算法。该类评测算法存储的主要路径为：</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">~/</span><span class="n">AISafety</span><span class="o">/</span><span class="n">EvalBox</span><span class="o">/</span><span class="n">UserEvaluation</span>
 </pre></div>
 </div>
-<p>| 评测算法名称 | 评测方法缩写 | 评测方法简要说明 |
-| — | — | —— |
-| Mean Corruption Error |  MCE |  计算神经网络对自然噪音的平均error值 |
-| relative Mean Corruption Error |  RMCE | 计算神经网络在自然噪音下，error与vanilla差值 |
-|  Mean Flip Probability  | MFP  | 计算神经网络对自然噪音序列的error  |
-|   Mean Top-5 Distance  | MT5D  | 神经网络Top5的预测不一致性  |</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 39%" />
+<col style="width: 21%" />
+<col style="width: 39%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>评测算法名称</p></th>
+<th class="head"><p>评测方法缩写</p></th>
+<th class="head"><p>评测方法简要说明</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Mean Corruption Error</p></td>
+<td><p>MCE</p></td>
+<td><p>计算神经网络
+对自然噪音的平均error值</p></td>
+</tr>
+<tr class="row-odd"><td><p>relative Mean Corruption
+Error</p></td>
+<td><p>RMCE</p></td>
+<td><p>计算神经网络在自然噪
+音下，error与vanilla差值</p></td>
+</tr>
+<tr class="row-even"><td><p>Mean Flip Probability</p></td>
+<td><p>MFP</p></td>
+<td><p>计算神经网
+络对自然噪音序列的error</p></td>
+</tr>
+<tr class="row-odd"><td><p>Mean Top-5 Distance</p></td>
+<td><p>MT5D</p></td>
+<td><p>神
+经网络Top5的预测不一致性</p></td>
+</tr>
+</tbody>
+</table>
 </div>
 <div class="section" id="id4">
-<h2><span class="section-number">1.3. </span>第三类评测算法<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h2>
+<h3>第三类评测算法<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h3>
 <p>第三类评测算法指：为了提高模型鲁棒性，通过对抗训练或其他加固方式，得到加固后模型，针对模型加固前后鲁棒性变化及预测能力变化进行的评测方法。该类评测算法存储的主要路径为：</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">~/</span><span class="n">AISafety</span><span class="o">/</span><span class="n">EvalBox</span><span class="o">/</span><span class="n">Evaluation</span>
 </pre></div>
 </div>
-<p>| 评测算法名称 | 评测方法缩写 | 评测方法简要说明 |
-| — | — | —— |
-|  |  CAV |  分类准确度方差，模型防御前后准确度的差 |
-|  |  CRR | 模型防御后，减少的错误分类百分比 |
-|    | CSR  | 模型防御后，增加的错误分类百分比  |
-|     | CCV  | 测量防御造成的置信方差（对防御前后均分类正确样本做统计）  |
-|   |  COS | 使用JS散度衡量模型防御前后输出概率相似性  |</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 21%" />
+<col style="width: 21%" />
+<col style="width: 58%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>评测算法名称</p></th>
+<th class="head"><p>评测方法缩写</p></th>
+<th class="head"><p>评测方法简要说明</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td></td>
+<td><p>CAV</p></td>
+<td><p>分
+类准确度方差，模型防御前后准确度的差</p></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td><p>CRR</p></td>
+<td><p>模型防御后，减少的错误分类百分比</p></td>
+</tr>
+<tr class="row-even"><td></td>
+<td><p>CSR</p></td>
+<td><p>模型防御后，增加的错误分类百分比</p></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td><p>CCV</p></td>
+<td><p>测量防御造成的置信方
+差（对防御前后均分类正确样本做统计）</p></td>
+</tr>
+<tr class="row-even"><td></td>
+<td><p>COS</p></td>
+<td><p>使用
+JS散度衡量模型防御前后输出概率相似性</p></td>
+</tr>
+</tbody>
+</table>
 </div>
 <div class="section" id="id5">
-<h2><span class="section-number">1.4. </span>第四类评测算法<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h2>
+<h3>第四类评测算法<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h3>
 <p>第四类评测算法指：针对模型静态结构，使用神经元覆盖等形式对模型进行评测的方法。该类评测算法存储的主要路径为：</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">~/</span><span class="n">AISafety</span><span class="o">/</span><span class="n">EvalBox</span><span class="o">/</span><span class="n">UserEvaluation</span>
 </pre></div>
 </div>
-<p>| 评测算法名称 | 评测方法缩写 | 评测方法简要说明 |
-| — | — | —— |
-| Neuron Sensitivity |  SNS |  计算神经网络中神经单元对噪音敏感性 |
-| epsilon-Empirical Noise Sensitivity |  ENI | 使用Lipschitz连续常数衡量模型对噪音的敏感性 |
-|   Worst Case Boundary Distance | BD | 随机寻找N个正交的方向，然后计算对于一个模型来说每个方向需要移动多少可以改变instance的prediction label，来衡量模型的决策边界最小距离  |
-|  Worst Case Boundary Distance-2   | BD2 | 上一种方法的变种，对于每一个direction（class），对于每一个instance使用I-FGSM来迭代移动n steps，计算n的大小来衡量模型的决策边界最小距离  |
-|  Critical attacking route |  CAR | 描述神经网络的脆弱路径  |</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 51%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>评测算法名称</p></th>
+<th class="head"><p>评测方法缩写</p></th>
+<th class="head"><p>评测方法简要说明</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Neuron
+Sensitivity</p></td>
+<td><p>SNS</p></td>
+<td><p>计
+算神经网络中神经单元对噪音敏感性</p></td>
+</tr>
+<tr class="row-odd"><td><p>ep
+silon-Empirical
+Noise
+Sensitivity</p></td>
+<td><p>ENI</p></td>
+<td><p>使用Lipsch
+itz连续常数衡量模型对噪音的敏感性</p></td>
+</tr>
+<tr class="row-even"><td><p>Worst Case
+Boundary
+Distance</p></td>
+<td><p>BD</p></td>
+<td><p>随机寻找N个正交的方向，然后计算
+对于一个模型来说每个方向需要移动
+多少可以改变instance的prediction
+la
+bel，来衡量模型的决策边界最小距离</p></td>
+</tr>
+<tr class="row-odd"><td><p>Worst Case
+Boundary
+Distance-2</p></td>
+<td><p>BD2</p></td>
+<td><p>上一种方法的变种，对于
+每一个direction（class），对于每
+一个instance使用I-FGSM来迭代移动n
+steps，计算n的
+大小来衡量模型的决策边界最小距离</p></td>
+</tr>
+<tr class="row-even"><td><p>Critical
+attacking route</p></td>
+<td><p>CAR</p></td>
+<td><p>描述神经网络的脆弱路径</p></td>
+</tr>
+</tbody>
+</table>
 </div>
 <div class="section" id="id6">
-<h2><span class="section-number">1.5. </span>第五类评测算法<a class="headerlink" href="#id6" title="永久链接至标题">¶</a></h2>
+<h3>第五类评测算法<a class="headerlink" href="#id6" title="永久链接至标题">¶</a></h3>
 <p>第五类评测算法指：针对进行模型训练或测试的数据集，根据模型在不同数据集上活跃表现，对模型预测行为加以可解释分析的方法。该类评测算法存储的主要路径为：</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">~/</span><span class="n">AISafety</span><span class="o">/</span><span class="n">EvalBox</span><span class="o">/</span><span class="n">UserEvaluation</span>
 </pre></div>
 </div>
-<p>| 评测算法名称 | 评测方法缩写 | 评测方法简要说明 |
-| — | — | —— |
-| Neuron Coverage |  NC |  神经元覆盖率，用于衡量测试数据是否可以对神经网络神经元进行覆盖 |
-| K-Multisection Neuron Coverage |  KMNC | K多节神经元覆盖 |
-| Neuron Boundary Coverage | NBC | 神经元边界覆盖  |
-|  Strong Neuron Activation Coverage | SNAC | 强神经元激活覆盖  |
-|  Top-K Neuron Coverage |  TKNC | Top-k神经元覆盖 |
-| Top-k Neuron Patterns  | TKNP | Top-k神经元模式 |</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 39%" />
+<col style="width: 21%" />
+<col style="width: 39%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>评测算法名称</p></th>
+<th class="head"><p>评测方法缩写</p></th>
+<th class="head"><p>评测方法简要说明</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Neuron Coverage</p></td>
+<td><p>NC</p></td>
+<td><p>神经元覆盖率，
+用于衡量测试数据是否可以
+对神经网络神经元进行覆盖</p></td>
+</tr>
+<tr class="row-odd"><td><p>K-Multisection Neuron
+Coverage</p></td>
+<td><p>KMNC</p></td>
+<td><p>K多节神经元覆盖</p></td>
+</tr>
+<tr class="row-even"><td><p>Neuron Boundary Coverage</p></td>
+<td><p>NBC</p></td>
+<td><p>神经元边界覆盖</p></td>
+</tr>
+<tr class="row-odd"><td><p>Strong Neuron Activation
+Coverage</p></td>
+<td><p>SNAC</p></td>
+<td><p>强神经元激活覆盖</p></td>
+</tr>
+<tr class="row-even"><td><p>Top-K Neuron Coverage</p></td>
+<td><p>TKNC</p></td>
+<td><p>Top-k神经元覆盖</p></td>
+</tr>
+<tr class="row-odd"><td><p>Top-k Neuron Patterns</p></td>
+<td><p>TKNP</p></td>
+<td><p>Top-k神经元模式</p></td>
+</tr>
+</tbody>
+</table>
+</div>
 </div>
 </div>
 

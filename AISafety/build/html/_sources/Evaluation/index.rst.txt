@@ -8,6 +8,6 @@
     :maxdepth: 2
     :numbered: 2
 
-    01_basic_introduce.md
-    02_detail_introduce.md
-    03_extend.md
+    01_basic_introduce.rst
+    02_detail_introduce.rst
+    03_extend.rst
