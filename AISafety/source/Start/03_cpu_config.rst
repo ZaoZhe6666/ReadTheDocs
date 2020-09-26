@@ -1,3 +1,7 @@
+.. role:: raw-latex(raw)
+   :format: latex
+..
+
 CPU/GPU模式和设置说明
 =====================
 

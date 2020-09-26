@@ -17,10 +17,7 @@ EAT的全称是Ensemble adversarial training
 
    \tilde{J}(\theta,x,y)=\alpha \cdot J(\theta,x,y)+(1-\alpha)\cdot J(\theta,x+\epsilon \cdot sign(\triangledown_x J(\theta,x,y)))
 
-其中 $ J(:raw-latex:`\theta`, x, y) $
-是模型对于普通样本的损失函数，作者通过 $ x +
-:raw-latex:`\epsilon `:raw-latex:`\cdot `sign(:raw-latex:`\triangledown`\_x
-J(:raw-latex:`\theta`,x,y)) $ 来构造对抗样本，并要求模型能正确对其分类。
+其中J(θ, x, y)是模型对于普通样本的损失函数，作者通过 x + ε · sign(▽x J(θ,x,y))来构造对抗样本，并要求模型能正确对其分类。
 
 参数说明
 ''''''''
@@ -56,12 +53,7 @@ training）是增强神经网络鲁棒性的重要方式。在对抗训练的过
 
    {min}_{\theta}E_{(Z,y)} \sim D[{max}_{||\delta|| \leq \epsilon} L(f_\theta (X + \delta),y)]
 
-内层（中括号内）是一个最大化，其中X表示样本的输入表示，$
-:raw-latex:`\delta `\ :math:`表示叠加在输入上的扰动，`
-f\_:raw-latex:`\theta `\ :math:`是神经网络函数，y是样本的标签，`
-L(f_theta (X + :raw-latex:`\delta `), y) $
-则表示在样本\ |img|\ 上叠加一个扰动$
-:raw-latex:`\delta `$，再经过神经网络函数，与标签\ |image1|\ 比较得到的损失。
+内层（中括号内）是一个最大化，其中X表示样本的输入表示，δ表示叠加在输入上的扰动，θ是神经网络函数，y是样本的标签，L(fθ(X + δ), y)则表示在样本X上叠加一个扰动δ，再经过神经网络函数，与标签y比较得到的损失。
 maxL是优化目标，即寻找使损失函数最大的扰动，简单来讲就是添加的扰动要尽量让神经网络迷惑。
 
 外层就是对神经网络进行优化的最小化公式，即当扰动固定的情况下，我们训练神经网络模型使得在训练数据上的损失最小，也就是说，使模型具有一定的鲁棒性能够适应这种扰动。
@@ -102,12 +94,7 @@ training）是增强神经网络鲁棒性的重要方式。在对抗训练的过
 
    {min}_{\theta}E_{(Z,y)} \sim D[{max}_{||\delta|| \leq \epsilon} L(f_\theta (X + \delta),y)]
 
-内层（中括号内）是一个最大化，其中X表示样本的输入表示，$
-:raw-latex:`\delta `\ :math:`表示叠加在输入上的扰动，`
-f\_:raw-latex:`\theta `\ :math:`是神经网络函数，y是样本的标签，`
-L(f_theta (X + :raw-latex:`\delta `), y) $
-则表示在样本\ |img|\ 上叠加一个扰动$
-:raw-latex:`\delta `$，再经过神经网络函数，与标签\ |image1|\ 比较得到的损失。
+内层（中括号内）是一个最大化，其中X表示样本的输入表示，δ表示叠加在输入上的扰动，θ是神经网络函数，y是样本的标签，L(fθ(X + δ), y)则表示在样本X上叠加一个扰动δ，再经过神经网络函数，与标签y比较得到的损失。
 maxL是优化目标，即寻找使损失函数最大的扰动，简单来讲就是添加的扰动要尽量让神经网络迷惑。
 
 外层就是对神经网络进行优化的最小化公式，即当扰动固定的情况下，我们训练神经网络模型使得在训练数据上的损失最小，也就是说，使模型具有一定的鲁棒性能够适应这种扰动。
@@ -133,8 +120,7 @@ PAT加固算法
 算法介绍
 ''''''''
 
-PAT的全称是PGD adversarial
-training（PGD对抗训练），在白盒环境下，通过PGD攻击算法生成对抗样本，然后用对抗样本和普通样本混合训练模型。
+PAT的全称是PGD adversarial training（PGD对抗训练），在白盒环境下，通过PGD攻击算法生成对抗样本，然后用对抗样本和普通样本混合训练模型。
 
 基于FGSM攻击方法，Madry等人引入迭代的过程，并且每次将噪音映射到某个特定空间中形成了目前最为常用的PGD攻击方法：
 
@@ -151,10 +137,7 @@ Goodfellow等人最早提出对抗训练的思想，该论文尝试在训练过�
 
    \tilde{J}(\theta,x,y)=\alpha \cdot J(\theta,x,y)+(1-\alpha)\cdot J(\theta,x+\epsilon \cdot sign(\triangledown_x J(\theta,x,y)))
 
-其中 $ J(:raw-latex:`\theta`, x, y) $
-是模型对于普通样本的损失函数，作者通过 $ x +
-:raw-latex:`\epsilon `:raw-latex:`\cdot `sign(:raw-latex:`\triangledown`\_x
-J(:raw-latex:`\theta`,x,y)) $ 来构造对抗样本，并要求模型能正确对其分类。
+其中 J(θ, x, y)是模型对于普通样本的损失函数，作者通过 x + ε · sign(▽x J(θ,x,y))来构造对抗样本，并要求模型能正确对其分类。
 
 PAT对抗训练优化的目标函数如下：
 
@@ -163,8 +146,7 @@ PAT对抗训练优化的目标函数如下：
 
    \theta^*={min}_\theta E_{(x,y)}[{max}_\sigma l(x+\sigma;y;F_\theta)]
 
-其中$ l(x+:raw-latex:`\sigma`;y;F\_:raw-latex:`\theta`) $为模型 $
-F\_:raw-latex:`\theta `$ 在对抗噪音大小为σ下的损失函数。
+其中l(x + σ;y;Fθ)为模型Fθ在对抗噪音大小为σ下的损失函数。
 
 在优化目标函数过程中，该方法在每一个批数据（mini-batch）中加入同样数量的普通样本和对抗样本（由PGD攻击生成）。
 
@@ -188,7 +170,7 @@ RAND加固算法
 Rand方法利用随机化的方法来对输入图片引入随机性操作，作为一个预处理模块，该方法可以有效的提升深度神经网络对于对抗样本噪音的防御能力和鲁棒性。
 
 该方法的具体操作有如下两种方式：
-（1）对于原始图片X，对其大小W*H*3进行随机修改，变化为W’*H’*3，这其中大小的变换要在合理范围内（如：2个像素值）；
+（1）对于原始图片X，对其大小W*H*3进行随机修改，变化为W'*H'*3，这其中大小的变换要在合理范围内（如：2个像素值）；
 
 （2）第二种方式是对原始图片X进行随机填充。使用值为0的像素在原始图片的四周进行填充。
 

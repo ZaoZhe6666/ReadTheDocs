@@ -93,27 +93,27 @@
 <li class="toctree-l2 current"><a class="current reference internal" href="#">1. 防御算法介绍</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#eat">1.1. EAT加固算法</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#id2">算法介绍</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id9">参数说明</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id3">参数说明</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#nat">1.2. NAT加固算法</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id10">算法介绍</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id17">参数说明</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id4">算法介绍</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id5">参数说明</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#oat">1.3. OAT加固算法</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id18">算法介绍</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id25">参数说明</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id6">算法介绍</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id7">参数说明</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#pat">1.4. PAT加固算法</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id26">算法介绍</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id37">参数说明</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id8">算法介绍</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id9">参数说明</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#rand">1.5. RAND加固算法</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id38">算法介绍</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id43">参数说明</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id10">算法介绍</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id15">参数说明</a></li>
 </ul>
 </li>
 </ul>
@@ -199,13 +199,10 @@
 <p>与之相关的基础方法是对抗训练，该方法旨在从随机初始化的权重中训练一个鲁棒的模型，其训练集由真实数据集和加入了对抗扰动的数据集组成，因此叫做对抗训练。其表达式如下：</p>
 <div class="math notranslate nohighlight">
 \[\tilde{J}(\theta,x,y)=\alpha \cdot J(\theta,x,y)+(1-\alpha)\cdot J(\theta,x+\epsilon \cdot sign(\triangledown_x J(\theta,x,y)))\]</div>
-<p>其中 $ J(<a href="#id3"><span class="problematic" id="id4">:raw-latex:`\theta`</span></a>, x, y) $
-是模型对于普通样本的损失函数，作者通过 $ x +
-<a href="#id5"><span class="problematic" id="id6">:raw-latex:`\epsilon `:raw-latex:`</span></a>cdot <cite>sign(:raw-latex:</cite>triangledown`_x
-J(<a href="#id7"><span class="problematic" id="id8">:raw-latex:`\theta`</span></a>,x,y)) $ 来构造对抗样本，并要求模型能正确对其分类。</p>
+<p>其中J(θ, x, y)是模型对于普通样本的损失函数，作者通过 x + ε · sign(▽x J(θ,x,y))来构造对抗样本，并要求模型能正确对其分类。</p>
 </div>
-<div class="section" id="id9">
-<h3>参数说明<a class="headerlink" href="#id9" title="永久链接至标题">¶</a></h3>
+<div class="section" id="id3">
+<h3>参数说明<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h3>
 <table class="docutils align-default">
 <colgroup>
 <col style="width: 41%" />
@@ -241,26 +238,21 @@ J(<a href="#id7"><span class="problematic" id="id8">:raw-latex:`\theta`</span></
 </div>
 <div class="section" id="nat">
 <h2><span class="section-number">1.2. </span>NAT加固算法<a class="headerlink" href="#nat" title="永久链接至标题">¶</a></h2>
-<div class="section" id="id10">
-<h3>算法介绍<a class="headerlink" href="#id10" title="永久链接至标题">¶</a></h3>
+<div class="section" id="id4">
+<h3>算法介绍<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h3>
 <p>New adversarial training (NAT)</p>
 <p>对抗训练（adversarial
 training）是增强神经网络鲁棒性的重要方式。在对抗训练的过程中，样本会被混合一些微小的扰动（改变很小，但是很可能造成误分类），然后使神经网络适应这种改变，从而对对抗样本具有鲁棒性。</p>
 <p>对抗训练的一般性原理，对抗训练可以概括为如下的最大最小化公式：</p>
 <div class="math notranslate nohighlight">
 \[{min}_{\theta}E_{(Z,y)} \sim D[{max}_{||\delta|| \leq \epsilon} L(f_\theta (X + \delta),y)]\]</div>
-<p>内层（中括号内）是一个最大化，其中X表示样本的输入表示，$
-<a href="#id11"><span class="problematic" id="id12">:raw-latex:`\delta `\ :math:`表示叠加在输入上的扰动，`</span></a>
-f_:raw-latex:<cite>theta `:math:`是神经网络函数，y是样本的标签，</cite>
-L(f_theta (X + <a href="#id13"><span class="problematic" id="id14">:raw-latex:`\delta `), y) $
-则表示在样本\ |img|\ 上叠加一个扰动$
-:raw-latex:`</span></a>delta <a href="#id15"><span class="problematic" id="id16">`</span></a>$，再经过神经网络函数，与标签<a href="#id44"><span class="problematic" id="id45">|image1|</span></a>比较得到的损失。
+<p>内层（中括号内）是一个最大化，其中X表示样本的输入表示，δ表示叠加在输入上的扰动，θ是神经网络函数，y是样本的标签，L(fθ(X + δ), y)则表示在样本X上叠加一个扰动δ，再经过神经网络函数，与标签y比较得到的损失。
 maxL是优化目标，即寻找使损失函数最大的扰动，简单来讲就是添加的扰动要尽量让神经网络迷惑。</p>
 <p>外层就是对神经网络进行优化的最小化公式，即当扰动固定的情况下，我们训练神经网络模型使得在训练数据上的损失最小，也就是说，使模型具有一定的鲁棒性能够适应这种扰动。</p>
 <p>这里过程中生成的对抗样本采用RLLC的方式生成，其他的过程和OAT的类似。</p>
 </div>
-<div class="section" id="id17">
-<h3>参数说明<a class="headerlink" href="#id17" title="永久链接至标题">¶</a></h3>
+<div class="section" id="id5">
+<h3>参数说明<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h3>
 <table class="docutils align-default">
 <colgroup>
 <col style="width: 21%" />
@@ -296,25 +288,20 @@ maxL是优化目标，即寻找使损失函数最大的扰动，简单来讲就�
 </div>
 <div class="section" id="oat">
 <h2><span class="section-number">1.3. </span>OAT加固算法<a class="headerlink" href="#oat" title="永久链接至标题">¶</a></h2>
-<div class="section" id="id18">
-<h3>算法介绍<a class="headerlink" href="#id18" title="永久链接至标题">¶</a></h3>
+<div class="section" id="id6">
+<h3>算法介绍<a class="headerlink" href="#id6" title="永久链接至标题">¶</a></h3>
 <p>Original adversarial training (OAT)</p>
 <p>对抗训练（adversarial
 training）是增强神经网络鲁棒性的重要方式。在对抗训练的过程中，样本会被混合一些微小的扰动（改变很小，但是很可能造成误分类），然后使神经网络适应这种改变，从而对对抗样本具有鲁棒性。</p>
 <p>对抗训练的一般性原理，对抗训练可以概括为如下的最大最小化公式：</p>
 <div class="math notranslate nohighlight">
 \[{min}_{\theta}E_{(Z,y)} \sim D[{max}_{||\delta|| \leq \epsilon} L(f_\theta (X + \delta),y)]\]</div>
-<p>内层（中括号内）是一个最大化，其中X表示样本的输入表示，$
-<a href="#id19"><span class="problematic" id="id20">:raw-latex:`\delta `\ :math:`表示叠加在输入上的扰动，`</span></a>
-f_:raw-latex:<cite>theta `:math:`是神经网络函数，y是样本的标签，</cite>
-L(f_theta (X + <a href="#id21"><span class="problematic" id="id22">:raw-latex:`\delta `), y) $
-则表示在样本\ |img|\ 上叠加一个扰动$
-:raw-latex:`</span></a>delta <a href="#id23"><span class="problematic" id="id24">`</span></a>$，再经过神经网络函数，与标签<a href="#id46"><span class="problematic" id="id47">|image1|</span></a>比较得到的损失。
+<p>内层（中括号内）是一个最大化，其中X表示样本的输入表示，δ表示叠加在输入上的扰动，θ是神经网络函数，y是样本的标签，L(fθ(X + δ), y)则表示在样本X上叠加一个扰动δ，再经过神经网络函数，与标签y比较得到的损失。
 maxL是优化目标，即寻找使损失函数最大的扰动，简单来讲就是添加的扰动要尽量让神经网络迷惑。</p>
 <p>外层就是对神经网络进行优化的最小化公式，即当扰动固定的情况下，我们训练神经网络模型使得在训练数据上的损失最小，也就是说，使模型具有一定的鲁棒性能够适应这种扰动。</p>
 </div>
-<div class="section" id="id25">
-<h3>参数说明<a class="headerlink" href="#id25" title="永久链接至标题">¶</a></h3>
+<div class="section" id="id7">
+<h3>参数说明<a class="headerlink" href="#id7" title="永久链接至标题">¶</a></h3>
 <table class="docutils align-default">
 <colgroup>
 <col style="width: 24%" />
@@ -344,10 +331,9 @@ maxL是优化目标，即寻找使损失函数最大的扰动，简单来讲就�
 </div>
 <div class="section" id="pat">
 <h2><span class="section-number">1.4. </span>PAT加固算法<a class="headerlink" href="#pat" title="永久链接至标题">¶</a></h2>
-<div class="section" id="id26">
-<h3>算法介绍<a class="headerlink" href="#id26" title="永久链接至标题">¶</a></h3>
-<p>PAT的全称是PGD adversarial
-training（PGD对抗训练），在白盒环境下，通过PGD攻击算法生成对抗样本，然后用对抗样本和普通样本混合训练模型。</p>
+<div class="section" id="id8">
+<h3>算法介绍<a class="headerlink" href="#id8" title="永久链接至标题">¶</a></h3>
+<p>PAT的全称是PGD adversarial training（PGD对抗训练），在白盒环境下，通过PGD攻击算法生成对抗样本，然后用对抗样本和普通样本混合训练模型。</p>
 <p>基于FGSM攻击方法，Madry等人引入迭代的过程，并且每次将噪音映射到某个特定空间中形成了目前最为常用的PGD攻击方法：</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\\ x_0^{'}=x
@@ -355,19 +341,15 @@ training（PGD对抗训练），在白盒环境下，通过PGD攻击算法生成
 <p>Goodfellow等人最早提出对抗训练的思想，该论文尝试在训练过程中加入对抗样本来提升模型的鲁棒性，其损失函数定义如下：</p>
 <div class="math notranslate nohighlight">
 \[\tilde{J}(\theta,x,y)=\alpha \cdot J(\theta,x,y)+(1-\alpha)\cdot J(\theta,x+\epsilon \cdot sign(\triangledown_x J(\theta,x,y)))\]</div>
-<p>其中 $ J(<a href="#id27"><span class="problematic" id="id28">:raw-latex:`\theta`</span></a>, x, y) $
-是模型对于普通样本的损失函数，作者通过 $ x +
-<a href="#id29"><span class="problematic" id="id30">:raw-latex:`\epsilon `:raw-latex:`</span></a>cdot <cite>sign(:raw-latex:</cite>triangledown`_x
-J(<a href="#id31"><span class="problematic" id="id32">:raw-latex:`\theta`</span></a>,x,y)) $ 来构造对抗样本，并要求模型能正确对其分类。</p>
+<p>其中 J(θ, x, y)是模型对于普通样本的损失函数，作者通过 x + ε · sign(▽x J(θ,x,y))来构造对抗样本，并要求模型能正确对其分类。</p>
 <p>PAT对抗训练优化的目标函数如下：</p>
 <div class="math notranslate nohighlight">
 \[\theta^*={min}_\theta E_{(x,y)}[{max}_\sigma l(x+\sigma;y;F_\theta)]\]</div>
-<p>其中$ l(x+:raw-latex:<cite>sigma</cite>;y;F_:raw-latex:<cite>theta</cite>) $为模型 $
-F_:raw-latex:<a href="#id33"><span class="problematic" id="id34">`</span></a>theta <a href="#id35"><span class="problematic" id="id36">`</span></a>$ 在对抗噪音大小为σ下的损失函数。</p>
+<p>其中l(x + σ;y;Fθ)为模型Fθ在对抗噪音大小为σ下的损失函数。</p>
 <p>在优化目标函数过程中，该方法在每一个批数据（mini-batch）中加入同样数量的普通样本和对抗样本（由PGD攻击生成）。</p>
 </div>
-<div class="section" id="id37">
-<h3>参数说明<a class="headerlink" href="#id37" title="永久链接至标题">¶</a></h3>
+<div class="section" id="id9">
+<h3>参数说明<a class="headerlink" href="#id9" title="永久链接至标题">¶</a></h3>
 <table class="docutils align-default">
 <colgroup>
 <col style="width: 10%" />
@@ -388,16 +370,16 @@ F_:raw-latex:<a href="#id33"><span class="problematic" id="id34">`</span></a>the
 </div>
 <div class="section" id="rand">
 <h2><span class="section-number">1.5. </span>RAND加固算法<a class="headerlink" href="#rand" title="永久链接至标题">¶</a></h2>
-<div class="section" id="id38">
-<h3>算法介绍<a class="headerlink" href="#id38" title="永久链接至标题">¶</a></h3>
+<div class="section" id="id10">
+<h3>算法介绍<a class="headerlink" href="#id10" title="永久链接至标题">¶</a></h3>
 <p>Rand方法利用随机化的方法来对输入图片引入随机性操作，作为一个预处理模块，该方法可以有效的提升深度神经网络对于对抗样本噪音的防御能力和鲁棒性。</p>
 <p>该方法的具体操作有如下两种方式：
-（1）对于原始图片X，对其大小W*H*3进行随机修改，变化为W’<a href="#id39"><span class="problematic" id="id40">*</span></a>H’<a href="#id41"><span class="problematic" id="id42">*</span></a>3，这其中大小的变换要在合理范围内（如：2个像素值）；</p>
+（1）对于原始图片X，对其大小W*H*3进行随机修改，变化为W’<a href="#id11"><span class="problematic" id="id12">*</span></a>H’<a href="#id13"><span class="problematic" id="id14">*</span></a>3，这其中大小的变换要在合理范围内（如：2个像素值）；</p>
 <p>（2）第二种方式是对原始图片X进行随机填充。使用值为0的像素在原始图片的四周进行填充。</p>
 <p>这两种方式对于输入图片引入很多随机性，从而削弱了对抗攻击的效果，提升了模型对抗鲁棒性。</p>
 </div>
-<div class="section" id="id43">
-<h3>参数说明<a class="headerlink" href="#id43" title="永久链接至标题">¶</a></h3>
+<div class="section" id="id15">
+<h3>参数说明<a class="headerlink" href="#id15" title="永久链接至标题">¶</a></h3>
 <table class="docutils align-default">
 <colgroup>
 <col style="width: 21%" />

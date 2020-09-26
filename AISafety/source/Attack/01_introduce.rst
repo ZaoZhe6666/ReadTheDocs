@@ -1,3 +1,7 @@
+.. role:: raw-latex(raw)
+   :format: latex
+..
+
 攻击算法说明
 ~~~~~~~~~~~~
 

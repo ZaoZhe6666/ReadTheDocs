@@ -38,7 +38,7 @@
     
     <link rel="index" title="索引" href="../genindex.html" />
     <link rel="search" title="搜索" href="../search.html" />
-    <link rel="next" title="16. 扩展评测算法" href="03_extend.html" />
+    <link rel="next" title="3. 扩展评测算法" href="03_extend.html" />
     <link rel="prev" title="1. 评测算法总览" href="01_basic_introduce.html" /> 
 </head>
 
@@ -93,22 +93,22 @@
 <li class="toctree-l2 current"><a class="current reference internal" href="#">2. 评测算法详细介绍</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#acc">2.1. ACC 精确度</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#acac">2.2. ACAC 平均置信度</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#actc">2.3. ACTC 对抗成功时正确标签平均置信度</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#aldp">2.4. ALDp 对抗攻击失真度</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ass-ssim">2.5. ASS 对抗样本数据与原数据的结构相似度（SSIM）</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bd">2.6. BD 最大边界距离</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cav">2.7. CAV 分类准确度方差</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ccv">2.8. CCV 分类置信方差</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cos">2.9. COS 分类输出稳定性</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#crr-csr">2.10. CRR/CSR 分类校正/补偿比率</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#eni">2.11. ENI</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nte">2.12. NTE 噪声容量估计</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#psd">2.13. PSD 扰动敏感距离</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rgb">2.14. RGB 对高斯模糊鲁棒性</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ric">2.15. RIC 对图像压缩鲁棒性</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#actc">3. ACTC 对抗成功时正确标签平均置信度</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#aldp">4. ALDp 对抗攻击失真度</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#ass-ssim">5. ASS 对抗样本数据与原数据的结构相似度（SSIM）</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#bd">6. BD 最大边界距离</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#cav">7. CAV 分类准确度方差</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#ccv">8. CCV 分类置信方差</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#cos">9. COS 分类输出稳定性</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#crr-csr">10. CRR/CSR 分类校正/补偿比率</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#eni">11. ENI</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#nte">12. NTE 噪声容量估计</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#psd">13. PSD 扰动敏感距离</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#rgb">14. RGB 对高斯模糊鲁棒性</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#ric">15. RIC 对图像压缩鲁棒性</a></li>
-<li class="toctree-l2"><a class="reference internal" href="03_extend.html">16. 扩展评测算法</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_extend.html">3. 扩展评测算法</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../Defense/index.html">防御算法介绍</a></li>
@@ -195,11 +195,7 @@
 Class)。其定义为经过对抗攻击后，对于所有攻击成功对抗样本，所有误分类类别的平均概率。公式定义如下</p>
 <div class="math notranslate nohighlight">
 \[ACAC=\frac{1}{n} \sum_{i = 1}^{n}P\left ( X_{i}^{a} \right )_{F\left ( X_{i}^{a} \right )}\]</div>
-<p>其中n表示所有对抗攻击成功样本个数，</p>
-<div class="math notranslate nohighlight">
-\[F\left ( X_{i}^{a} \right )\]</div>
-<p>表示第i个样本被分类为a类，$ P:raw-latex:<cite>left `( X_{i}^{a}
-:raw-latex:</cite>right <a href="#id2"><span class="problematic" id="id3">`</span></a>) $ 为第i个样本被分类为a类的概率。</p>
+<p>其中n表示所有对抗攻击成功样本个数，F(Xi^a)表示第i个样本被分类为a类，P(Xi^a)为第i个样本被分类为a类的概率。</p>
 <table class="docutils align-default">
 <colgroup>
 <col style="width: 40%" />
@@ -248,27 +244,24 @@ Activation Coverage</p></td>
 </tbody>
 </table>
 </div>
-</div>
 <div class="section" id="actc">
-<h1><span class="section-number">3. </span>ACTC 对抗成功时正确标签平均置信度<a class="headerlink" href="#actc" title="永久链接至标题">¶</a></h1>
+<h2><span class="section-number">2.3. </span>ACTC 对抗成功时正确标签平均置信度<a class="headerlink" href="#actc" title="永久链接至标题">¶</a></h2>
 <p>正确类别平均置信度(Average Confidence of True
 Class)。通过对对抗攻击样本的真实类，计算预测可信度的平均值。用来评估攻击在多大程度上偏离真实值。</p>
 <div class="math notranslate nohighlight">
 \[ACTC=\frac{1}{n} \sum_{i = 1}^{n}P\left ( X_{i}^{a} \right )_{ y_{i}}\]</div>
-<p>其中$ P( X_{i}^{a} )
-$为第i个样本被分类为对应类的概率，yi表示第i个样本被正确分类为yi类。</p>
+<p>其中P(Xi^a)为第i个样本被分类为对应类的概率，yi表示第i个样本被正确分类为yi类。</p>
 </div>
 <div class="section" id="aldp">
-<h1><span class="section-number">4. </span>ALDp 对抗攻击失真度<a class="headerlink" href="#aldp" title="永久链接至标题">¶</a></h1>
+<h2><span class="section-number">2.4. </span>ALDp 对抗攻击失真度<a class="headerlink" href="#aldp" title="永久链接至标题">¶</a></h2>
 <p>平均Lp失真度(Average Lp Distortion)。几乎所有的攻击都采用Lp
-norm距离（p=0, 2,
-∞）作为评价的失真度量。具体来说，L0计算扰动后发生改变的像素数量；L2计算原始示例和扰动示例之间的欧氏距离；L∞测量对抗样本全维度下最大变化量。ALDp为所有攻击成功的对抗样本的平均归一化Lp失真度，ALDp越小，对抗样本的不可感知性越强。</p>
+norm距离（p=0, 2, ∞）作为评价的失真度量。具体来说，L0计算扰动后发生改变的像素数量；L2计算原始示例和扰动示例之间的欧氏距离；L∞测量对抗样本全维度下最大变化量。ALDp为所有攻击成功的对抗样本的平均归一化Lp失真度，ALDp越小，对抗样本的不可感知性越强。</p>
 <div class="math notranslate nohighlight">
-\[\begin{split}ALDp=\\frac{1}{n}\\sum\_{i=1}^{n}\\frac{\\left \\\| X\_{i}^{a} - X\_{i}  \\right \\\|\_{p}} { \\left \\\| X\_{i} \\right \\\|\_{p}}\end{split}\]</div>
+\[ALDp=\frac{1}{n} \sum_{i=1}^{n} \frac{ \left \|X_{i}^{a} - X_{i} \right \|_{p} }{ \left \| X_{i} \right \|_{p}}\]</div>
 <p>其中n为所有攻击成功的对抗样本个数。</p>
 </div>
 <div class="section" id="ass-ssim">
-<h1><span class="section-number">5. </span>ASS 对抗样本数据与原数据的结构相似度（SSIM）<a class="headerlink" href="#ass-ssim" title="永久链接至标题">¶</a></h1>
+<h2><span class="section-number">2.5. </span>ASS 对抗样本数据与原数据的结构相似度（SSIM）<a class="headerlink" href="#ass-ssim" title="永久链接至标题">¶</a></h2>
 <p>平均结构相似性(Average Structural
 Similarity)。SSIM作为量化两幅图像间相似性常用指标之一，被认为比Lp相似度更符合人类视觉感知。为了评估对抗样本的不可感知性，ASS被定义为所有攻击成功对抗样本与其原始样本间的平均相似性，即</p>
 <div class="math notranslate nohighlight">
@@ -276,18 +269,16 @@ Similarity)。SSIM作为量化两幅图像间相似性常用指标之一，被�
 <p>其中n表示所有攻击成功的对抗样本个数。ASS值越大，则对抗样本的不可感知性越强。</p>
 </div>
 <div class="section" id="bd">
-<h1><span class="section-number">6. </span>BD 最大边界距离<a class="headerlink" href="#bd" title="永久链接至标题">¶</a></h1>
+<h2><span class="section-number">2.6. </span>BD 最大边界距离<a class="headerlink" href="#bd" title="永久链接至标题">¶</a></h2>
 <p>最大边界距离（Worst Case Boundary
-Distance）。数据点之间到决策边界的距离衡量模型在最坏情况下的稳定性和鲁棒性。</p>
-<p>随机寻找N个正交的方向，然后计算对于一个模型来说每个方向需要移动多少可以改变instance的prediction
-label，来衡量模型的决策边界最大距离。</p>
+Distance）。数据点之间到决策边界的距离衡量模型在最坏情况下的稳定性和鲁棒性。
+随机寻找N个正交的方向，然后计算对于一个模型来说每个方向需要移动多少可以改变instance的prediction label，来衡量模型的决策边界最大距离。</p>
 <div class="math notranslate nohighlight">
-\[BD = \frac{1} {N} \sum_{i = 1}^{N} d_{i}, d_{i}=max \phi _{i} \left ( V \right )\]</div>
-<p>其中，V表示一个随机生成的集合，$ <a href="#id4"><span class="problematic" id="id5">:raw-latex:`\phi`</span></a>_{i} (V)
-$为到模型决策边界的RMS距离，di为到决策边界距离的最大值。</p>
+\[\begin{split}\\BD = \frac{1} {N} \sum_{i = 1}^{N} d_{i}, d_{i}=max \phi _{i} \left ( V \right )\end{split}\]</div>
+<p>其中，V表示一个随机生成的集合，φi(V)为到模型决策边界的RMS距离，di为到决策边界距离的最大值。</p>
 </div>
 <div class="section" id="cav">
-<h1><span class="section-number">7. </span>CAV 分类准确度方差<a class="headerlink" href="#cav" title="永久链接至标题">¶</a></h1>
+<h2><span class="section-number">2.7. </span>CAV 分类准确度方差<a class="headerlink" href="#cav" title="永久链接至标题">¶</a></h2>
 <p>分类准确度方差(Classiﬁcation Accuracy
 Variance)。用于评估深度学习模型性能的最重要指标为准确性，因此，防御增强模型应尽可能保持常规测试实例下的分类精度。通过CAV评估防御对模型分类精度的影响，定义为</p>
 <div class="math notranslate nohighlight">
@@ -295,7 +286,7 @@ Variance)。用于评估深度学习模型性能的最重要指标为准确性�
 <p>其中Acc(F,T)表示模型F在数据集T下的识别准确率。</p>
 </div>
 <div class="section" id="ccv">
-<h1><span class="section-number">8. </span>CCV 分类置信方差<a class="headerlink" href="#ccv" title="永久链接至标题">¶</a></h1>
+<h2><span class="section-number">2.8. </span>CCV 分类置信方差<a class="headerlink" href="#ccv" title="永久链接至标题">¶</a></h2>
 <p>分类置信方差(Classification Confidence
 Variance)。对原始模型增加防御，可能不会影响评估准确率，但是正确分类样本的预测可信度可能会降低，因此引入CCV，测量防御增强模型引起的置信方差，我们定义</p>
 <div class="math notranslate nohighlight">
@@ -303,50 +294,42 @@ Variance)。对原始模型增加防御，可能不会影响评估准确率，�
 <p>其中n表示在原始模型及防御增强后模型全部分类准确的样本数量。</p>
 </div>
 <div class="section" id="cos">
-<h1><span class="section-number">9. </span>COS 分类输出稳定性<a class="headerlink" href="#cos" title="永久链接至标题">¶</a></h1>
-<p>COS全称为分类输出稳定性(Classification Output
-Stability)。使用JS散度来衡量原始模型和防御增强模型输出概率相似性，即分类输出的稳定性。</p>
+<h2><span class="section-number">2.9. </span>COS 分类输出稳定性<a class="headerlink" href="#cos" title="永久链接至标题">¶</a></h2>
+<p>COS全称为分类输出稳定性(Classification Output Stability)。使用JS散度来衡量原始模型和防御增强模型输出概率相似性，即分类输出的稳定性。</p>
 <p>对所有正确分类的测试实例，定义</p>
 <div class="math notranslate nohighlight">
 \[COS = \frac{1}{n}\sum_{i=1}^nJSD(P(X_i)||P^D(X_i))\]</div>
 <p>其中n表示在原始模型及防御增强后模型全部分类准确的样本数量，JSD表示计算JS散度的函数。COS值越低，两个模型的差距越小。</p>
 </div>
 <div class="section" id="crr-csr">
-<h1><span class="section-number">10. </span>CRR/CSR 分类校正/补偿比率<a class="headerlink" href="#crr-csr" title="永久链接至标题">¶</a></h1>
-<p>分类校正/补偿比率(Classification Rectify/Sacrifice
-Ratio)。为了评估防御对模型在测试集上预测结果的影响，将CRR定义为原始模型错误分类，但增加防御后，模型正确分类的测试实例的百分比。与此相反，CSR表示原始模型正确分类，但增加防御后，模型错误分类的测试实例的百分比。</p>
+<h2><span class="section-number">2.10. </span>CRR/CSR 分类校正/补偿比率<a class="headerlink" href="#crr-csr" title="永久链接至标题">¶</a></h2>
+<p>分类校正/补偿比率(Classification Rectify/Sacrifice Ratio)。为了评估防御对模型在测试集上预测结果的影响，将CRR定义为原始模型错误分类，但增加防御后，模型正确分类的测试实例的百分比。与此相反，CSR表示原始模型正确分类，但增加防御后，模型错误分类的测试实例的百分比。</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\\ CRR=\frac{1}{N}\sum_{i=1}^Ncount(F(X_i) \neq y_i \&amp; F^D(X_i)=y_i)
 \\ CSR=\frac{1}{N}\sum_{i=1}^Ncount(F(X_i) = y_i \&amp; F^D(X_i) \neq y_i)\end{split}\]</div>
-<p>同时CAV = CRR -
-CSR。其中F表示原始模型预测结果，<a href="#id8"><span class="problematic" id="id9">|img|</span></a>表示防御后模型预测结果，&amp;符号表示同时满足。返回值越小，两个模型的差距越小。</p>
+<p>同时CAV = CRR - CSR。其中F表示原始模型预测结果，F^D表示防御后模型预测结果，&amp; 符号表示同时满足。返回值越小，两个模型的差距越小。</p>
 </div>
 <div class="section" id="eni">
-<h1><span class="section-number">11. </span>ENI<a class="headerlink" href="#eni" title="永久链接至标题">¶</a></h1>
-<p>ε-Empirical Noise Insensitivity（综合对抗攻击和自然噪音的一个test
-set）。ENI值越低，攻击的不可感知性越强。</p>
+<h2><span class="section-number">2.11. </span>ENI<a class="headerlink" href="#eni" title="永久链接至标题">¶</a></h2>
+<p>ε-Empirical Noise Insensitivity（综合对抗攻击和自然噪音的一个test set）。ENI值越低，攻击的不可感知性越强。</p>
 </div>
 <div class="section" id="nte">
-<h1><span class="section-number">12. </span>NTE 噪声容量估计<a class="headerlink" href="#nte" title="永久链接至标题">¶</a></h1>
-<p>噪声容量估计(Noise Tolerance
-Estimation)，对抗样本的鲁棒性可通过噪声容限来估计，噪声容限反映了对抗样本在保持分类类别不变的情况下，可容忍的噪声量。具体来说，NTE计算了误分类概率与其他类最大概率之间的差值。</p>
+<h2><span class="section-number">2.12. </span>NTE 噪声容量估计<a class="headerlink" href="#nte" title="永久链接至标题">¶</a></h2>
+<p>噪声容量估计(Noise Tolerance Estimation)，对抗样本的鲁棒性可通过噪声容限来估计，噪声容限反映了对抗样本在保持分类类别不变的情况下，可容忍的噪声量。具体来说，NTE计算了误分类概率与其他类最大概率之间的差值。</p>
 <div class="math notranslate nohighlight">
 \[NTE = \frac{1}{n}\sum_{i=1}^n [ P(X_i^a)_{F(X_i^a)} - max{P(X_i^a)_j}]
 ，其中j\in\{1,...,k\},且j \neq F(X_i^a)\]</div>
 <p>NTE值越高，说明对抗样本的鲁棒性越高，攻击算法的鲁棒性越强。</p>
 </div>
 <div class="section" id="psd">
-<h1><span class="section-number">13. </span>PSD 扰动敏感距离<a class="headerlink" href="#psd" title="永久链接至标题">¶</a></h1>
-<p>扰动敏感距离(Perturbation Sensitivity
-Distance)。用于评测人类对扰动的感知能力。</p>
+<h2><span class="section-number">2.13. </span>PSD 扰动敏感距离<a class="headerlink" href="#psd" title="永久链接至标题">¶</a></h2>
+<p>扰动敏感距离(Perturbation Sensitivity Distance)。用于评测人类对扰动的感知能力。</p>
 <div class="math notranslate nohighlight">
 \[PSD=\frac{1}{n} \sum_{i=1}^n \sum_{j=1}^m \frac{\delta_{i,j}}{std(R(x_{i,j}))}\]</div>
-<p>其中m为像素点总数，$ <a href="#id6"><span class="problematic" id="id7">:raw-latex:`\delta`</span></a><em>{i, j} $
-表示第i个样例的第j个像素点，$ R(x</em>{i,j}) $ 表示 $ x_{i, j} $
-附近平方区域，std表示标准偏差函数。PSD的值越小，则对抗样本的不可感知性越强</p>
+<p>其中m为像素点总数δ{i, j}表示第i个样例的第j个像素点，R(x{i,j})表示x{i, j}附近平方区域，std表示标准偏差函数。PSD的值越小，则对抗样本的不可感知性越强。</p>
 </div>
 <div class="section" id="rgb">
-<h1><span class="section-number">14. </span>RGB 对高斯模糊鲁棒性<a class="headerlink" href="#rgb" title="永久链接至标题">¶</a></h1>
+<h2><span class="section-number">2.14. </span>RGB 对高斯模糊鲁棒性<a class="headerlink" href="#rgb" title="永久链接至标题">¶</a></h2>
 <p>对高斯模糊鲁棒性(Robustness to Gaussian
 Blur)。高斯模糊常被用于计算机视觉算法中的图像去噪。正常情况下，一个高鲁棒性的对抗样本，在高斯模糊后应保持其误分类效果。</p>
 <p>可以定义</p>
@@ -356,7 +339,7 @@ Blur)。高斯模糊常被用于计算机视觉算法中的图像去噪。正常
 <p>UA表示非定向攻击，TA表示定向攻击，GB函数表示高斯模糊处理。RGB结果越高，说明对抗样本鲁棒性越强。</p>
 </div>
 <div class="section" id="ric">
-<h1><span class="section-number">15. </span>RIC 对图像压缩鲁棒性<a class="headerlink" href="#ric" title="永久链接至标题">¶</a></h1>
+<h2><span class="section-number">2.15. </span>RIC 对图像压缩鲁棒性<a class="headerlink" href="#ric" title="永久链接至标题">¶</a></h2>
 <p>对图像压缩鲁棒性(Robustness to Image
 Compression)。图像压缩常被用于计算机视觉算法中的图像去噪。正常情况下，一个高鲁棒性的对抗样本，在图像压缩后应保持其误分类效果。</p>
 <p>可以定义</p>
@@ -364,6 +347,7 @@ Compression)。图像压缩常被用于计算机视觉算法中的图像去噪�
 \[\begin{split}\\RIC_{UA}=\frac{count(F(IC(X_i^a))\neq y_i)}{count(F(X_i^a)\neq y_i)}
 \\RIC_{TA}=\frac{count(F(IC(X_i^a))= y_i^+)}{count(F(X_i^a)= y_i^+)}\end{split}\]</div>
 <p>UA表示非定向攻击，TA表示定向攻击，IC函数表示图像压缩处理。RIC结果越高，说明对抗样本鲁棒性越强。</p>
+</div>
 </div>
 
 
@@ -374,7 +358,7 @@ Compression)。图像压缩常被用于计算机视觉算法中的图像去噪�
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="03_extend.html" class="btn btn-neutral float-right" title="16. 扩展评测算法" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="03_extend.html" class="btn btn-neutral float-right" title="3. 扩展评测算法" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="01_basic_introduce.html" class="btn btn-neutral float-left" title="1. 评测算法总览" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>

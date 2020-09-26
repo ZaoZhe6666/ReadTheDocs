@@ -7,7 +7,7 @@ Docker CE安装（Linux环境）
 软件下载
 ~~~~~~~~
 
-官方地址：\ `Docker官网`_ 阿里docker-ce镜像：\ `Docker镜像`_
+官方地址：\ `官网下载`_ 阿里docker-ce镜像：\ `Docker镜像`_
 
 内核要求
 ~~~~~~~~
@@ -32,7 +32,7 @@ yum-util 提供yum-config-manager功能，另外两个是devicemapper驱动依�
 
            sudo yum install -y yum-utils device-mapper-persistent-data lvm2
 
-.. _Docker官网: https://www.docker.com/community-edition
+.. _官网下载: https://www.docker.com/community-edition
 .. _Docker镜像: https://developer.aliyun.com/mirror/docker-ce
    
 
@@ -130,20 +130,20 @@ yum-util 提供yum-config-manager功能，另外两个是devicemapper驱动依�
        Experimental: false
 
 Docker使用
-==========
+--------------------------
 
 创建dockfile
-------------
+~~~~~~~~~~~~~~~~
 
 详见\ `dockfile创建说明`_\ ，或参考附件中样例，\ `下载链接`_
 
 运行镜像
---------
+~~~~~~~~~~~~~~~~
 
 将dockfile文件与项目放在同一路径下；进入项目路径，运行\ ``docker build``\ 创建镜像；
 
 查看image镜像
--------------
+~~~~~~~~~~~~~~~~
 
 ::
 
@@ -153,12 +153,11 @@ Docker使用
    docker image ls -a
 
 其他Docker命令
---------------
-
+~~~~~~~~~~~~~~~~
 详见\ `Docker官网`_
 
 Docker运行
-==========
+--------------------------
 
 .. _dockfile创建说明: https://www.cnblogs.com/panwenbin-logs/p/8007348.html
 .. _下载链接: https://www.cnblogs.com/panwenbin-logs/p/8007348.html

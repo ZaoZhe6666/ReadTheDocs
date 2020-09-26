@@ -1,3 +1,7 @@
+.. role:: raw-latex(raw)
+   :format: latex
+..
+
 扩展评测算法
 ============
 

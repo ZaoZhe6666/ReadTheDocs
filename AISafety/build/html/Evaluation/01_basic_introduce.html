@@ -90,30 +90,15 @@
 <li class="toctree-l1"><a class="reference internal" href="../Attack/index.html">攻击算法介绍</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">评测算法介绍</a><ul class="current">
 <li class="toctree-l2 current"><a class="current reference internal" href="#">1. 评测算法总览</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id2">1.1. 第一类评测算法</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id3">第二类评测算法</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id4">第三类评测算法</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id5">第四类评测算法</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id6">第五类评测算法</a></li>
-</ul>
-</li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">1.1. 第一类评测算法</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">1.2. 第二类评测算法</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">1.3. 第三类评测算法</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">1.4. 第四类评测算法</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id6">1.5. 第五类评测算法</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="02_detail_introduce.html">2. 评测算法详细介绍</a></li>
-<li class="toctree-l2"><a class="reference internal" href="02_detail_introduce.html#actc">3. ACTC 对抗成功时正确标签平均置信度</a></li>
-<li class="toctree-l2"><a class="reference internal" href="02_detail_introduce.html#aldp">4. ALDp 对抗攻击失真度</a></li>
-<li class="toctree-l2"><a class="reference internal" href="02_detail_introduce.html#ass-ssim">5. ASS 对抗样本数据与原数据的结构相似度（SSIM）</a></li>
-<li class="toctree-l2"><a class="reference internal" href="02_detail_introduce.html#bd">6. BD 最大边界距离</a></li>
-<li class="toctree-l2"><a class="reference internal" href="02_detail_introduce.html#cav">7. CAV 分类准确度方差</a></li>
-<li class="toctree-l2"><a class="reference internal" href="02_detail_introduce.html#ccv">8. CCV 分类置信方差</a></li>
-<li class="toctree-l2"><a class="reference internal" href="02_detail_introduce.html#cos">9. COS 分类输出稳定性</a></li>
-<li class="toctree-l2"><a class="reference internal" href="02_detail_introduce.html#crr-csr">10. CRR/CSR 分类校正/补偿比率</a></li>
-<li class="toctree-l2"><a class="reference internal" href="02_detail_introduce.html#eni">11. ENI</a></li>
-<li class="toctree-l2"><a class="reference internal" href="02_detail_introduce.html#nte">12. NTE 噪声容量估计</a></li>
-<li class="toctree-l2"><a class="reference internal" href="02_detail_introduce.html#psd">13. PSD 扰动敏感距离</a></li>
-<li class="toctree-l2"><a class="reference internal" href="02_detail_introduce.html#rgb">14. RGB 对高斯模糊鲁棒性</a></li>
-<li class="toctree-l2"><a class="reference internal" href="02_detail_introduce.html#ric">15. RIC 对图像压缩鲁棒性</a></li>
-<li class="toctree-l2"><a class="reference internal" href="03_extend.html">16. 扩展评测算法</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_extend.html">3. 扩展评测算法</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../Defense/index.html">防御算法介绍</a></li>
@@ -269,8 +254,9 @@ i个样例的第j个像素点，表示附近
 </tr>
 </tbody>
 </table>
+</div>
 <div class="section" id="id3">
-<h3>第二类评测算法<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h3>
+<h2><span class="section-number">1.2. </span>第二类评测算法<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h2>
 <p>第二类评测算法指：针对模型行为鲁棒性，通过对输入样本添加自然噪音，测试在自然噪音攻击下模型鲁棒性的一类评测算法。该类评测算法存储的主要路径为：</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">~/</span><span class="n">AISafety</span><span class="o">/</span><span class="n">EvalBox</span><span class="o">/</span><span class="n">UserEvaluation</span>
 </pre></div>
@@ -313,7 +299,7 @@ Error</p></td>
 </table>
 </div>
 <div class="section" id="id4">
-<h3>第三类评测算法<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h3>
+<h2><span class="section-number">1.3. </span>第三类评测算法<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h2>
 <p>第三类评测算法指：为了提高模型鲁棒性，通过对抗训练或其他加固方式，得到加固后模型，针对模型加固前后鲁棒性变化及预测能力变化进行的评测方法。该类评测算法存储的主要路径为：</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">~/</span><span class="n">AISafety</span><span class="o">/</span><span class="n">EvalBox</span><span class="o">/</span><span class="n">Evaluation</span>
 </pre></div>
@@ -358,7 +344,7 @@ JS散度衡量模型防御前后输出概率相似性</p></td>
 </table>
 </div>
 <div class="section" id="id5">
-<h3>第四类评测算法<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h3>
+<h2><span class="section-number">1.4. </span>第四类评测算法<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h2>
 <p>第四类评测算法指：针对模型静态结构，使用神经元覆盖等形式对模型进行评测的方法。该类评测算法存储的主要路径为：</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">~/</span><span class="n">AISafety</span><span class="o">/</span><span class="n">EvalBox</span><span class="o">/</span><span class="n">UserEvaluation</span>
 </pre></div>
@@ -419,7 +405,7 @@ attacking route</p></td>
 </table>
 </div>
 <div class="section" id="id6">
-<h3>第五类评测算法<a class="headerlink" href="#id6" title="永久链接至标题">¶</a></h3>
+<h2><span class="section-number">1.5. </span>第五类评测算法<a class="headerlink" href="#id6" title="永久链接至标题">¶</a></h2>
 <p>第五类评测算法指：针对进行模型训练或测试的数据集，根据模型在不同数据集上活跃表现，对模型预测行为加以可解释分析的方法。该类评测算法存储的主要路径为：</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">~/</span><span class="n">AISafety</span><span class="o">/</span><span class="n">EvalBox</span><span class="o">/</span><span class="n">UserEvaluation</span>
 </pre></div>
@@ -467,7 +453,6 @@ Coverage</p></td>
 </tr>
 </tbody>
 </table>
-</div>
 </div>
 </div>
 
