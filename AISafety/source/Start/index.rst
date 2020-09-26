@@ -12,6 +12,7 @@
     :numbered: 2
 
     01_introduce.rst
+    05_frame.rst
     02_requirment.rst
     03_cpu_config.rst
     04_docker.rst

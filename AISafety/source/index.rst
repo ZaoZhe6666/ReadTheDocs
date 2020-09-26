@@ -11,9 +11,11 @@ Welcome to AISafety's documentation!
    :caption: Contents:
 
    Start/index.rst
+   Dataset/index.rst
    Attack/index.rst
    Evaluation/index.rst
    Defense/index.rst
+   Models/index.rst
 
 Indices and tables
 ==================

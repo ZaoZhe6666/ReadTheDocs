@@ -7,13 +7,14 @@ Docker CE安装（Linux环境）
 软件下载
 ~~~~~~~~
 
-官方地址：\ `官网下载`_ 阿里docker-ce镜像：\ `Docker镜像`_
+官方地址：\ `官网下载`_ 
+阿里docker-ce镜像：\ `Docker镜像`_
 
 内核要求
 ~~~~~~~~
 
-docker 要求centos系统内核版本必须高于3.10 centos下通过 uname -r
-查看内核版本。
+docker 要求centos系统内核版本必须高于3.10
+centos下通过 uname -r 查看内核版本。
 
 软件安装
 ~~~~~~~~

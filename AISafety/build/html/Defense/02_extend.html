@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>2. 扩展评测算法 &mdash; AISafety 1.0 文档</title>
+  <title>2. 扩展防御算法 &mdash; AISafety 1.0 文档</title>
   
 
   
@@ -38,6 +38,7 @@
     
     <link rel="index" title="索引" href="../genindex.html" />
     <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="平台模型介绍" href="../Models/index.html" />
     <link rel="prev" title="1. 防御算法介绍" href="01_introduce.html" /> 
 </head>
 
@@ -86,13 +87,21 @@
               <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../Start/index.html">开始使用</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Dataset/index.html">数据集介绍</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Attack/index.html">攻击算法介绍</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Evaluation/index.html">评测算法介绍</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">防御算法介绍</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="01_introduce.html">1. 防御算法介绍</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">2. 扩展评测算法</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">2. 扩展防御算法</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id2">2.1. 防御算法类图</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">2.2. 防御算法存储位置</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nat">2.3. 扩展实例——NAT算法</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">2.4. 扩展说明</a></li>
 </ul>
 </li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Models/index.html">平台模型介绍</a></li>
 </ul>
 
             
@@ -141,7 +150,7 @@
         
           <li><a href="index.html">防御算法介绍</a> &raquo;</li>
         
-      <li><span class="section-number">2. </span>扩展评测算法</li>
+      <li><span class="section-number">2. </span>扩展防御算法</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -161,10 +170,239 @@
            <div itemprop="articleBody">
             
   <div class="section" id="id1">
-<h1><span class="section-number">2. </span>扩展评测算法<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
-<blockquote>
-<div><p>用户可参照如下指令，扩展并集成个人评测算法执行评测过程</p>
-</div></blockquote>
+<h1><span class="section-number">2. </span>扩展防御算法<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
+<div class="section" id="id2">
+<h2><span class="section-number">2.1. </span>防御算法类图<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
+<p>此处应该有个图片</p>
+<p>如上图所示，上图为防御算法NAT和防御算法PAT继承Defense类示意图。防御算法内部可自行实现防御过程具体函数，仅需覆写train方法，valid方法，generate方法即可。</p>
+</div>
+<div class="section" id="id3">
+<h2><span class="section-number">2.2. </span>防御算法存储位置<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>├── EvalBox
+│   ├── Attack
+│   ├── Analysis
+│   ├── **Defense**   防御算法路径
+│   │   ├──__init__.py
+│   │   ├──nat.py
+│   │   ├──pat.py
+│   │   ├──....py
+│   │   ├──defense.py
+│   ├── Evaluation
+├── Models
+├── utils
+├── test
+├── Datasets
+</pre></div>
+</div>
+</div>
+<div class="section" id="nat">
+<h2><span class="section-number">2.3. </span>扩展实例——NAT算法<a class="headerlink" href="#nat" title="永久链接至标题">¶</a></h2>
+<p>NAT算法路径为：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">~/</span><span class="n">AISafety</span><span class="o">/</span><span class="n">EvalBox</span><span class="o">/</span><span class="n">Defense</span><span class="o">/</span><span class="n">nat</span><span class="o">.</span><span class="n">py</span>
+</pre></div>
+</div>
+<p>ACTC算法源代码:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">NAT</span><span class="p">(</span><span class="n">Defense</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                 <span class="n">model</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">device</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">optimizer</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">scheduler</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        @description: New adversarial training (NAT)</span>
+<span class="sd">        @param {</span>
+<span class="sd">            model:</span>
+<span class="sd">            device:</span>
+<span class="sd">            optimizer:</span>
+<span class="sd">            scheduler:</span>
+<span class="sd">            kwargs:</span>
+<span class="sd">        }</span>
+<span class="sd">        @return: None</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">device</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">criterion</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">CrossEntropyLoss</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">optimizer</span> <span class="o">=</span> <span class="n">optimizer</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_parse_params</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_parse_params</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        @description:</span>
+<span class="sd">        @param {</span>
+<span class="sd">            num_epochs:</span>
+<span class="sd">            adv_ratio:</span>
+<span class="sd">            clip_eps_min:</span>
+<span class="sd">            clip_eps_max:</span>
+<span class="sd">            eps_mu:</span>
+<span class="sd">            eps_sigma:</span>
+<span class="sd">        }</span>
+<span class="sd">        @return: None</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">num_epochs</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;num_epochs&#39;</span><span class="p">,</span> <span class="mi">200</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">adv_ratio</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;adv_ratio&#39;</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">clip_eps_min</span> <span class="o">=</span><span class="nb">float</span><span class="p">(</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;eps_min&#39;</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">clip_eps_max</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;eps_max&#39;</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">eps_mu</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;eps_mu&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">eps_sigma</span> <span class="o">=</span><span class="nb">float</span><span class="p">(</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;eps_sigma&#39;</span><span class="p">,</span> <span class="mi">50</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">_random_llc_generation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">var_natural_images</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        @description:</span>
+<span class="sd">        @param {</span>
+<span class="sd">            var_natural_images:</span>
+<span class="sd">        }</span>
+<span class="sd">        @return: ret_adv_images</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">device</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">device</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+        <span class="n">clone_var_natural_images</span> <span class="o">=</span> <span class="n">var_natural_images</span><span class="o">.</span><span class="n">clone</span><span class="p">()</span>
+
+        <span class="c1"># get the random epsilon for the Random LLC generation</span>
+        <span class="n">random_eps</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span>
+            <span class="n">loc</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">eps_mu</span><span class="p">,</span>
+            <span class="n">scale</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">eps_sigma</span><span class="p">,</span>
+            <span class="n">size</span><span class="o">=</span><span class="p">[</span><span class="n">var_natural_images</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="mi">0</span><span class="p">)])</span> <span class="o">/</span> <span class="mf">255.0</span>
+        <span class="n">random_eps</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">random_eps</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">clip_eps_min</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">clip_eps_max</span><span class="p">)</span>
+
+        <span class="n">clone_var_natural_images</span><span class="o">.</span><span class="n">requires_grad</span> <span class="o">=</span> <span class="kc">True</span>
+
+        <span class="c1"># prepare the least likely class labels (avoid label leaking effect)</span>
+        <span class="n">logits</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">(</span><span class="n">clone_var_natural_images</span><span class="p">)</span>
+        <span class="n">llc_labels</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">logits</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="c1"># get the loss and gradients</span>
+        <span class="n">loss_llc</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">criterion</span><span class="p">(</span><span class="n">logits</span><span class="p">,</span> <span class="n">llc_labels</span><span class="p">)</span>
+        <span class="n">gradients_llc</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">autograd</span><span class="o">.</span><span class="n">grad</span><span class="p">(</span><span class="n">loss_llc</span><span class="p">,</span> <span class="n">clone_var_natural_images</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="n">clone_var_natural_images</span><span class="o">.</span><span class="n">requires_grad</span> <span class="o">=</span> <span class="kc">False</span>
+
+        <span class="n">gradients_sign</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">gradients_llc</span><span class="p">)</span>
+        <span class="n">var_random_eps</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">random_eps</span><span class="p">)</span><span class="o">.</span><span class="n">float</span><span class="p">()</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+
+        <span class="c1"># generation of adversarial examples</span>
+        <span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>
+            <span class="n">list_var_adv_images</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">var_natural_images</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="mi">0</span><span class="p">)):</span>
+                <span class="n">var_adv_image</span> <span class="o">=</span> <span class="n">var_natural_images</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">var_random_eps</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="n">gradients_sign</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+                <span class="n">var_adv_image</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">clamp</span><span class="p">(</span><span class="n">var_adv_image</span><span class="p">,</span> <span class="nb">min</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+                <span class="n">list_var_adv_images</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">var_adv_image</span><span class="p">)</span>
+            <span class="n">ret_adv_images</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">stack</span><span class="p">(</span><span class="n">list_var_adv_images</span><span class="p">)</span>
+        <span class="n">ret_adv_images</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">clamp</span><span class="p">(</span><span class="n">ret_adv_images</span><span class="p">,</span> <span class="nb">min</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">ret_adv_images</span>
+
+    <span class="k">def</span> <span class="nf">valid</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">valid_loader</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        @description:</span>
+<span class="sd">        @param {</span>
+<span class="sd">            valid_loader:</span>
+<span class="sd">            epoch:</span>
+<span class="sd">        }</span>
+<span class="sd">        @return: val_acc</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">device</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">device</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
+        <span class="n">correct</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>
+            <span class="k">for</span> <span class="n">inputs</span><span class="p">,</span> <span class="n">labels</span> <span class="ow">in</span> <span class="n">valid_loader</span><span class="p">:</span>
+                <span class="n">inputs</span> <span class="o">=</span> <span class="n">inputs</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+                <span class="n">labels</span> <span class="o">=</span> <span class="n">labels</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+
+                <span class="n">outputs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">(</span><span class="n">inputs</span><span class="p">)</span>
+                <span class="n">preds</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">outputs</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+                <span class="n">total</span> <span class="o">+=</span> <span class="n">inputs</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="n">correct</span> <span class="o">+=</span> <span class="p">(</span><span class="n">preds</span> <span class="o">==</span> <span class="n">labels</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+            <span class="n">val_acc</span> <span class="o">=</span> <span class="n">correct</span> <span class="o">/</span> <span class="n">total</span>
+        <span class="k">return</span> <span class="n">val_acc</span>
+
+    <span class="k">def</span> <span class="nf">train</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">train_loader</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">epoch</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        @description:</span>
+<span class="sd">        @param {</span>
+<span class="sd">            train_loader:</span>
+<span class="sd">            epoch:</span>
+<span class="sd">        }</span>
+<span class="sd">        @return: None</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">device</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">device</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="p">(</span><span class="n">images</span><span class="p">,</span> <span class="n">labels</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">train_loader</span><span class="p">):</span>
+            <span class="n">nat_images</span> <span class="o">=</span> <span class="n">images</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+            <span class="n">nat_labels</span> <span class="o">=</span> <span class="n">labels</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
+            <span class="n">adv_images</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_random_llc_generation</span><span class="p">(</span>
+                <span class="n">var_natural_images</span><span class="o">=</span><span class="n">nat_images</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">train</span><span class="p">()</span>
+            <span class="n">logits_nat</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">(</span><span class="n">nat_images</span><span class="p">)</span>
+            <span class="n">loss_nat</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">criterion</span><span class="p">(</span><span class="n">logits_nat</span><span class="p">,</span> <span class="n">nat_labels</span><span class="p">)</span>
+            <span class="n">logits_adv</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">(</span><span class="n">adv_images</span><span class="p">)</span>
+            <span class="n">loss_adv</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">criterion</span><span class="p">(</span><span class="n">logits_adv</span><span class="p">,</span> <span class="n">nat_labels</span><span class="p">)</span>
+
+            <span class="n">loss</span> <span class="o">=</span> <span class="p">(</span><span class="n">loss_nat</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">adv_ratio</span> <span class="o">*</span> <span class="n">loss_adv</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">adv_ratio</span><span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">optimizer</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>
+            <span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">optimizer</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+            <span class="nb">print</span><span class="p">(</span>
+                <span class="s1">&#39;</span><span class="se">\r</span><span class="s1">Train Epoch </span><span class="si">{:&gt;2}</span><span class="s1">: [batch:</span><span class="si">{:&gt;4}</span><span class="s1">/</span><span class="si">{:&gt;4}</span><span class="s1">]  </span><span class="se">\t</span><span class="s1">loss_nat=</span><span class="si">{:.4f}</span><span class="s1">, loss_adv=</span><span class="si">{:.4f}</span><span class="s1">, total_loss=</span><span class="si">{:.4f}</span><span class="s1"> ===&gt; &#39;</span>
+                <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">epoch</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">train_loader</span><span class="p">),</span> <span class="n">loss_nat</span><span class="o">.</span><span class="n">item</span><span class="p">(),</span> <span class="n">loss_adv</span><span class="o">.</span><span class="n">item</span><span class="p">(),</span> <span class="n">loss</span><span class="o">.</span><span class="n">item</span><span class="p">()),</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">generate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">train_loader</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">valid_loader</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">defense_enhanced_saver</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        @description:</span>
+<span class="sd">        @param {</span>
+<span class="sd">            train_loader:</span>
+<span class="sd">            valid_loader:</span>
+<span class="sd">        }</span>
+<span class="sd">        @return: best_model_weights, best_acc</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">best_val_acc</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">best_model_weights</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">state_dict</span><span class="p">()</span>
+        <span class="n">dir_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">defense_enhanced_saver</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">dir_path</span><span class="p">):</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">dir_path</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_epochs</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">train_loader</span><span class="p">,</span> <span class="n">epoch</span><span class="p">)</span>
+            <span class="n">val_acc</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">valid</span><span class="p">(</span><span class="n">valid_loader</span><span class="p">)</span>
+            <span class="n">adjust_learning_rate</span><span class="p">(</span><span class="n">epoch</span><span class="o">=</span><span class="n">epoch</span><span class="p">,</span> <span class="n">optimizer</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">optimizer</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">best_val_acc</span> <span class="ow">or</span> <span class="nb">round</span><span class="p">(</span><span class="n">val_acc</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="nb">round</span><span class="p">(</span><span class="n">best_val_acc</span><span class="p">,</span> <span class="mi">4</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">best_val_acc</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">defense_enhanced_saver</span><span class="p">)</span>
+                <span class="n">best_val_acc</span> <span class="o">=</span> <span class="n">val_acc</span>
+                <span class="n">best_model_weights</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">state_dict</span><span class="p">()</span>
+                <span class="n">torch</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">state_dict</span><span class="p">(),</span> <span class="n">defense_enhanced_saver</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Train Epoch</span><span class="si">{:&gt;3}</span><span class="s1">: validation dataset accuracy did not improve from </span><span class="si">{:.4f}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">epoch</span><span class="p">,</span> <span class="n">best_val_acc</span><span class="p">))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Best val Acc: </span><span class="si">{:.4f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">best_val_acc</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">best_model_weights</span><span class="p">,</span> <span class="n">best_val_acc</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id4">
+<h2><span class="section-number">2.4. </span>扩展说明<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h2>
+<ol class="arabic simple">
+<li><p>用户需要实现个人防御算法，并继承基础的Defense类</p></li>
+<li><p>用户需要将待扩展的防御算法对应文件，如new_defense_method.py，放置于以下路径中</p></li>
+</ol>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">~/</span><span class="n">AISafety</span><span class="o">/</span><span class="n">EvalBox</span><span class="o">/</span><span class="n">Defense</span><span class="o">/</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li><p>用户需要在2中路径下的__init__.py文件中，添加用户防御算法类的引用：</p></li>
+</ol>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">.pat</span> <span class="kn">import</span> <span class="n">PAT</span>
+<span class="kn">from</span> <span class="nn">.oat</span> <span class="kn">import</span> <span class="n">OAT</span>
+<span class="o">...</span>
+<span class="kn">from</span> <span class="nn">.new_defense_method</span> <span class="kn">import</span> <span class="n">NEW_DEFENSE_METHOD</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="4">
+<li><p>用户可在集成调用文件testimport_defense.py中，修改对应方法名，方法参数路径信息</p></li>
+</ol>
+</div>
 </div>
 
 
@@ -174,6 +412,8 @@
           <footer>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../Models/index.html" class="btn btn-neutral float-right" title="平台模型介绍" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="01_introduce.html" class="btn btn-neutral float-left" title="1. 防御算法介绍" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>

@@ -1,0 +1,304 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-CN" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>2. 扩展数据集 &mdash; AISafety 1.0 文档</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/translations.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="攻击算法介绍" href="../Attack/index.html" />
+    <link rel="prev" title="1. 数据集介绍" href="01_introduce.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> AISafety
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../Start/index.html">开始使用</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">数据集介绍</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="01_introduce.html">1. 数据集介绍</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">2. 扩展数据集</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id2">2.1. 平台代码分布结构</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#npy">2.2. 扩展npy数据集</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#cifar-10">转换Cifar-10数据集</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cifar-100">转换Cifar-100数据集</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Attack/index.html">攻击算法介绍</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Evaluation/index.html">评测算法介绍</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Defense/index.html">防御算法介绍</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Models/index.html">平台模型介绍</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">AISafety</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">数据集介绍</a> &raquo;</li>
+        
+      <li><span class="section-number">2. </span>扩展数据集</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/Dataset/02_extend.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="id1">
+<h1><span class="section-number">2. </span>扩展数据集<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
+<div class="section" id="id2">
+<h2><span class="section-number">2.1. </span>平台代码分布结构<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>├── EvalBox
+├── Models
+├── utils
+├── **test**
+│   ├── testimport.py
+│   ├── testimport_black.py
+│   ├── **cifartonpy.py**
+│   ├── **dict_lists**
+│   │   ├── cifar10_dict.txt
+│   │   ├── ImageNet_12_dict.txt
+├── **Datasets**
+│   ├── CIFAR_cln_data
+│   │   ├──cifar10_30_origin_inputs.npy
+│   │   ├──cifar10_30_origin_labels.npy
+│   │   ├──cifar10_30_target_labels.npy
+│   │   ├── ...
+│   ├──ImageNet
+│   │   ├──Images
+│   │   ├──val_20.txt
+│   ├──ImageCustom
+│   ├──adv_data
+│   │   ├──zjx.json
+</pre></div>
+</div>
+<p>上图为与扩展用户个人数据集相关的平台结构图。目前平台共支持两类数据集：</p>
+<ol class="arabic simple">
+<li><p>npy格式数据集（与平台中cifar10，cifar100结构格式一致），包含原始样本，样本的标签。</p></li>
+<li><p>原始图像 + 图像标签txt文件的数据集。（与平台中ImageNet数据集格式一致）</p></li>
+</ol>
+<p>需要注意的是，上述两类数据集，均需要额外提供对应的类别编号对应的目标名称的字典</p>
+</div>
+<div class="section" id="npy">
+<h2><span class="section-number">2.2. </span>扩展npy数据集<a class="headerlink" href="#npy" title="永久链接至标题">¶</a></h2>
+<p>平台目前提供了一个，将cifar数据集转换为npy数据格式的样例文件cifartonpy.py。</p>
+<div class="section" id="cifar-10">
+<h3>转换Cifar-10数据集<a class="headerlink" href="#cifar-10" title="永久链接至标题">¶</a></h3>
+<p>获得Cifar-10数据集的train数据Xtr，Ytr；test数据Xte，Yte：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Xtr</span><span class="p">,</span> <span class="n">Ytr</span><span class="p">,</span> <span class="n">Xte</span><span class="p">,</span> <span class="n">Yte</span><span class="o">=</span><span class="n">load_CIFAR10</span><span class="p">(</span><span class="s1">&#39;../../cifar-10-python/cifar-10-batches-py&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>保存Cifar-10的test数据的随机1500个,方式是随机均匀取10类,各150。这里的标签是原始的Groundtruth标签,IsTargeted=False</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">save_numpy</span><span class="p">(</span> <span class="n">Xte</span><span class="p">,</span> <span class="n">Yte</span><span class="p">,</span><span class="s1">&#39;../Datasets/CIFAR_cln_data/&#39;</span><span class="p">,</span><span class="mi">1500</span><span class="p">,</span><span class="n">shuff</span><span class="o">=</span><span class="s2">&quot;random_equally&quot;</span><span class="p">,</span><span class="n">datasetType</span><span class="o">=</span><span class="s2">&quot;cifar10&quot;</span><span class="p">,</span><span class="n">IsTargeted</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>如果IsTargeted=True ,则是随机生成和原始样本的GroundTruth不一致的标签,可以用于目标攻击使用,用户也可以自行定义目标标签的生成类别规则。</p>
+<p>其中’../../cifar-10-python/cifar-10-batches-py’是原始的cifar10数据下载下来的
+返回值 Xtr, Ytr, Xte, Yte分别是 cifar10的train数据 Xtr,Ytr,cifar10的test数据。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>  <span class="n">调用save_numpy</span><span class="p">(</span>
+  <span class="n">X</span>     <span class="c1">#全部的数据</span>
+<span class="p">,</span> <span class="n">Y</span>     <span class="c1">#全部的数据</span>
+<span class="p">,</span> <span class="n">path</span>  <span class="c1">#npy 数据保存的目标路径</span>
+<span class="p">,</span> <span class="n">number</span><span class="o">=</span><span class="mi">10000</span>   <span class="c1">#最后的要保存的数据的数量，&lt;=总的</span>
+<span class="p">,</span> <span class="n">shuff</span><span class="o">=</span><span class="s2">&quot;random_equally&quot;</span> <span class="c1">#随机选取的类别数量要均衡的方式</span>
+<span class="p">,</span> <span class="n">datasetType</span><span class="o">=</span><span class="s2">&quot;cifar10&quot;</span>  <span class="c1">#数据集的名称</span>
+<span class="p">,</span> <span class="n">IsTargeted</span><span class="o">=</span><span class="kc">False</span>   <span class="c1">#是否生成的是用于目标攻击的标签，随机值（和原始的不同即可)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="cifar-100">
+<h3>转换Cifar-100数据集<a class="headerlink" href="#cifar-100" title="永久链接至标题">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">numbertest</span><span class="o">=</span><span class="mi">10000</span>
+<span class="n">Xte100</span><span class="p">,</span> <span class="n">Yte100</span><span class="o">=</span><span class="n">load_CIFAR100</span><span class="p">(</span><span class="s1">&#39;../Datasets/CIFAR10/cifar-100-python&#39;</span><span class="p">,</span><span class="s1">&#39;test&#39;</span><span class="p">,</span><span class="n">numbertest</span><span class="p">)</span>
+<span class="n">save_numpy</span><span class="p">(</span> <span class="n">Xte100</span><span class="p">,</span> <span class="n">Yte100</span><span class="p">,</span><span class="s1">&#39;../Datasets/cln_data/&#39;</span><span class="p">,</span><span class="mi">300</span><span class="p">,</span><span class="n">shuff</span><span class="o">=</span><span class="s2">&quot;random_equally&quot;</span><span class="p">,</span><span class="n">datasetType</span><span class="o">=</span><span class="s2">&quot;cifar100&quot;</span><span class="p">,</span><span class="n">IsTargeted</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../Attack/index.html" class="btn btn-neutral float-right" title="攻击算法介绍" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="01_introduce.html" class="btn btn-neutral float-left" title="1. 数据集介绍" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; 版权所有 2020, DIG
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

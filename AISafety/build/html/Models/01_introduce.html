@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Start &mdash; AISafety 1.0 文档</title>
+  <title>1. 测试模型 &mdash; AISafety 1.0 文档</title>
   
 
   
@@ -37,7 +37,9 @@
 
     
     <link rel="index" title="索引" href="../genindex.html" />
-    <link rel="search" title="搜索" href="../search.html" /> 
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="2. 扩展模型" href="02_extend.html" />
+    <link rel="prev" title="平台模型介绍" href="index.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -83,11 +85,17 @@
             
             
               <p class="caption"><span class="caption-text">Contents:</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../Start/index.html">开始使用</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Dataset/index.html">数据集介绍</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Attack/index.html">攻击算法介绍</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Evaluation/index.html">评测算法介绍</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Defense/index.html">防御算法介绍</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">平台模型介绍</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">1. 测试模型</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_extend.html">2. 扩展模型</a></li>
+</ul>
+</li>
 </ul>
 
             
@@ -134,13 +142,15 @@
     
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
         
-      <li>Start</li>
+          <li><a href="index.html">平台模型介绍</a> &raquo;</li>
+        
+      <li><span class="section-number">1. </span>测试模型</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="../_sources/Example/index.md.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/Models/01_introduce.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -153,8 +163,21 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="start">
-<h1>Start<a class="headerlink" href="#start" title="永久链接至标题">¶</a></h1>
+  <div class="section" id="id1">
+<h1><span class="section-number">1. </span>测试模型<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
+<p>平台已集成的测试模型共有以下几个</p>
+<ul class="simple">
+<li><p>针对Cifar-10数据集的ResNet20，FP_ResNet，VGG16</p></li>
+<li><p>针对ImageNet数据集的VGG19</p></li>
+</ul>
+<p>平台已集成的模型参数共有以下几个</p>
+<ul class="simple">
+<li><p>resnet20模型在cifar10原始训练集上模型参数</p></li>
+<li><p>resnet20模型通过RAND加固算法加固后模型参数</p></li>
+<li><p>FP_ResNet模型在cifar10原始训练集上模型参数</p></li>
+<li><p>VGG16模型在cifar10原始训练集上模型参数</p></li>
+<li><p>VGG16模型通过RAND加固算法加固后模型参数</p></li>
+</ul>
 </div>
 
 
@@ -162,6 +185,15 @@
            
           </div>
           <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="02_extend.html" class="btn btn-neutral float-right" title="2. 扩展模型" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral float-left" title="平台模型介绍" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
   
 
   <hr/>

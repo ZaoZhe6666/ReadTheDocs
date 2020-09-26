@@ -87,14 +87,22 @@
               <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../Start/index.html">开始使用</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Dataset/index.html">数据集介绍</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Attack/index.html">攻击算法介绍</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">评测算法介绍</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="01_basic_introduce.html">1. 评测算法总览</a></li>
 <li class="toctree-l2"><a class="reference internal" href="02_detail_introduce.html">2. 评测算法详细介绍</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">3. 扩展评测算法</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">3. 扩展评测算法</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id2">3.1. 评测算法类图</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">3.2. 评测算法存储位置</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#actc">3.3. 扩展实例——ACTC算法</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">3.4. 扩展说明</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../Defense/index.html">防御算法介绍</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Models/index.html">平台模型介绍</a></li>
 </ul>
 
             
@@ -164,9 +172,124 @@
             
   <div class="section" id="id1">
 <h1><span class="section-number">3. </span>扩展评测算法<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
-<blockquote>
-<div><p>用户可参照如下指令，扩展并集成个人评测算法执行评测过程</p>
-</div></blockquote>
+<div class="section" id="id2">
+<h2><span class="section-number">3.1. </span>评测算法类图<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
+<p>此处应该有个图片</p>
+<p>如上图所示，上图为评测算法ACTC和评测算法CAV和评测算法CACC继承Evaluation类示意图。评测算法内部可自行实现评测过程具体函数，仅需覆写evaluate函数即可。</p>
+</div>
+<div class="section" id="id3">
+<h2><span class="section-number">3.2. </span>评测算法存储位置<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>├── EvalBox
+│   ├── Attack
+│   ├── Analysis
+│   ├── **Evaluation**  评测算法存储位置
+│   │   ├──__init__.py
+│   │   ├──actc.py
+│   │   ├──CAV.py
+│   │   ├──evaluation.py
+│   │   ├──evaluation_defense.py
+│   ├── Defense
+├── Models
+├── utils
+├── test
+├── Datasets
+</pre></div>
+</div>
+</div>
+<div class="section" id="actc">
+<h2><span class="section-number">3.3. </span>扩展实例——ACTC算法<a class="headerlink" href="#actc" title="永久链接至标题">¶</a></h2>
+<p>ACTC算法路径为：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">~/</span><span class="n">AISafety</span><span class="o">/</span><span class="n">EvalBox</span><span class="o">/</span><span class="n">Evaluation</span><span class="o">/</span><span class="n">actc</span><span class="o">.</span><span class="n">py</span>
+</pre></div>
+</div>
+<p>ACTC算法源代码:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">ACTC</span><span class="p">(</span><span class="n">Evaluation</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">outputs_origin</span><span class="p">,</span> <span class="n">outputs_adv</span><span class="p">,</span> <span class="n">device</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        @description:</span>
+<span class="sd">        @param {</span>
+<span class="sd">            model:</span>
+<span class="sd">            device:</span>
+<span class="sd">            kwargs:</span>
+<span class="sd">        }</span>
+<span class="sd">        @return: None</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">ACTC</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">outputs_origin</span><span class="p">,</span> <span class="n">outputs_adv</span><span class="p">,</span> <span class="n">device</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_parsing_parameters</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">_parsing_parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        @description:</span>
+<span class="sd">        @param {</span>
+<span class="sd">        }</span>
+<span class="sd">        @return:</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+
+    <span class="k">def</span> <span class="nf">evaluate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">adv_xs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">cln_xs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">cln_ys</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">adv_ys</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">target_preds</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">target_flag</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        @description:</span>
+<span class="sd">        @param {</span>
+<span class="sd">            adv_xs: 攻击样本</span>
+<span class="sd">            cln_xs：原始样本</span>
+<span class="sd">            cln_ys: 原始类别，非目标攻击下原始样本的类型</span>
+<span class="sd">            adv_ys: 攻击样本的预测类别</span>
+<span class="sd">            target_preds： 目标攻击下希望原始样本攻击的目标类别</span>
+<span class="sd">            target_flag：是否是目标攻击</span>
+<span class="sd">        }</span>
+<span class="sd">        @return: actc {Average Confidence of True Class}</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">total</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">adv_xs</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;total&quot;</span><span class="p">,</span> <span class="n">total</span><span class="p">)</span>
+        <span class="n">outputs</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">outputs_adv</span><span class="p">)</span>
+        <span class="n">number</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">prob</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">outputs_softmax</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">functional</span><span class="o">.</span><span class="n">softmax</span><span class="p">(</span><span class="n">outputs</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">preds</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">outputs</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">outputs_softmax</span> <span class="o">=</span> <span class="n">outputs_softmax</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+        <span class="n">preds</span> <span class="o">=</span> <span class="n">preds</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+        <span class="n">labels</span> <span class="o">=</span> <span class="n">target_preds</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">target_flag</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">preds</span><span class="o">.</span><span class="n">size</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">preds</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="n">labels</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
+                    <span class="n">number</span> <span class="o">+=</span> <span class="mi">1</span>
+                    <span class="n">prob</span> <span class="o">+=</span> <span class="n">outputs_softmax</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">labels</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">preds</span><span class="o">.</span><span class="n">size</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">preds</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">labels</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
+                    <span class="n">number</span> <span class="o">+=</span> <span class="mi">1</span>
+                    <span class="n">prob</span> <span class="o">+=</span> <span class="n">outputs_softmax</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">labels</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">number</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">actc</span> <span class="o">=</span> <span class="n">prob</span> <span class="o">/</span> <span class="n">number</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">actc</span> <span class="o">=</span> <span class="n">prob</span><span class="o">/</span><span class="p">(</span><span class="n">number</span><span class="o">+</span><span class="n">MIN_COMPENSATION</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">actc</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id4">
+<h2><span class="section-number">3.4. </span>扩展说明<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h2>
+<ol class="arabic simple">
+<li><p>用户需要实现个人评测算法，并继承基础的Evaluation类，若用户希望实现的是比较模式的评测算法，则继承Evaluation_Defense类</p></li>
+<li><p>用户需要将待扩展的评测算法对应文件，如new_evaluate_method.py，放置于以下路径中</p></li>
+</ol>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">~/</span><span class="n">AISafety</span><span class="o">/</span><span class="n">EvalBox</span><span class="o">/</span><span class="n">Evaluation</span><span class="o">/</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li><p>用户需要在2中路径下的__init__.py文件中，添加用户评测算法类的引用：</p></li>
+</ol>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">.CAV</span> <span class="kn">import</span> <span class="n">CAV</span>
+<span class="kn">from</span> <span class="nn">.acc</span> <span class="kn">import</span> <span class="n">ACC</span>
+<span class="o">...</span>
+<span class="kn">from</span> <span class="nn">.new_evaluate_method</span> <span class="kn">import</span> <span class="n">NEW_EVALUATE_METHOD</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="4">
+<li><p>用户可在集成调用文件testimport.py中，修改evaluation_method参数为NEW_EVALUATE_METHOD</p></li>
+<li><p>如果用户评测算法是针对动态行为的评测算法，即需要获取传入模型，可设置IS_PYTHORCH_WHITE参数为True</p></li>
+<li><p>若用户评测算法为对比模型，需设置IS_COMPARE_MODEL参数为True</p></li>
+</ol>
+</div>
 </div>
 
 

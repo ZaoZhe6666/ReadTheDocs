@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>&lt;no title&gt; &mdash; AISafety 1.0 文档</title>
+  <title>2. 扩展攻击算法 &mdash; AISafety 1.0 文档</title>
   
 
   
@@ -85,11 +85,23 @@
             
             
               <p class="caption"><span class="caption-text">Contents:</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../Start/index.html">开始使用</a></li>
-<li class="toctree-l1"><a class="reference internal" href="index.html">攻击算法介绍</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Dataset/index.html">数据集介绍</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">攻击算法介绍</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="01_introduce.html">1. 攻击算法说明</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">2. 扩展攻击算法</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id2">2.1. 攻击算法类图</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">2.2. 攻击算法存储位置</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#fgsm">2.3. 扩展实例——FGSM算法</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">2.4. 扩展说明</a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="../Evaluation/index.html">评测算法介绍</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Defense/index.html">防御算法介绍</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Models/index.html">平台模型介绍</a></li>
 </ul>
 
             
@@ -138,7 +150,7 @@
         
           <li><a href="index.html">攻击算法介绍</a> &raquo;</li>
         
-      <li>&lt;no title&gt;</li>
+      <li><span class="section-number">2. </span>扩展攻击算法</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -157,7 +169,129 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  
+  <div class="section" id="id1">
+<h1><span class="section-number">2. </span>扩展攻击算法<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
+<div class="section" id="id2">
+<h2><span class="section-number">2.1. </span>攻击算法类图<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
+<p>此处应该有个图片</p>
+<p>如上图所示，上图为攻击算法FGSM和攻击算法SPSA继承Attack类示意图。攻击算法内部可自行实现攻击过程具体函数，仅需覆写generate函数即可。</p>
+</div>
+<div class="section" id="id3">
+<h2><span class="section-number">2.2. </span>攻击算法存储位置<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>├── EvalBox
+│   ├── **Attack**
+│   │   ├──AdvAttack  对抗攻击算法存储路径
+│   │   │   ├──__init__.py
+│   │   │   ├──attack.py
+│   │   │   ├──fgsm.py
+│   │   │   ├──....py
+│   │   ├──CorAttack  噪声攻击算法存储路径
+│   ├── Analysis
+│   ├── Defense
+│   ├── Evaluation
+├── Models
+├── utils
+├── test
+├── Datasets
+</pre></div>
+</div>
+</div>
+<div class="section" id="fgsm">
+<h2><span class="section-number">2.3. </span>扩展实例——FGSM算法<a class="headerlink" href="#fgsm" title="永久链接至标题">¶</a></h2>
+<p>FGSM算法路径为：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">~/</span><span class="n">AISafety</span><span class="o">/</span><span class="n">EvalBox</span><span class="o">/</span><span class="n">Attack</span><span class="o">/</span><span class="n">fgsm</span><span class="o">.</span><span class="n">py</span>
+</pre></div>
+</div>
+<p>FGSM算法源代码:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">from</span> <span class="nn">torch.autograd</span> <span class="kn">import</span> <span class="n">Variable</span>
+<span class="kn">from</span> <span class="nn">EvalBox.Attack.AdvAttack.attack</span> <span class="kn">import</span> <span class="n">Attack</span>
+<span class="kn">from</span> <span class="nn">utils.CrossEntropyLoss</span> <span class="kn">import</span> <span class="n">CrossEntropyLoss</span>
+
+<span class="k">class</span> <span class="nc">FGSM</span><span class="p">(</span><span class="n">Attack</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">IsTargeted</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        @description: Fast Gradient Sign Method (FGSM)</span>
+<span class="sd">        @param {</span>
+<span class="sd">            model:需要测试的模型</span>
+<span class="sd">            device: 设备(GPU)</span>
+<span class="sd">            IsTargeted:是否是目标攻击</span>
+<span class="sd">            kwargs: 用户对攻击方法需要的参数</span>
+<span class="sd">        }</span>
+<span class="sd">        @return: None</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">FGSM</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">device</span><span class="p">,</span><span class="n">IsTargeted</span><span class="p">)</span>
+        <span class="c1">#使用该函数时候，要保证训练模型的标签是从0开始，而不是1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">criterion</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">CrossEntropyLoss</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_parse_params</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_parse_params</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        @description:</span>
+<span class="sd">        @param {</span>
+<span class="sd">            epsilon:沿着梯度方向步长的参数</span>
+<span class="sd">        }</span>
+<span class="sd">        @return: None</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">eps</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;epsilon&#39;</span><span class="p">,</span> <span class="mf">0.03</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">generate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">xs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">ys</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        @description:</span>
+<span class="sd">        @param {</span>
+<span class="sd">            xs:原始的样本</span>
+<span class="sd">            ys:样本的标签</span>
+<span class="sd">        }</span>
+<span class="sd">        @return: adv_xs{numpy.ndarray}</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">device</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">device</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+        <span class="n">targeted</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">IsTargeted</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;targeted&quot;</span><span class="p">,</span> <span class="n">targeted</span><span class="p">)</span>
+        <span class="n">copy_xs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">xs</span><span class="o">.</span><span class="n">numpy</span><span class="p">())</span>
+        <span class="n">var_xs</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">copy_xs</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float</span><span class="p">,</span>     <span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">,</span> <span class="n">requires_grad</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">var_ys</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">ys</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">)</span>
+        <span class="n">outputs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">(</span><span class="n">var_xs</span><span class="p">)</span>
+        <span class="n">preds</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">outputs</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">preds</span> <span class="o">=</span> <span class="n">preds</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">targeted</span><span class="p">:</span>
+           <span class="n">loss</span> <span class="o">=</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">criterion</span><span class="p">(</span><span class="n">outputs</span><span class="p">,</span> <span class="n">var_ys</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">loss</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">criterion</span><span class="p">(</span><span class="n">outputs</span><span class="p">,</span> <span class="n">var_ys</span><span class="p">)</span>
+        <span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+        <span class="n">grad_sign</span> <span class="o">=</span> <span class="n">var_xs</span><span class="o">.</span><span class="n">grad</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">sign</span><span class="p">()</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+        <span class="n">copy_xs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">copy_xs</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">eps</span> <span class="o">*</span> <span class="n">grad_sign</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
+        <span class="n">adv_xs</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">copy_xs</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">adv_xs</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id4">
+<h2><span class="section-number">2.4. </span>扩展说明<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h2>
+<ol class="arabic simple">
+<li><p>用户需要实现个人攻击算法，并继承基础的Attack类</p></li>
+<li><p>用户需要将待扩展的攻击算法对应文件，如new_attack_method.py，放置于以下路径中</p></li>
+</ol>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">~/</span><span class="n">AISafety</span><span class="o">/</span><span class="n">EvalBox</span><span class="o">/</span><span class="n">Attack</span><span class="o">/</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li><p>用户需要在2中路径下的__init__.py文件中，添加用户攻击算法类的引用：</p></li>
+</ol>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">.attack</span> <span class="kn">import</span> <span class="n">Attack</span>
+<span class="kn">from</span> <span class="nn">.fgsm</span> <span class="kn">import</span> <span class="n">FGSM</span>
+<span class="o">...</span>
+<span class="kn">from</span> <span class="nn">.new_attack_method</span> <span class="kn">import</span> <span class="n">NEW_ATTACK_METHOD</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="4">
+<li><p>用户需要在test/attack_param路径下，生成个人预设参数txt文件，及参数xml文件。若仅需要默认参数，则xml文件可为空。</p></li>
+<li><p>用户可在集成调用文件testimport.py中，修改attack_method参数为NEW_ATTACK_METHOD</p></li>
+</ol>
+</div>
+</div>
+
 
            </div>
            

@@ -1,0 +1,300 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-CN" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>2. 算法内核简介 &mdash; AISafety 1.0 文档</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/translations.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="3. 开始运行项目" href="02_requirment.html" />
+    <link rel="prev" title="1. 项目简介" href="01_introduce.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> AISafety
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">开始使用</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="01_introduce.html">1. 项目简介</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">2. 算法内核简介</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id2">2.1. 算法内核结构</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">2.2. 项目具体说明</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#evalbox">EvalBox</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#models">Models</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#utils">utils</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#test">test</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#datasets">Datasets</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="02_requirment.html">3. 开始运行项目</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_cpu_config.html">4. CPU/GPU模式和设置说明</a></li>
+<li class="toctree-l2"><a class="reference internal" href="04_docker.html">5. Docker模式和设置说明</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Dataset/index.html">数据集介绍</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Attack/index.html">攻击算法介绍</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Evaluation/index.html">评测算法介绍</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Defense/index.html">防御算法介绍</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Models/index.html">平台模型介绍</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">AISafety</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">开始使用</a> &raquo;</li>
+        
+      <li><span class="section-number">2. </span>算法内核简介</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/Start/05_frame.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="id1">
+<h1><span class="section-number">2. </span>算法内核简介<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
+<div class="section" id="id2">
+<h2><span class="section-number">2.1. </span>算法内核结构<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>├── EvalBox
+│   ├──Analysis
+│   ├──Attack
+│   ├──Defense
+│   ├──Evaluation
+├── Models
+│   ├──TestModel
+│   ├──UserModel
+│   ├──weights
+│   ├──basic_module.py
+├── utils
+├── test
+│   ├── testimport.py
+│   ├── testimport_black.py
+├── Datasets
+</pre></div>
+</div>
+</div>
+<div class="section" id="id3">
+<h2><span class="section-number">2.2. </span>项目具体说明<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h2>
+<div class="section" id="evalbox">
+<h3>EvalBox<a class="headerlink" href="#evalbox" title="永久链接至标题">¶</a></h3>
+<p>EvalBox 是整个评估过程中使用到的攻击，评测，防御，分析的工具箱</p>
+<ul class="simple">
+<li><p>Anaysis：对评估过程运用组合和集成的分析函数，来完成一个分析的过程</p></li>
+<li><p>Attack：生成攻击样本的攻击算法库</p></li>
+<li><p>defense：防御算法库</p></li>
+<li><p>Evaluation：评测攻击指标的评测算法库</p></li>
+<li><p>UserEvaluation：由用户扩展的评测攻击指标的评测算法库</p></li>
+</ul>
+</div>
+<div class="section" id="models">
+<h3>Models<a class="headerlink" href="#models" title="永久链接至标题">¶</a></h3>
+<p>Models 是平台提供的部分模型库，用户也可以自行添加</p>
+<ul class="simple">
+<li><p>TestModel：平台提供的部分模型库</p></li>
+<li><p>UserModel：用于用户添加符合扩展要求的模型库</p></li>
+<li><p>weights：存放相应的模型权重的位置</p></li>
+<li><p>basic_module.py：包含一些和模型组成相关基础函数</p></li>
+</ul>
+</div>
+<div class="section" id="utils">
+<h3>utils<a class="headerlink" href="#utils" title="永久链接至标题">¶</a></h3>
+<p>utils是工具库，包含常用的io，图像的处理，模型等相关的工具函数</p>
+</div>
+<div class="section" id="test">
+<h3>test<a class="headerlink" href="#test" title="永久链接至标题">¶</a></h3>
+<p>test是平台提供的集成了完整攻击-预测-评测的流程的集成脚本工具，包含黑白盒调用方式</p>
+<ul class="simple">
+<li><p>testimport.py 完整攻击（攻击样本可以支持黑盒的，也可从其他平台获取攻击样本，在攻击样本处设置为黑盒）、预测、评测的白盒调用</p></li>
+<li><p>testimport.py 可分离为，仅仅生成攻击样本作为用于其他平台的黑盒数据输入，也可以完整使用生成的攻击样本，用在他处黑盒获得他处符合格式的黑盒预测结果，进行下一步的评测指标计算，输出指标值和可视化结果</p></li>
+</ul>
+</div>
+<div class="section" id="datasets">
+<h3>Datasets<a class="headerlink" href="#datasets" title="永久链接至标题">¶</a></h3>
+<p>Datasets是存放常用数据集或用户自定义符合扩展要求的数据集的位置</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="02_requirment.html" class="btn btn-neutral float-right" title="3. 开始运行项目" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="01_introduce.html" class="btn btn-neutral float-left" title="1. 项目简介" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; 版权所有 2020, DIG
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
