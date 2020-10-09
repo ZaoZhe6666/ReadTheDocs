@@ -89,15 +89,115 @@
 <li class="toctree-l1"><a class="reference internal" href="../Start/index.html">开始使用</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Dataset/index.html">数据集介绍</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">攻击算法介绍</a><ul class="current">
-<li class="toctree-l2 current"><a class="reference internal" href="index.html#id2">攻击方法</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="index.html#id3">攻击方法（黑白盒</a></li>
-<li class="toctree-l3 current"><a class="reference internal" href="index.html#id6">攻击方法（目标/非目标</a><ul class="current">
-<li class="toctree-l4"><a class="reference internal" href="index.html#id7">目标攻击</a></li>
-<li class="toctree-l4 current"><a class="reference internal" href="index.html#id8">非目标攻击</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">1. 攻击算法详细介绍</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id2">1.1. 名词解释</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id3">攻击方法（黑白盒）</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id6">攻击方法（目标/非目标）</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#ba">1.2. BA算法</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id9">算法介绍</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id10">参数说明</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#bim">1.3. BIM算法</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id11">算法介绍</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id13">参数说明</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#blb">1.4. BLB算法</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id15">算法介绍</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id17">参数说明</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#corrupt">1.5. Corrupt算法</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id19">算法介绍</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id21">参数说明</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#cw2">1.6. CW2算法</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id23">算法介绍</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id25">参数说明</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#deepfool">1.7. Deepfool算法</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id27">算法介绍</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id29">参数说明</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#ead">1.8. EAD算法</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id31">算法介绍</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id33">参数说明</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#fgsm">1.9. FGSM算法</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id35">算法介绍</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id37">参数说明</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#illc">1.10. ILLC</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id39">算法介绍</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id41">参数说明</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#jsm">1.11. JSM</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id43">算法介绍</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id45">参数说明</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#llc">1.12. LLC算法</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id47">算法介绍</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id49">参数说明</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#nes">1.13. NES算法</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id51">算法介绍</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id53">参数说明</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#om">1.14. OM算法</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id55">算法介绍</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id57">参数说明</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#pgd">1.15. PGD算法</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id59">算法介绍</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id61">参数说明</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#rfgsm">1.16. RFGSM算法</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id63">算法介绍</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id65">参数说明</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#rllc">1.17. RLLC算法</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id67">算法介绍</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id69">参数说明</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#spsa">1.18. SPSA算法</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id71">算法介绍</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id73">参数说明</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#uap">1.19. UAP算法</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id75">算法介绍</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id77">参数说明</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#umifgsm">1.20. UMIFGSM算法</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id79">算法介绍</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id81">参数说明</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#zoo">1.21. ZOO算法</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id83">算法介绍</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id85">参数说明</a></li>
 </ul>
 </li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="02_extend.html">2. 扩展攻击算法</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../Evaluation/index.html">评测算法介绍</a></li>
@@ -173,10 +273,35 @@
   <div class="section" id="id1">
 <h1><span class="section-number">1. </span>攻击算法详细介绍<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
 <p>平台已集成的攻击算法及简要说明如下所示(使用攻击算法缩写字典序排序)</p>
-<div class="section" id="ba">
-<h2><span class="section-number">1.1. </span>BA算法<a class="headerlink" href="#ba" title="永久链接至标题">¶</a></h2>
 <div class="section" id="id2">
-<h3>算法介绍<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h3>
+<h2><span class="section-number">1.1. </span>名词解释<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
+<div class="section" id="id3">
+<h3>攻击方法（黑白盒）<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h3>
+<div class="section" id="id4">
+<h4>白盒攻击<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h4>
+<p>项目的部分攻击算法是白盒的攻击方式，需要完整的知道model的结构和对应的梯度等信息。</p>
+</div>
+<div class="section" id="id5">
+<h4>黑盒攻击<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h4>
+<p>项目的部分攻击算法是黑盒的攻击方式，不需要完整的知道model的结构和对应的梯度等信息，只需要知道经过该模型的预测结果，用于作为评测的数据输入。</p>
+</div>
+</div>
+<div class="section" id="id6">
+<h3>攻击方法（目标/非目标）<a class="headerlink" href="#id6" title="永久链接至标题">¶</a></h3>
+<div class="section" id="id7">
+<h4>目标攻击<a class="headerlink" href="#id7" title="永久链接至标题">¶</a></h4>
+<p>目标攻击是指将原始样本通过攻击后，指定攻击后的结果类别</p>
+</div>
+<div class="section" id="id8">
+<h4>非目标攻击<a class="headerlink" href="#id8" title="永久链接至标题">¶</a></h4>
+<p>非目标攻击是指将原始样本通过攻击后，结果类别与原有的模型类别不同即可</p>
+</div>
+</div>
+</div>
+<div class="section" id="ba">
+<h2><span class="section-number">1.2. </span>BA算法<a class="headerlink" href="#ba" title="永久链接至标题">¶</a></h2>
+<div class="section" id="id9">
+<h3>算法介绍<a class="headerlink" href="#id9" title="永久链接至标题">¶</a></h3>
 <p>BA的全称是 Boundary
 Attack。该算法使用目标类中的一个样本初始化为非目标攻击，并用一个混合了均匀噪声的样本初始化为目标攻击。算法的每次迭代有三个部分。首先，通过二进制搜索将上次迭代的迭代结果推向边界。</p>
 <p><img alt="image1" src="../_images/BA.png" /></p>
@@ -185,8 +310,8 @@ Attack。该算法使用目标类中的一个样本初始化为非目标攻击�
 \[\widetilde{\triangledown S} (x^t, \delta):=\frac{1}{B} \sum_{b=1}^{B} \phi_x(x^t+\delta_{u_b})u_b\]</div>
 <p>最后通过几何级数选择合适的步长，直到扰动成功。并通过二元搜索将扰动样本推回边界。</p>
 </div>
-<div class="section" id="id3">
-<h3>参数说明<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h3>
+<div class="section" id="id10">
+<h3>参数说明<a class="headerlink" href="#id10" title="永久链接至标题">¶</a></h3>
 <table class="docutils align-default">
 <colgroup>
 <col style="width: 36%" />
@@ -233,9 +358,9 @@ Attack。该算法使用目标类中的一个样本初始化为非目标攻击�
 </div>
 </div>
 <div class="section" id="bim">
-<h2><span class="section-number">1.2. </span>BIM算法<a class="headerlink" href="#bim" title="永久链接至标题">¶</a></h2>
-<div class="section" id="id4">
-<span id="id5"></span><h3>算法介绍<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h3>
+<h2><span class="section-number">1.3. </span>BIM算法<a class="headerlink" href="#bim" title="永久链接至标题">¶</a></h2>
+<div class="section" id="id11">
+<span id="id12"></span><h3>算法介绍<a class="headerlink" href="#id11" title="永久链接至标题">¶</a></h3>
 <p>BIM全称为Basic Iterative Method。FGSM这种one-step
 方法通过一大步运算增大分类器的损失函数而进行图像扰动，因而可以直接将其扩展为通过多个小步增大损失函数的变体，从而我们得到
 Basic Iterative
@@ -244,8 +369,8 @@ Methods（BIM）。BIM是FGSM的拓展，进行了多次小步的迭代，并且
 <div class="math notranslate nohighlight">
 \[X_0^{adv}=X,\; \; X_{N+1}^{adv}=Clip_{X,\epsilon}\{ X_n^{adv} + \alpha sign(\triangledown _X J(X_N^{adv}, y_{true})) \}\]</div>
 </div>
-<div class="section" id="id6">
-<span id="id7"></span><h3>参数说明<a class="headerlink" href="#id6" title="永久链接至标题">¶</a></h3>
+<div class="section" id="id13">
+<span id="id14"></span><h3>参数说明<a class="headerlink" href="#id13" title="永久链接至标题">¶</a></h3>
 <table class="docutils align-default">
 <colgroup>
 <col style="width: 29%" />
@@ -271,9 +396,9 @@ Methods（BIM）。BIM是FGSM的拓展，进行了多次小步的迭代，并且
 </div>
 </div>
 <div class="section" id="blb">
-<h2><span class="section-number">1.3. </span>BLB算法<a class="headerlink" href="#blb" title="永久链接至标题">¶</a></h2>
-<div class="section" id="id8">
-<span id="id9"></span><h3>算法介绍<a class="headerlink" href="#id8" title="永久链接至标题">¶</a></h3>
+<h2><span class="section-number">1.4. </span>BLB算法<a class="headerlink" href="#blb" title="永久链接至标题">¶</a></h2>
+<div class="section" id="id15">
+<span id="id16"></span><h3>算法介绍<a class="headerlink" href="#id15" title="永久链接至标题">¶</a></h3>
 <p>BLB的全称是 Box-constrained L-BFGS
 attack。该攻击方法通过对图像添加小量的人类察觉不到的扰动误导神经网络做出误分类：</p>
 <div class="math notranslate nohighlight">
@@ -284,8 +409,8 @@ attack。该攻击方法通过对图像添加小量的人类察觉不到的扰�
 \[min_{\rho} \; c|\rho| + L(I_c + \rho, l)\; \; s.t. I_c + \rho \in [0,1]^m\]</div>
 <p>L(.,.)计算分类器的loss。通过凸优化的手段得到最终的噪音。</p>
 </div>
-<div class="section" id="id10">
-<span id="id11"></span><h3>参数说明<a class="headerlink" href="#id10" title="永久链接至标题">¶</a></h3>
+<div class="section" id="id17">
+<span id="id18"></span><h3>参数说明<a class="headerlink" href="#id17" title="永久链接至标题">¶</a></h3>
 <table class="docutils align-default">
 <colgroup>
 <col style="width: 28%" />
@@ -311,9 +436,9 @@ attack。该攻击方法通过对图像添加小量的人类察觉不到的扰�
 </div>
 </div>
 <div class="section" id="corrupt">
-<h2><span class="section-number">1.4. </span>Corrupt算法<a class="headerlink" href="#corrupt" title="永久链接至标题">¶</a></h2>
-<div class="section" id="id12">
-<span id="id13"></span><h3>算法介绍<a class="headerlink" href="#id12" title="永久链接至标题">¶</a></h3>
+<h2><span class="section-number">1.5. </span>Corrupt算法<a class="headerlink" href="#corrupt" title="永久链接至标题">¶</a></h2>
+<div class="section" id="id19">
+<span id="id20"></span><h3>算法介绍<a class="headerlink" href="#id19" title="永久链接至标题">¶</a></h3>
 <p>Corrupt算法将自然噪声加入到原始样本后所产生的攻击样本，用于评测模型的鲁棒性。其中，自然噪音（corruption）是指经常出现在自然场景中且对模型的任务产生一定不良影响的噪音，如：高斯噪音、强烈的对比度变化、雪、雾等。包含：</p>
 <blockquote>
 <div><p>gaussian_noise 高斯噪声</p>
@@ -337,8 +462,8 @@ attack。该攻击方法通过对图像添加小量的人类察觉不到的扰�
 <p>elastic_transform 弹性变换</p>
 </div></blockquote>
 </div>
-<div class="section" id="id14">
-<span id="id15"></span><h3>参数说明<a class="headerlink" href="#id14" title="永久链接至标题">¶</a></h3>
+<div class="section" id="id21">
+<span id="id22"></span><h3>参数说明<a class="headerlink" href="#id21" title="永久链接至标题">¶</a></h3>
 <table class="docutils align-default">
 <colgroup>
 <col style="width: 13%" />
@@ -361,9 +486,9 @@ attack。该攻击方法通过对图像添加小量的人类察觉不到的扰�
 </div>
 </div>
 <div class="section" id="cw2">
-<h2><span class="section-number">1.5. </span>CW2算法<a class="headerlink" href="#cw2" title="永久链接至标题">¶</a></h2>
-<div class="section" id="id16">
-<span id="id17"></span><h3>算法介绍<a class="headerlink" href="#id16" title="永久链接至标题">¶</a></h3>
+<h2><span class="section-number">1.6. </span>CW2算法<a class="headerlink" href="#cw2" title="永久链接至标题">¶</a></h2>
+<div class="section" id="id23">
+<span id="id24"></span><h3>算法介绍<a class="headerlink" href="#id23" title="永久链接至标题">¶</a></h3>
 <p>CW2算法的全称是 Carlini &amp; Wagner Attack。Carlini 和Wagner
 为了攻击防御性蒸馏(Defensive
 distillation)网络提出了三种对抗攻击方法，通过限制
@@ -380,8 +505,8 @@ l0,l1,l∞范数使得扰动无法被察觉。实验证明蒸馏网络完全无�
 <p>这样，x + δ =1/2(tanh(k) + 1)在优化过程中始终位于[0,
 1]中。除了在MNIST、CIFAR10和ImageNet的正常训练DNN模型上获得100%的攻击成功率外，C&amp;W攻击还可以破坏防御性蒸馏模型，而这些模型可以使L-BFGS和Deepfool无法找到对抗性样本。</p>
 </div>
-<div class="section" id="id18">
-<span id="id19"></span><h3>参数说明<a class="headerlink" href="#id18" title="永久链接至标题">¶</a></h3>
+<div class="section" id="id25">
+<span id="id26"></span><h3>参数说明<a class="headerlink" href="#id25" title="永久链接至标题">¶</a></h3>
 <table class="docutils align-default">
 <colgroup>
 <col style="width: 35%" />
@@ -425,9 +550,9 @@ l0,l1,l∞范数使得扰动无法被察觉。实验证明蒸馏网络完全无�
 </div>
 </div>
 <div class="section" id="deepfool">
-<h2><span class="section-number">1.6. </span>Deepfool算法<a class="headerlink" href="#deepfool" title="永久链接至标题">¶</a></h2>
-<div class="section" id="id20">
-<span id="id21"></span><h3>算法介绍<a class="headerlink" href="#id20" title="永久链接至标题">¶</a></h3>
+<h2><span class="section-number">1.7. </span>Deepfool算法<a class="headerlink" href="#deepfool" title="永久链接至标题">¶</a></h2>
+<div class="section" id="id27">
+<span id="id28"></span><h3>算法介绍<a class="headerlink" href="#id27" title="永久链接至标题">¶</a></h3>
 <p>对于多分类问题，通常采取的方案为一对多。在这里，针对多个输出类别，通过下式进行分类选择：</p>
 <div class="math notranslate nohighlight">
 \[\hat{k}(x)=\underset{k}{arg\, max}f_k(x)\]</div>
@@ -450,8 +575,8 @@ l0,l1,l∞范数使得扰动无法被察觉。实验证明蒸馏网络完全无�
 <p><img alt="image3" src="../_images/图片19.png" /></p>
 <p>注意，这个算法并不能保证收敛到最小扰动解。算法中2范数可以扩展到p范数。</p>
 </div>
-<div class="section" id="id22">
-<span id="id23"></span><h3>参数说明<a class="headerlink" href="#id22" title="永久链接至标题">¶</a></h3>
+<div class="section" id="id29">
+<span id="id30"></span><h3>参数说明<a class="headerlink" href="#id29" title="永久链接至标题">¶</a></h3>
 <table class="docutils align-default">
 <colgroup>
 <col style="width: 20%" />
@@ -474,9 +599,9 @@ l0,l1,l∞范数使得扰动无法被察觉。实验证明蒸馏网络完全无�
 </div>
 </div>
 <div class="section" id="ead">
-<h2><span class="section-number">1.7. </span>EAD算法<a class="headerlink" href="#ead" title="永久链接至标题">¶</a></h2>
-<div class="section" id="id24">
-<span id="id25"></span><h3>算法介绍<a class="headerlink" href="#id24" title="永久链接至标题">¶</a></h3>
+<h2><span class="section-number">1.8. </span>EAD算法<a class="headerlink" href="#ead" title="永久链接至标题">¶</a></h2>
+<div class="section" id="id31">
+<span id="id32"></span><h3>算法介绍<a class="headerlink" href="#id31" title="永久链接至标题">¶</a></h3>
 <p>EAD的全称是 Elastic-net Attacks to DNNs。EAD将使用对抗样本攻击 DNN
 的过程转化为了使用弹性网络正则化（elastic-net
 regularized）的优化问题。在这种表示下，当前最佳的 L2
@@ -488,8 +613,8 @@ L1 范数失真以及增强 DNN
 的安全性提供了全新的见解。下图是EAD算法的伪代码：</p>
 <p><img alt="image4" src="../_images/图片20.png" /></p>
 </div>
-<div class="section" id="id26">
-<span id="id27"></span><h3>参数说明<a class="headerlink" href="#id26" title="永久链接至标题">¶</a></h3>
+<div class="section" id="id33">
+<span id="id34"></span><h3>参数说明<a class="headerlink" href="#id33" title="永久链接至标题">¶</a></h3>
 <table class="docutils align-default">
 <colgroup>
 <col style="width: 39%" />
@@ -536,9 +661,9 @@ L1 范数失真以及增强 DNN
 </div>
 </div>
 <div class="section" id="fgsm">
-<h2><span class="section-number">1.8. </span>FGSM算法<a class="headerlink" href="#fgsm" title="永久链接至标题">¶</a></h2>
-<div class="section" id="id28">
-<span id="id29"></span><h3>算法介绍<a class="headerlink" href="#id28" title="永久链接至标题">¶</a></h3>
+<h2><span class="section-number">1.9. </span>FGSM算法<a class="headerlink" href="#fgsm" title="永久链接至标题">¶</a></h2>
+<div class="section" id="id35">
+<span id="id36"></span><h3>算法介绍<a class="headerlink" href="#id35" title="永久链接至标题">¶</a></h3>
 <p>FGSM的全称是Fast Gradient Sign
 Method(快速梯度下降法），在白盒环境下，通过求出模型对输入的导数，然后用符号函数得到其具体的梯度方向，接着乘以一个步长，得到的“扰动”加在原来的输入
 上就得到了在FGSM攻击下的样本。</p>
@@ -551,8 +676,8 @@ Method(快速梯度下降法），在白盒环境下，通过求出模型对输�
 \\ b_{i}^{(l)}=b_{i}^{(l)}-\alpha \frac{\partial}{\partial  b_{i}^{(l)}}J(W,b)\end{split}\]</div>
 <p>那么现在我们既然是要使得loss增大，而模型的网络系数又固定不变，唯一可以改变的就是输入，因此我们就利用loss对输入求导从而“更新”这个输入。</p>
 </div>
-<div class="section" id="id30">
-<span id="id31"></span><h3>参数说明<a class="headerlink" href="#id30" title="永久链接至标题">¶</a></h3>
+<div class="section" id="id37">
+<span id="id38"></span><h3>参数说明<a class="headerlink" href="#id37" title="永久链接至标题">¶</a></h3>
 <table class="docutils align-default">
 <colgroup>
 <col style="width: 31%" />
@@ -572,9 +697,9 @@ Method(快速梯度下降法），在白盒环境下，通过求出模型对输�
 </div>
 </div>
 <div class="section" id="illc">
-<h2><span class="section-number">1.9. </span>ILLC<a class="headerlink" href="#illc" title="永久链接至标题">¶</a></h2>
-<div class="section" id="id32">
-<span id="id33"></span><h3>算法介绍<a class="headerlink" href="#id32" title="永久链接至标题">¶</a></h3>
+<h2><span class="section-number">1.10. </span>ILLC<a class="headerlink" href="#illc" title="永久链接至标题">¶</a></h2>
+<div class="section" id="id39">
+<span id="id40"></span><h3>算法介绍<a class="headerlink" href="#id39" title="永久链接至标题">¶</a></h3>
 <p>ILLC的全称是Iterative Least Likely Class Attack，先介绍一下
 one-Step的方法。 one-step target class methods:</p>
 <div class="math notranslate nohighlight">
@@ -592,8 +717,8 @@ one-Step的方法。 one-step target class methods:</p>
 <p>算法过程：</p>
 <p><img alt="image5" src="../_images/图片21.png" /></p>
 </div>
-<div class="section" id="id34">
-<span id="id35"></span><h3>参数说明<a class="headerlink" href="#id34" title="永久链接至标题">¶</a></h3>
+<div class="section" id="id41">
+<span id="id42"></span><h3>参数说明<a class="headerlink" href="#id41" title="永久链接至标题">¶</a></h3>
 <table class="docutils align-default">
 <colgroup>
 <col style="width: 38%" />
@@ -619,9 +744,9 @@ one-Step的方法。 one-step target class methods:</p>
 </div>
 </div>
 <div class="section" id="jsm">
-<h2><span class="section-number">1.10. </span>JSM<a class="headerlink" href="#jsm" title="永久链接至标题">¶</a></h2>
-<div class="section" id="id36">
-<span id="id37"></span><h3>算法介绍<a class="headerlink" href="#id36" title="永久链接至标题">¶</a></h3>
+<h2><span class="section-number">1.11. </span>JSM<a class="headerlink" href="#jsm" title="永久链接至标题">¶</a></h2>
+<div class="section" id="id43">
+<span id="id44"></span><h3>算法介绍<a class="headerlink" href="#id43" title="永久链接至标题">¶</a></h3>
 <p>JSM算法的全称是Jacobian-based Saliency Map Attack</p>
 <p>目标是只修改图像中的几个像素，而不是扰乱整个图像来欺骗分类器,该算法一次修改一个干净图像的像素，并监测变化对结果分类的影响。通过使用网络层的输出的梯度来计算一个显著性图来执行监控。</p>
 <p>JSMA算法主要包括三个过程：计算前向导数，计算对抗性显著图，添加扰动，以下给出具体解释。</p>
@@ -640,8 +765,8 @@ one-Step的方法。 one-step target class methods:</p>
 <p>算法具体过程：</p>
 <p><img alt="image6" src="../_images/图片22.png" /></p>
 </div>
-<div class="section" id="id38">
-<span id="id39"></span><h3>参数说明<a class="headerlink" href="#id38" title="永久链接至标题">¶</a></h3>
+<div class="section" id="id45">
+<span id="id46"></span><h3>参数说明<a class="headerlink" href="#id45" title="永久链接至标题">¶</a></h3>
 <table class="docutils align-default">
 <colgroup>
 <col style="width: 15%" />
@@ -665,9 +790,9 @@ one-Step的方法。 one-step target class methods:</p>
 </div>
 </div>
 <div class="section" id="llc">
-<h2><span class="section-number">1.11. </span>LLC算法<a class="headerlink" href="#llc" title="永久链接至标题">¶</a></h2>
-<div class="section" id="id40">
-<span id="id41"></span><h3>算法介绍<a class="headerlink" href="#id40" title="永久链接至标题">¶</a></h3>
+<h2><span class="section-number">1.12. </span>LLC算法<a class="headerlink" href="#llc" title="永久链接至标题">¶</a></h2>
+<div class="section" id="id47">
+<span id="id48"></span><h3>算法介绍<a class="headerlink" href="#id47" title="永久链接至标题">¶</a></h3>
 <p>LLC算法的全称为Least-Likely-Class Iterative Methods。</p>
 <p>one-step
 方法通过一大步运算增大分类器的损失函数而进行图像扰动，因而可以直接将其扩展为通过多个小步增大损失函数的变体，从而我们得到
@@ -680,8 +805,8 @@ Least-Likely-Class Iterative Methods。</p>
 <div class="math notranslate nohighlight">
 \[X_0^{adv}=X, \; X_{N+1}^{adv}=Clip_{X,\epsilon}\{ X_N^{adv} - \alpha sign(\triangledown _X J(X_N^{adv}, y_{LL})) \}\]</div>
 </div>
-<div class="section" id="id42">
-<span id="id43"></span><h3>参数说明<a class="headerlink" href="#id42" title="永久链接至标题">¶</a></h3>
+<div class="section" id="id49">
+<span id="id50"></span><h3>参数说明<a class="headerlink" href="#id49" title="永久链接至标题">¶</a></h3>
 <table class="docutils align-default">
 <colgroup>
 <col style="width: 31%" />
@@ -701,13 +826,13 @@ Least-Likely-Class Iterative Methods。</p>
 </div>
 </div>
 <div class="section" id="nes">
-<h2><span class="section-number">1.12. </span>NES算法<a class="headerlink" href="#nes" title="永久链接至标题">¶</a></h2>
-<div class="section" id="id44">
-<span id="id45"></span><h3>算法介绍<a class="headerlink" href="#id44" title="永久链接至标题">¶</a></h3>
+<h2><span class="section-number">1.13. </span>NES算法<a class="headerlink" href="#nes" title="永久链接至标题">¶</a></h2>
+<div class="section" id="id51">
+<span id="id52"></span><h3>算法介绍<a class="headerlink" href="#id51" title="永久链接至标题">¶</a></h3>
 <p>NES算法的全称为Nature Evolutionary Strategies</p>
 </div>
-<div class="section" id="id46">
-<span id="id47"></span><h3>参数说明<a class="headerlink" href="#id46" title="永久链接至标题">¶</a></h3>
+<div class="section" id="id53">
+<span id="id54"></span><h3>参数说明<a class="headerlink" href="#id53" title="永久链接至标题">¶</a></h3>
 <table class="docutils align-default">
 <colgroup>
 <col style="width: 28%" />
@@ -757,9 +882,9 @@ Least-Likely-Class Iterative Methods。</p>
 </div>
 </div>
 <div class="section" id="om">
-<h2><span class="section-number">1.13. </span>OM算法<a class="headerlink" href="#om" title="永久链接至标题">¶</a></h2>
-<div class="section" id="id48">
-<span id="id49"></span><h3>算法介绍<a class="headerlink" href="#id48" title="永久链接至标题">¶</a></h3>
+<h2><span class="section-number">1.14. </span>OM算法<a class="headerlink" href="#om" title="永久链接至标题">¶</a></h2>
+<div class="section" id="id55">
+<span id="id56"></span><h3>算法介绍<a class="headerlink" href="#id55" title="永久链接至标题">¶</a></h3>
 <p>OM算法的全称为OPTMARGIN
 attack，它可以生成低失真的对抗示例，对小扰动具有鲁棒性，例如在区域分类中使用的小扰动。</p>
 <p>在OPTMARGIN攻击中，创建了区域分类器的替代模型，该模型干扰输入点比较少。</p>
@@ -771,8 +896,8 @@ attack，它可以生成低失真的对抗示例，对小扰动具有鲁棒性�
 \[minimize || x^{'} - x ||_2^2 + c \cdot (l_1(x^{'})+...+l_n(x^{'}))\]</div>
 <p>作者选用了20种分类器，在攻击过程中，v1,v2,…,v19，都是量级归一化到ε上的随机正交向量，v20=0,此选择是为了使随机扰动位于vi中，为了稳定优化器，在攻击过程中，需要固定vi，这个办法在C&amp;W算法中仍然使用过，详细的描述见：<a class="reference external" href="https://openreview.net/pdf?id=BkpiPMbA">https://openreview.net/pdf?id=BkpiPMbA</a>-</p>
 </div>
-<div class="section" id="id50">
-<span id="id51"></span><h3>参数说明<a class="headerlink" href="#id50" title="永久链接至标题">¶</a></h3>
+<div class="section" id="id57">
+<span id="id58"></span><h3>参数说明<a class="headerlink" href="#id57" title="永久链接至标题">¶</a></h3>
 <table class="docutils align-default">
 <colgroup>
 <col style="width: 31%" />
@@ -819,9 +944,9 @@ attack，它可以生成低失真的对抗示例，对小扰动具有鲁棒性�
 </div>
 </div>
 <div class="section" id="pgd">
-<h2><span class="section-number">1.14. </span>PGD算法<a class="headerlink" href="#pgd" title="永久链接至标题">¶</a></h2>
-<div class="section" id="id52">
-<span id="id53"></span><h3>算法介绍<a class="headerlink" href="#id52" title="永久链接至标题">¶</a></h3>
+<h2><span class="section-number">1.15. </span>PGD算法<a class="headerlink" href="#pgd" title="永久链接至标题">¶</a></h2>
+<div class="section" id="id59">
+<span id="id60"></span><h3>算法介绍<a class="headerlink" href="#id59" title="永久链接至标题">¶</a></h3>
 <p>PGD全称是Projected Gradient
 descent。目的是为解决FGSM和FGM中的线性假设问题，使用PGD方法来求解内部的最大值问题。
 PGD是一种迭代攻击，相比于普通的FGSM和FGM
@@ -835,8 +960,8 @@ PGD是一种迭代攻击，相比于普通的FGSM和FGM
 <p>由于每次只走很小的一步，所以局部线性假设基本成立。经过多步之后就可以达到最优解，也就是达到最强的攻击效果。同时使用PGD算法得到的攻击样本，是一阶对抗样本中最强的。这里所说的一阶对抗样本是指依据一阶梯度的对抗样本。如果模型对PGD产生的样本鲁棒，那基本上就对所有的一阶对抗样本都鲁棒。实验也证明，利用PGD算法进行对抗训练的模型确实具有很好的鲁棒性。</p>
 <p>PGD虽然简单，也很有效，但是存在一个问题是计算效率不高。不采用提对抗训练的方法m次迭代只会有m次梯度的计算，但是对于PGD而言，每做一次梯度下降（获取模型参数的梯度，训练模型），都要对应有K步的梯度提升（获取输出的梯度，寻找扰动）。所以相比不采用对抗训练的方法，PGD需要做m(K+1)次梯度计算。</p>
 </div>
-<div class="section" id="id54">
-<span id="id55"></span><h3>参数说明<a class="headerlink" href="#id54" title="永久链接至标题">¶</a></h3>
+<div class="section" id="id61">
+<span id="id62"></span><h3>参数说明<a class="headerlink" href="#id61" title="永久链接至标题">¶</a></h3>
 <table class="docutils align-default">
 <colgroup>
 <col style="width: 29%" />
@@ -862,9 +987,9 @@ PGD是一种迭代攻击，相比于普通的FGSM和FGM
 </div>
 </div>
 <div class="section" id="rfgsm">
-<h2><span class="section-number">1.15. </span>RFGSM算法<a class="headerlink" href="#rfgsm" title="永久链接至标题">¶</a></h2>
-<div class="section" id="id56">
-<span id="id57"></span><h3>算法介绍<a class="headerlink" href="#id56" title="永久链接至标题">¶</a></h3>
+<h2><span class="section-number">1.16. </span>RFGSM算法<a class="headerlink" href="#rfgsm" title="永久链接至标题">¶</a></h2>
+<div class="section" id="id63">
+<span id="id64"></span><h3>算法介绍<a class="headerlink" href="#id63" title="永久链接至标题">¶</a></h3>
 <p>RFGSM算法全称是RAND-FGSM (R-FGSM)</p>
 <p>使用FGSM方法进行对抗训练后的神经网络模型，在面对白盒攻击时比黑盒攻击更为鲁棒，所以提出了R-FGSM
 增加随机梯度训练，用于防御对抗训练。</p>
@@ -873,8 +998,8 @@ PGD是一种迭代攻击，相比于普通的FGSM和FGM
 \\ x^{'}=x_{tmp}+(\epsilon - \alpha)\cdot sign(\triangledown _ {x_{tmp}} J(x_{tmp}, l))\end{split}\]</div>
 <p>其中α 和 ϵ 是参数，且α&lt;ϵ。</p>
 </div>
-<div class="section" id="id58">
-<span id="id59"></span><h3>参数说明<a class="headerlink" href="#id58" title="永久链接至标题">¶</a></h3>
+<div class="section" id="id65">
+<span id="id66"></span><h3>参数说明<a class="headerlink" href="#id65" title="永久链接至标题">¶</a></h3>
 <table class="docutils align-default">
 <colgroup>
 <col style="width: 15%" />
@@ -898,13 +1023,13 @@ PGD是一种迭代攻击，相比于普通的FGSM和FGM
 </div>
 </div>
 <div class="section" id="rllc">
-<h2><span class="section-number">1.16. </span>RLLC算法<a class="headerlink" href="#rllc" title="永久链接至标题">¶</a></h2>
-<div class="section" id="id60">
-<span id="id61"></span><h3>算法介绍<a class="headerlink" href="#id60" title="永久链接至标题">¶</a></h3>
+<h2><span class="section-number">1.17. </span>RLLC算法<a class="headerlink" href="#rllc" title="永久链接至标题">¶</a></h2>
+<div class="section" id="id67">
+<span id="id68"></span><h3>算法介绍<a class="headerlink" href="#id67" title="永久链接至标题">¶</a></h3>
 <p>Random Least Likely Class Attack</p>
 </div>
-<div class="section" id="id62">
-<span id="id63"></span><h3>参数说明<a class="headerlink" href="#id62" title="永久链接至标题">¶</a></h3>
+<div class="section" id="id69">
+<span id="id70"></span><h3>参数说明<a class="headerlink" href="#id69" title="永久链接至标题">¶</a></h3>
 <table class="docutils align-default">
 <colgroup>
 <col style="width: 15%" />
@@ -928,9 +1053,9 @@ PGD是一种迭代攻击，相比于普通的FGSM和FGM
 </div>
 </div>
 <div class="section" id="spsa">
-<h2><span class="section-number">1.17. </span>SPSA算法<a class="headerlink" href="#spsa" title="永久链接至标题">¶</a></h2>
-<div class="section" id="id64">
-<span id="id65"></span><h3>算法介绍<a class="headerlink" href="#id64" title="永久链接至标题">¶</a></h3>
+<h2><span class="section-number">1.18. </span>SPSA算法<a class="headerlink" href="#spsa" title="永久链接至标题">¶</a></h2>
+<div class="section" id="id71">
+<span id="id72"></span><h3>算法介绍<a class="headerlink" href="#id71" title="永久链接至标题">¶</a></h3>
 <p>SPSA算法全称是Multivariate stochastic approximation using a simultaneous
 perturbation gradient approximation</p>
 <p>SPSA算法非常适合于高维优化问题，即使在不确定目标的情况下，我们也可使用SPSA公式来产生对抗性攻击。在SPSA算法中，首先从Rademacher分布（即Bernoulli±1）中抽取一批n个样本，即</p>
@@ -943,8 +1068,8 @@ perturbation gradient approximation</p>
 <p>完整的伪代码如下：</p>
 <p><img alt="image7" src="../_images/图片23.png" /></p>
 </div>
-<div class="section" id="id66">
-<span id="id67"></span><h3>参数说明<a class="headerlink" href="#id66" title="永久链接至标题">¶</a></h3>
+<div class="section" id="id73">
+<span id="id74"></span><h3>参数说明<a class="headerlink" href="#id73" title="永久链接至标题">¶</a></h3>
 <table class="docutils align-default">
 <colgroup>
 <col style="width: 30%" />
@@ -985,9 +1110,9 @@ perturbation gradient approximation</p>
 </div>
 </div>
 <div class="section" id="uap">
-<h2><span class="section-number">1.18. </span>UAP算法<a class="headerlink" href="#uap" title="永久链接至标题">¶</a></h2>
-<div class="section" id="id68">
-<span id="id69"></span><h3>算法介绍<a class="headerlink" href="#id68" title="永久链接至标题">¶</a></h3>
+<h2><span class="section-number">1.19. </span>UAP算法<a class="headerlink" href="#uap" title="永久链接至标题">¶</a></h2>
+<div class="section" id="id75">
+<span id="id76"></span><h3>算法介绍<a class="headerlink" href="#id75" title="永久链接至标题">¶</a></h3>
 <p>UAP算法的全称是Universal Adversarial Perturbation attack。</p>
 <p>UAP算法提出了一种不易察觉的万能perturbation，它能使目前最好的分类器，在完成图片分类任务时出错。通过这个算法得到的perturbation，在各种神经网络情况下都能取得很好的效果。这揭示了目前分类器分类“判定边界”在高维度上的几何关系。</p>
 <p>万能perturbation的构造算法：</p>
@@ -1001,8 +1126,8 @@ perturbation gradient approximation</p>
 1 − δ，其中 δ
 为人为定义的分类器准确度。而算法的关键不是为了找到一个能使大多数样本分类错误的最小perturbation，而是用足够小的范数找到这样的一个扰动。</p>
 </div>
-<div class="section" id="id70">
-<span id="id71"></span><h3>参数说明<a class="headerlink" href="#id70" title="永久链接至标题">¶</a></h3>
+<div class="section" id="id77">
+<span id="id78"></span><h3>参数说明<a class="headerlink" href="#id77" title="永久链接至标题">¶</a></h3>
 <table class="docutils align-default">
 <colgroup>
 <col style="width: 33%" />
@@ -1022,9 +1147,9 @@ perturbation gradient approximation</p>
 </div>
 </div>
 <div class="section" id="umifgsm">
-<h2><span class="section-number">1.19. </span>UMIFGSM算法<a class="headerlink" href="#umifgsm" title="永久链接至标题">¶</a></h2>
-<div class="section" id="id72">
-<span id="id73"></span><h3>算法介绍<a class="headerlink" href="#id72" title="永久链接至标题">¶</a></h3>
+<h2><span class="section-number">1.20. </span>UMIFGSM算法<a class="headerlink" href="#umifgsm" title="永久链接至标题">¶</a></h2>
+<div class="section" id="id79">
+<span id="id80"></span><h3>算法介绍<a class="headerlink" href="#id79" title="永久链接至标题">¶</a></h3>
 <p>UMIFGSM算法全称是Utargeted Momentum Iterative Fast Gradient Sign
 Method(UMI-FGSM)。</p>
 <p>在迭代攻击方法中加入动量项（momentum term），提高对抗样本的转移性：</p>
@@ -1033,8 +1158,8 @@ Method(UMI-FGSM)。</p>
 \\ x_{t+1}^{adv}=x_{t}^{adv}+\alpha \cdot sign(g_{t+1})\end{split}\]</div>
 <p>其中gt包含了直到t次迭代的梯度信息。</p>
 </div>
-<div class="section" id="id74">
-<span id="id75"></span><h3>参数说明<a class="headerlink" href="#id74" title="永久链接至标题">¶</a></h3>
+<div class="section" id="id81">
+<span id="id82"></span><h3>参数说明<a class="headerlink" href="#id81" title="永久链接至标题">¶</a></h3>
 <table class="docutils align-default">
 <colgroup>
 <col style="width: 33%" />
@@ -1063,9 +1188,9 @@ Method(UMI-FGSM)。</p>
 </div>
 </div>
 <div class="section" id="zoo">
-<h2><span class="section-number">1.20. </span>ZOO算法<a class="headerlink" href="#zoo" title="永久链接至标题">¶</a></h2>
-<div class="section" id="id76">
-<span id="id77"></span><h3>算法介绍<a class="headerlink" href="#id76" title="永久链接至标题">¶</a></h3>
+<h2><span class="section-number">1.21. </span>ZOO算法<a class="headerlink" href="#zoo" title="永久链接至标题">¶</a></h2>
+<div class="section" id="id83">
+<span id="id84"></span><h3>算法介绍<a class="headerlink" href="#id83" title="永久链接至标题">¶</a></h3>
 <p>ZOO算法全称为Zeroth Order Optimization Based Black-box。</p>
 <p>ZOO攻击不可知，仅依赖于预测分数（例如类别机率或对数），使用数值估算梯度的预测。ZOO算法利用正负扰动带来的概率差估算一阶导（梯度）和二阶导，再利用ADAM或者牛顿法等方法更新x。本质为通过估算梯度将黑盒转换为白盒过程。</p>
 <p>ZOO算法的损失函数和CW相似：</p>
@@ -1086,8 +1211,8 @@ Method(UMI-FGSM)。</p>
 <p><img alt="image9" src="../_images/图片25.png" /></p>
 <p><img alt="image10" src="../_images/图片26.png" /></p>
 </div>
-<div class="section" id="id78">
-<span id="id79"></span><h3>参数说明<a class="headerlink" href="#id78" title="永久链接至标题">¶</a></h3>
+<div class="section" id="id85">
+<span id="id86"></span><h3>参数说明<a class="headerlink" href="#id85" title="永久链接至标题">¶</a></h3>
 <table class="docutils align-default">
 <colgroup>
 <col style="width: 32%" />
