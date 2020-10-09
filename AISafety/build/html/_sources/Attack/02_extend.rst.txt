@@ -4,7 +4,7 @@
 攻击算法类图
 ------------------------------------------------------------------------
 
-此处应该有个图片
+|attack_class_picture|
 
 如上图所示，上图为攻击算法FGSM和攻击算法SPSA继承Attack类示意图。攻击算法内部可自行实现攻击过程具体函数，仅需覆写generate函数即可。
 
@@ -127,3 +127,5 @@ FGSM算法源代码:
 4. 用户需要在test/attack_param路径下，生成个人预设参数txt文件，及参数xml文件。若仅需要默认参数，则xml文件可为空。
 
 5. 用户可在集成调用文件testimport.py中，修改attack_method参数为NEW_ATTACK_METHOD
+
+.. |attack_class_picture| image:: ../Pic/图片1.png

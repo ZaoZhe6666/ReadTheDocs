@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Title &mdash; AISafety 1.0 文档</title>
+  <title>攻击算法介绍 &mdash; AISafety 1.0 文档</title>
   
 
   
@@ -136,7 +136,7 @@
     
       <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
         
-      <li>Title</li>
+      <li>攻击算法介绍</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -155,14 +155,33 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="title">
-<h1>Title<a class="headerlink" href="#title" title="永久链接至标题">¶</a></h1>
-<div class="section" id="mmd-is-the-best">
-<h2>MMD is the best!<a class="headerlink" href="#mmd-is-the-best" title="永久链接至标题">¶</a></h2>
-<p>$$
-ALDp=\frac{1}{n} \sum_{i=1}^{n} \frac{ \left |X_{i}^{a} - X_{i} \right |<em>{p} }{ \left | X</em>{i} \right |_{p}}
-$$</p>
-<p>你说的难道是$ ALDp=\frac{1}{n} \sum_{i=1}^{n} \frac{ \left |X_{i}^{a} - X_{i} \right |<em>{p} }{ \left | X</em>{i} \right |_{p}} $ 这条公式吗？</p>
+  <div class="section" id="id1">
+<h1>攻击算法介绍<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
+<div class="section" id="id2">
+<h2>攻击方法<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
+<p>这一部分主要说明平台中已集成的攻击算法，以及如何扩展用户个人攻击算法。</p>
+<div class="section" id="id3">
+<h3>攻击方法（黑白盒<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h3>
+<div class="section" id="id4">
+<h4>白盒攻击<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h4>
+<p>项目的部分攻击算法是白盒的攻击方式，需要完整的知道model的结构和对应的梯度等信息。</p>
+</div>
+<div class="section" id="id5">
+<h4>黑盒攻击<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h4>
+<p>项目的部分攻击算法是黑盒的攻击方式，不需要完整的知道model的结构和对应的梯度等信息，只需要知道经过该模型的预测结果，用于作为评测的数据输入。</p>
+</div>
+</div>
+<div class="section" id="id6">
+<h3>攻击方法（目标/非目标<a class="headerlink" href="#id6" title="永久链接至标题">¶</a></h3>
+<div class="section" id="id7">
+<h4>目标攻击<a class="headerlink" href="#id7" title="永久链接至标题">¶</a></h4>
+<p>目标攻击是指将原始样本通过攻击后，指定攻击后的结果类别</p>
+</div>
+<div class="section" id="id8">
+<h4>非目标攻击<a class="headerlink" href="#id8" title="永久链接至标题">¶</a></h4>
+<p>非目标攻击是指将原始样本通过攻击后，结果类别与原有的模型类别不同即可</p>
+</div>
+</div>
 </div>
 </div>
 

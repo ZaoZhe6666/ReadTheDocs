@@ -16,3 +16,5 @@
     02_requirment.rst
     03_cpu_config.rst
     04_docker.rst
+    06_interface.rst
+    07_example.rst

@@ -1,0 +1,459 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-CN" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>7. 评测完整实例 &mdash; AISafety 1.0 文档</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/translations.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="数据集介绍" href="../Dataset/index.html" />
+    <link rel="prev" title="6. 完整集成调用过程" href="06_interface.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> AISafety
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">开始使用</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="01_introduce.html">1. 项目简介</a></li>
+<li class="toctree-l2"><a class="reference internal" href="05_frame.html">2. 算法内核简介</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_requirment.html">3. 开始运行项目</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_cpu_config.html">4. CPU/GPU模式和设置说明</a></li>
+<li class="toctree-l2"><a class="reference internal" href="04_docker.html">5. Docker模式和设置说明</a></li>
+<li class="toctree-l2"><a class="reference internal" href="06_interface.html">6. 完整集成调用过程</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">7. 评测完整实例</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id2">7.1. 参考实例1（白盒攻击）</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id3">参数设置</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id4">输出存储</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id5">评测结果</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id6">攻击后样本</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#topk">攻击前后模型topk对比</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id7">攻击前后热力图敏感区域可视化</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id8">7.2. 参考示例2（黑盒攻击）</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id9">参数设置</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id11">输出存储</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id13">评测结果</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#topk-1">攻击前后模型topk对比</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Dataset/index.html">数据集介绍</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Attack/index.html">攻击算法介绍</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Evaluation/index.html">评测算法介绍</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Defense/index.html">防御算法介绍</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Models/index.html">平台模型介绍</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">AISafety</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">开始使用</a> &raquo;</li>
+        
+      <li><span class="section-number">7. </span>评测完整实例</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/Start/07_example.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="id1">
+<h1><span class="section-number">7. </span>评测完整实例<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
+<div class="section" id="id2">
+<h2><span class="section-number">7.1. </span>参考实例1（白盒攻击）<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
+<div class="section" id="id3">
+<h3>参数设置<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h3>
+<p>testimport.py中parser设置：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>(   attack_method=[&quot;FGSM&quot;],
+    evaluation_method=&#39;ACTC&#39;,
+    Data_path=[&quot;../Datasets/ImageNet/images/&quot;,&quot;../Datasets/ImageNet/val_4.txt&quot;,&quot;../Datasets/ImageNet/images/&quot;,&quot;../Datasets/ImageNet/val_4.txt&quot;],
+    Dict_path=&quot;./dict_lists/ImageNet_12_dict.txt&quot;,
+    model_dir=&#39; &#39;,
+    model=&#39;torchvision.models.vgg19&#39;,
+    defense_model=&#39; &#39;,
+    model_defence_dir=&#39; &#39;,
+    data_type=&#39;ImageNet&#39;,
+    IS_WHITE=True,
+    IS_PYTHORCH_WHITE=False,
+    black_Result_dir=&#39; &#39;,
+    IS_SAVE=True,
+    IS_COMPARE_MODEL=False,
+    Scale_ImageSize=(375,500),
+    Crop_ImageSize=(375,500),
+    IS_TARGETTED=False,
+    save_path=&#39;ImageNet_Attack_generation/&#39;，
+    batch_size=64,
+    CAM_layer=28,
+    GPU_Config=[&quot;1&quot;,&quot;0&quot;],
+    save_method=&#39;ImageNet&#39;
+    save_visualization_base_path=&quot;./temp/&quot;
+)
+</pre></div>
+</div>
+</div>
+<div class="section" id="id4">
+<h3>输出存储<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h3>
+<p>项目会默认生成对应名称的结果位置如下：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>AISafety
+├── EvalBox
+├── Models
+├── utils
+├── test
+│   ├── testimport.py
+│   ├── testimport_black.py
+│   ├── ImageNet_Attack_generation
+│    │   ├── attack_param_FGSM_fgsm_01
+│    │   ├── attack_param_FGSM_fgsm_02  # 对应于攻击算法参数
+│    │   │   ├── Image
+│    │   │   │   ├── Adv_Images  # 存储对抗样本
+│    │   │   │   │   ├── Adv_ILSVRC2012_val_00000001.JPEG
+│    │   │   │   │   ├── Adv_ILSVRC2012_val_00000002.JPEG
+│    │   │   │   │   ├── Adv_....JPEG
+│    │   │   │  ├── adv_preds_val_4.txt
+│    ├── temp
+│    │   ├── **result.txt** # 用于存储评测结果
+├── Datasets
+</pre></div>
+</div>
+</div>
+<div class="section" id="id5">
+<h3>评测结果<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h3>
+<p>result.txt中存储的评测计算结果形如：</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="nt">&quot;table_list&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;FGSM&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="nt">&quot;fgsm_01&quot;</span><span class="p">:</span> <span class="p">[[</span><span class="s2">&quot;ACAC&quot;</span><span class="p">,</span> <span class="s2">&quot;ACC&quot;</span><span class="p">,</span> <span class="s2">&quot;ACAC&quot;</span><span class="p">,</span> <span class="s2">&quot;ACTC&quot;</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.8877955079078674</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span> <span class="mf">0.26380638033151627</span><span class="p">,</span> <span class="mf">0.025149270360998344</span><span class="p">]],</span>
+            <span class="nt">&quot;fgsm_02&quot;</span><span class="p">:</span> <span class="p">[[</span><span class="s2">&quot;ACAC&quot;</span><span class="p">,</span> <span class="s2">&quot;ACC&quot;</span><span class="p">,</span> <span class="s2">&quot;ACAC&quot;</span><span class="p">,</span> <span class="s2">&quot;ACTC&quot;</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.8242363157095732</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span> <span class="mf">0.23616972751915455</span><span class="p">,</span> <span class="mf">0.014533321653289022</span><span class="p">]]</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>这里是使用Json格式的存储。格式说明如下：</p>
+<p>第一个字典关键字是FGSM，表示攻击的方法，第二个是fgsm_01，表示配置的参数文件对应的名称，“ACAC”,
+“ACC”等表示的是评测函数的选取，后面顺序相同的对应的是该方法的评测值</p>
+<p>“0.8877955079078674,
+0.9”,这里设置的评测方法是“ACTC”，对应的就是最后一个值0.025149270360998344</p>
+</div>
+<div class="section" id="id6">
+<h3>攻击后样本<a class="headerlink" href="#id6" title="永久链接至标题">¶</a></h3>
+<p>攻击后样本，如果选择的保存样本方式为</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">save_method</span><span class="o">=</span><span class="s1">&#39;ImageNet&#39;</span>
+</pre></div>
+</div>
+<p>而非</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">save_method</span><span class="o">=</span><span class="s1">&#39;.npy&#39;</span>
+</pre></div>
+</div>
+<p>则对抗样本将以图像形式，存储在先前设置的“Adv_Images”中</p>
+</div>
+<div class="section" id="topk">
+<h3>攻击前后模型topk对比<a class="headerlink" href="#topk" title="永久链接至标题">¶</a></h3>
+<p>模型评测的同时，将就模型预测topk类别做统计，并给出如下图像：</p>
+<p><img alt="image1" src="../_images/图片13.png" /></p>
+</div>
+<div class="section" id="id7">
+<h3>攻击前后热力图敏感区域可视化<a class="headerlink" href="#id7" title="永久链接至标题">¶</a></h3>
+<p>模型评测的同时，将生成模型关注度的热力图，并将按照</p>
+<ol class="arabic simple">
+<li><p>原始图像，OriginSample_模型名_orig_图像序号.jpg</p></li>
+<li><p>攻击图像，AttackSample_模型名_orig_图像序号.jpg</p></li>
+<li><p>原始图像热力图，OriginSample_模型名_cam_图像序号.jpg</p></li>
+<li><p>攻击图像热力图，AttackSample_模型名_cam_图像序号.jpg</p></li>
+</ol>
+<p>的形式，一张输入样本，对应输出四张可视化图像。</p>
+<p>目前的热力图方法只支持grad_cam的方式，指定显示模型的某一层到图像上，默认结果和热力图设置和保存成224X224的，可以供用户作为可解释性分析的一种方式。</p>
+<p><img alt="image2" src="../_images/图片10.png" /></p>
+</div>
+</div>
+<div class="section" id="id8">
+<h2><span class="section-number">7.2. </span>参考示例2（黑盒攻击）<a class="headerlink" href="#id8" title="永久链接至标题">¶</a></h2>
+<div class="section" id="id9">
+<span id="id10"></span><h3>参数设置<a class="headerlink" href="#id9" title="永久链接至标题">¶</a></h3>
+<p>testimport_black.py中parser设置，arg1的：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>(
+    attack_method=[&quot;FGSM&quot;],
+    Data_path=
+    [&quot;../Datasets/CIFAR_cln_data/cifar10_30_origin_inputs.npy&quot;, &quot;../Datasets/CIFAR_cln_data/cifar10_30_target_labels.npy&quot;,
+    &quot;../Datasets/CIFAR_cln_data/cifar10_30_origin_inputs.npy&quot;, &quot;../Datasets/CIFAR_cln_data/cifar10_30_origin_labels.npy&quot;],
+    Dict_path=&quot;./dict_lists/cifar10_dict.txt&quot;,
+    model_dir=&#39;../Models/weights/FP_ResNet20.th&#39;,
+    model=&#39;Models.UserModel.FP_resnet&#39;,
+    defense_model=&#39;Models.UserModel.ResNet2&#39;,
+    model_defence_dir=&#39;../Models/weights/resnet20_cifar.pt&#39;,
+    IS_COMPARE_MODEL=True,
+    IS_TARGETTED=True,
+    data_type=&#39;cifar10&#39;,
+    IS_WHITE=True,
+    IS_PYTHORCH_WHITE=False,
+    IS_DOCKER_BLACK=True,
+    ONLY_GENRATE_BLACK_SAMPLE=False,
+    IS_SAVE=False,
+    black_Result_dir=&quot;../Datasets/adv_data/zjx.json&quot;,
+    Scale_ImageSize=(32,32),   (高，宽）
+    Crop_ImageSize=(32,32),(高，宽）
+    batch_size=64,
+    save_path=&#39;./Attack_generation/&#39;，
+    GPU_Config=[&quot;1&quot;,&quot;0&quot;],
+    save_method=&#39;.npy&#39;
+)
+</pre></div>
+</div>
+<p>testimport_black.py的parser设置，arg2的：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>    <span class="n">data_type</span><span class="o">=</span><span class="s1">&#39;cifar10&#39;</span><span class="p">,</span>
+    <span class="n">evaluation_method</span><span class="o">=</span><span class="s1">&#39;CCV&#39;</span><span class="p">,</span>
+    <span class="n">IS_COMPARE_MODEL</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">IS_TARGETTED</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">IS_PYTHORCH_WHITE</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">CAM_layer</span><span class="o">=</span><span class="mi">12</span>
+    <span class="n">save_visualization_base_path</span><span class="o">=</span><span class="s2">&quot;./temp/&quot;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id11">
+<span id="id12"></span><h3>输出存储<a class="headerlink" href="#id11" title="永久链接至标题">¶</a></h3>
+<p>项目会默认生成对应名称的结果位置如下：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>AISafety
+├── EvalBox
+├── Models
+├── utils
+├── test
+│   ├── temp
+│    │   ├── FGSM
+│    │   │   ├── fgsm_01
+│    │   │   │   ├── topk
+│    │   │   │   │   ├── top_3_0_FGSM_ Models.UserModel.FP_resnet_cifar10.jpg
+│    │   │   │   │   ├── top_3_1_FGSM_ Models.UserModel.FP_resnet_cifar10.jpg
+│    │   │   │   │   ├── top_3_..._FGSM_ Models.UserModel.FP_resnet_cifar10.jpg
+│    │   │   │   │   ├── top_3_0_FGSM_ Models.UserModel.ResNet2_cifar10.jpg
+│    │   │   │   │   ├── top_3_..._FGSM_ Models.UserModel.ResNet2_cifar10.jpg
+│    │   │   │   │   ├── ....jpg
+│    │   ├── result.txt
+│   ├── Attack_generation
+├── Datasets
+</pre></div>
+</div>
+</div>
+<div class="section" id="id13">
+<span id="id14"></span><h3>评测结果<a class="headerlink" href="#id13" title="永久链接至标题">¶</a></h3>
+<p>result.txt中存储的评测计算结果形如：</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="nt">&quot;table_list&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;FGSM&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="nt">&quot;fgsm_01&quot;</span><span class="p">:</span> <span class="p">[[</span><span class="s2">&quot;ACAC&quot;</span><span class="p">,</span> <span class="s2">&quot;ACC&quot;</span><span class="p">,</span> <span class="s2">&quot;ACAC&quot;</span><span class="p">,</span> <span class="s2">&quot;ACTC&quot;</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.8877955079078674</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span> <span class="mf">0.26380638033151627</span><span class="p">,</span> <span class="mf">0.025149270360998344</span><span class="p">]],</span>
+            <span class="nt">&quot;fgsm_02&quot;</span><span class="p">:</span> <span class="p">[[</span><span class="s2">&quot;ACAC&quot;</span><span class="p">,</span> <span class="s2">&quot;ACC&quot;</span><span class="p">,</span> <span class="s2">&quot;ACAC&quot;</span><span class="p">,</span> <span class="s2">&quot;ACTC&quot;</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.8242363157095732</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span> <span class="mf">0.23616972751915455</span><span class="p">,</span> <span class="mf">0.014533321653289022</span><span class="p">]]}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>这里是使用Json格式的存储。格式说明如下：</p>
+<p>第一个字典关键字是FGSM，表示攻击的方法，第二个是fgsm_01，表示配置的参数文件对应的名称，“ACAC”,
+“ACC”等表示的是评测函数的选取，后面顺序相同的对应的是该方法的评测值</p>
+<p>“0.8877955079078674,
+0.9”,这里设置的评测方法是“ACTC”，对应的就是最后一个值0.025149270360998344</p>
+<p>每测评一次会在文件中按照
+攻击方法–&gt;方法配置文件名字–&gt;测评方法–&gt;结果值去保存</p>
+<p>如果不想被之前的结果干扰，用户可以手动删除，只生成当前的结果即可。</p>
+</div>
+<div class="section" id="topk-1">
+<span id="id15"></span><h3>攻击前后模型topk对比<a class="headerlink" href="#topk-1" title="永久链接至标题">¶</a></h3>
+<p>这里topk默认是3，会默认生成对应名称的结果，表示攻击前后模型对样本预测的概率前3的分类结果的一个柱状图比较。</p>
+<p>对应的命名方式例如： top_3_0_FGSM_Models.UserModel.FP_resnet_cifar10.jpg</p>
+<p>表示top3在第0个样本攻击方法FGSM使用的模型文件Models.UserModel.FP_resnet在数据集cifar10的一个柱状分类前三的结果图</p>
+<p>项目默认保存的是样本数据的前50%，用户可以通过修改
+testimport.py中Save_Eval_Visualization_Result()函数的topl_show_list参数，此参数是一个列表，用户可手动赋值，也可以按照自己的需求生成要保存的数据的index列表</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">topk_show_list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">topl_show_list</span><span class="o">=</span><span class="n">topk_show_list设置要保存的列表</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../Dataset/index.html" class="btn btn-neutral float-right" title="数据集介绍" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="06_interface.html" class="btn btn-neutral float-left" title="6. 完整集成调用过程" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; 版权所有 2020, DIG
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

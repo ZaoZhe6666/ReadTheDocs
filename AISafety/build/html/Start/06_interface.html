@@ -1,0 +1,740 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-CN" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>6. 完整集成调用过程 &mdash; AISafety 1.0 文档</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/translations.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="7. 评测完整实例" href="07_example.html" />
+    <link rel="prev" title="5. Docker模式和设置说明" href="04_docker.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> AISafety
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">开始使用</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="01_introduce.html">1. 项目简介</a></li>
+<li class="toctree-l2"><a class="reference internal" href="05_frame.html">2. 算法内核简介</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_requirment.html">3. 开始运行项目</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_cpu_config.html">4. CPU/GPU模式和设置说明</a></li>
+<li class="toctree-l2"><a class="reference internal" href="04_docker.html">5. Docker模式和设置说明</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">6. 完整集成调用过程</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id2">6.1. 接口文件存储位置</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">6.2. 接口文件参数参考</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">6.3. 接口文件参数说明</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#attack-method">attack_method</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#evaluation-method">evaluation_method</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#data-path">Data_path</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dict-path">Dict_path</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#model">model</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#model-dir">model_dir</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#defense-model">defense_model</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#model-defence-dir">model_defence_dir</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#is-compare-model">IS_COMPARE_MODEL</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#is-targetted">IS_TARGETTED</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#data-type">data_type</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#is-white">IS_WHITE</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#is-pythorch-white">IS_PYTHORCH_WHITE</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#is-docker-black">IS_DOCKER_BLACK</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#only-genrate-black-sample">ONLY_GENRATE_BLACK_SAMPLE</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#black-result-dir">black_Result_dir</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#is-save">IS_SAVE</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#save-path">save_path</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#save-method">save_method</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#scale-imagesize">Scale_ImageSize</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#crop-imagesize">Crop_ImageSize</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#batch-size">batch_size</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cam-layer">CAM_layer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gpu-config">GPU_Config</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#save-visualization-base-path">save_visualization_base_path</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">6.4. 接口文件调用流程</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="07_example.html">7. 评测完整实例</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Dataset/index.html">数据集介绍</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Attack/index.html">攻击算法介绍</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Evaluation/index.html">评测算法介绍</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Defense/index.html">防御算法介绍</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Models/index.html">平台模型介绍</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">AISafety</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">开始使用</a> &raquo;</li>
+        
+      <li><span class="section-number">6. </span>完整集成调用过程</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/Start/06_interface.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="id1">
+<h1><span class="section-number">6. </span>完整集成调用过程<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
+<div class="section" id="id2">
+<h2><span class="section-number">6.1. </span>接口文件存储位置<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
+<p>平台已集成有完整的攻击评测接口文件testimport.py。接口文件路径如下：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>├── EvalBox
+├── Models
+├── utils
+├── test
+    ├── **testimport.py**
+├── Datasets
+</pre></div>
+</div>
+</div>
+<div class="section" id="id3">
+<h2><span class="section-number">6.2. </span>接口文件参数参考<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h2>
+<p>如下为在cifar-10数据集上，执行一个完整攻击+评测过程，所使用的对应参数：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s1">&#39;The Attack and Evaluate Generation&#39;</span><span class="p">)</span>
+<span class="c1"># common arguments</span>
+<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+    <span class="s1">&#39;--attack_method&#39;</span><span class="p">,</span>
+    <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span>
+    <span class="n">nargs</span><span class="o">=</span><span class="s1">&#39;*&#39;</span><span class="p">,</span>
+    <span class="n">default</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;FGSM&quot;</span><span class="p">])</span>
+<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+    <span class="s1">&#39;--evaluation_method&#39;</span><span class="p">,</span>
+    <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span>
+    <span class="n">default</span><span class="o">=</span><span class="s1">&#39;ACC&#39;</span><span class="p">)</span>
+<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+    <span class="s1">&#39;--Data_path&#39;</span><span class="p">,</span>
+    <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span>
+    <span class="n">nargs</span><span class="o">=</span><span class="s1">&#39;*&#39;</span><span class="p">,</span>
+    <span class="n">default</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;../Datasets/cln_data/cifar10_300_origin_inputs.npy&quot;</span><span class="p">,</span> <span class="s2">&quot;../Datasets/cln_data/cifar10_300_origin_labels.npy&quot;</span><span class="p">,</span>                     <span class="s2">&quot;../Datasets/cln_data/cifar10_300_origin_inputs.npy&quot;</span><span class="p">,</span> <span class="s2">&quot;../Datasets/cln_data/cifar10_300_origin_labels.npy&quot;</span><span class="p">])</span>
+<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+    <span class="s1">&#39;--Dict_path&#39;</span><span class="p">,</span>
+    <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span>
+    <span class="n">default</span><span class="o">=</span><span class="s2">&quot;./dict_lists/cifar10_dict.txt&quot;</span><span class="p">)</span>
+<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+    <span class="s1">&#39;--defense_model&#39;</span><span class="p">,</span>
+    <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span>
+    <span class="n">default</span><span class="o">=</span><span class="s1">&#39;Models.UserModel.ResNet2&#39;</span><span class="p">)</span>
+<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+    <span class="s1">&#39;--model&#39;</span><span class="p">,</span>
+    <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span>
+    <span class="n">default</span> <span class="o">=</span> <span class="s1">&#39;Models.UserModel.FP_resnet&#39;</span><span class="p">)</span>
+<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+    <span class="s1">&#39;--model_dir&#39;</span><span class="p">,</span>
+    <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span>
+    <span class="n">default</span> <span class="o">=</span> <span class="s1">&#39;../Models/weights/FP_ResNet20.th&#39;</span><span class="p">)</span>
+<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+    <span class="s1">&#39;--model_defence_dir&#39;</span><span class="p">,</span>
+    <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span>
+    <span class="n">default</span><span class="o">=</span><span class="s1">&#39;../Models/weights/resnet20_cifar.pt&#39;</span><span class="p">)</span>
+<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+    <span class="s1">&#39;--IS_COMPARE_MODEL&#39;</span><span class="p">,</span>
+    <span class="nb">type</span><span class="o">=</span><span class="nb">bool</span><span class="p">,</span>
+    <span class="n">default</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+    <span class="s1">&#39;--IS_TARGETTED&#39;</span><span class="p">,</span>
+    <span class="nb">type</span><span class="o">=</span><span class="nb">bool</span><span class="p">,</span>
+    <span class="n">default</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+    <span class="s1">&#39;--data_type&#39;</span><span class="p">,</span>
+    <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span>
+    <span class="n">default</span><span class="o">=</span><span class="s1">&#39;cifar10&#39;</span><span class="p">)</span>
+<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+    <span class="s1">&#39;--IS_WHITE&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">bool</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+    <span class="s1">&#39;--IS_PYTHORCH_WHITE&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">bool</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+    <span class="s1">&#39;--IS_DOCKER_BLACK&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">bool</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+    <span class="s1">&#39;--black_Result_dir&#39;</span> <span class="p">,</span>
+    <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span>
+    <span class="n">default</span> <span class="o">=</span> <span class="s1">&#39; &#39;</span><span class="p">)</span>
+<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+    <span class="s1">&#39;--IS_SAVE&#39;</span><span class="p">,</span>
+    <span class="nb">type</span><span class="o">=</span><span class="nb">bool</span><span class="p">,</span>
+    <span class="n">default</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+    <span class="s1">&#39;--save_path&#39;</span><span class="p">,</span>
+    <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span>
+    <span class="n">default</span><span class="o">=</span><span class="s1">&#39;./Attack_generation/&#39;</span><span class="p">)</span>
+<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+    <span class="s1">&#39;--save_method&#39;</span><span class="p">,</span>
+    <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span>
+    <span class="n">default</span><span class="o">=</span><span class="s1">&#39;.npy&#39;</span><span class="p">)</span>
+<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+    <span class="s1">&#39;--Scale_ImageSize&#39;</span><span class="p">,</span>
+    <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span>
+    <span class="n">default</span><span class="o">=</span><span class="mi">32</span><span class="p">)</span>
+<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+    <span class="s1">&#39;--Crop_ImageSize&#39;</span><span class="p">,</span>
+    <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span>
+    <span class="n">default</span><span class="o">=</span><span class="mi">32</span><span class="p">)</span>
+<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+    <span class="s1">&#39;--batch_size&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">&#39;batch size&#39;</span><span class="p">)</span>
+<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+    <span class="s1">&#39;--CAM_layer&#39;</span><span class="p">,</span>
+    <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span>
+    <span class="n">default</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+    <span class="s1">&#39;--GPU_Config&#39;</span><span class="p">,</span>
+    <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span>
+    <span class="c1"># 数目，index设置</span>
+    <span class="n">default</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;2&quot;</span><span class="p">,</span><span class="s2">&quot;0,1&quot;</span><span class="p">])</span>
+<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+    <span class="s1">&#39;--save_visualization_base_path&#39;</span><span class="p">,</span>
+    <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span>
+    <span class="n">default</span><span class="o">=</span><span class="s1">&#39;./temp/&#39;</span><span class="p">)</span>
+<span class="n">arguments</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+<span class="n">main</span><span class="p">(</span><span class="n">args</span><span class="o">=</span><span class="n">arguments</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id4">
+<h2><span class="section-number">6.3. </span>接口文件参数说明<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h2>
+<div class="section" id="attack-method">
+<h3>attack_method<a class="headerlink" href="#attack-method" title="永久链接至标题">¶</a></h3>
+<p>该参数表示攻击算法名称，目前平台已集成的所有攻击算法，均可通过缩写调用。</p>
+<p>参考格式为： [“FGSM”]、[“PGD”]、[“DEEPFOOL”]</p>
+</div>
+<div class="section" id="evaluation-method">
+<h3>evaluation_method<a class="headerlink" href="#evaluation-method" title="永久链接至标题">¶</a></h3>
+<p>该参数表示评测算法名称，目前平台已集成的所有评测算法，均可通过缩写调用。</p>
+<p>参考格式为： [“ACC”]、[“ALDp”]</p>
+</div>
+<div class="section" id="data-path">
+<h3>Data_path<a class="headerlink" href="#data-path" title="永久链接至标题">¶</a></h3>
+<p>该参数共有4个参数位，分别需传入：</p>
+<ol class="arabic simple">
+<li><p>样本的数据集文件
+（白盒攻击下是原始样本，黑盒攻击下是攻击后的攻击样本）</p></li>
+<li><p>对应的标签的文件 （非目标攻击下是Ground
+Truth，目标攻击下是攻击目标类别）</p></li>
+<li><p>原始样本的数据集文件</p></li>
+<li><p>对应的Ground Truth标签文件</p></li>
+</ol>
+<p>参考格式为：</p>
+<p>[“../Datasets/”]</p>
+</div>
+<div class="section" id="dict-path">
+<h3>Dict_path<a class="headerlink" href="#dict-path" title="永久链接至标题">¶</a></h3>
+<p>该参数表示所选择的数据集文件所对应的字典文件。字典文件中应包含对应的数据集的分类类别号码和类别名称的编号</p>
+<p>参考格式为“./dict_lists/cifar10_dict.txt”</p>
+<p>以上述参考格式中cifar10_dict.txt文件为例，字典文件形如：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s1">&#39;0&#39;</span><span class="p">:</span> <span class="s1">&#39;airplane&#39;</span><span class="p">,</span> <span class="s1">&#39;1&#39;</span><span class="p">:</span> <span class="s1">&#39;automobile&#39;</span><span class="p">,</span> <span class="o">...</span> <span class="p">,</span> <span class="s1">&#39;8&#39;</span><span class="p">:</span> <span class="s1">&#39;ship&#39;</span><span class="p">,</span> <span class="s1">&#39;9&#39;</span><span class="p">:</span> <span class="s1">&#39;truck&#39;</span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="model">
+<h3>model<a class="headerlink" href="#model" title="永久链接至标题">¶</a></h3>
+<p>该参数表示用户选择的待执行评测任务的网络模型。使用时需给出模型地址。</p>
+<p>参考格式： ‘Models.UserModel.ResNet2’</p>
+</div>
+<div class="section" id="model-dir">
+<h3>model_dir<a class="headerlink" href="#model-dir" title="永久链接至标题">¶</a></h3>
+<p>该参数表示用户选择的待执行测评任务的网络模型的参数文件，对应着上述model参数中模型文件。使用时使用相对地址调用。</p>
+<p>参考格式：‘../Models/weights/resnet20_cifar.pt’</p>
+</div>
+<div class="section" id="defense-model">
+<h3>defense_model<a class="headerlink" href="#defense-model" title="永久链接至标题">¶</a></h3>
+<p>default = ‘Models.UserModel.ResNet2’</p>
+<p>该参数表示用户选择的防御后模型。与model参数类似，区别在于只有在使用对比评测算法时，才传入该参数，并设定IS_COMPARE_MODEL参数为True。</p>
+<p>参考格式： ‘Models.UserModel.ResNet2’</p>
+</div>
+<div class="section" id="model-defence-dir">
+<h3>model_defence_dir<a class="headerlink" href="#model-defence-dir" title="永久链接至标题">¶</a></h3>
+<p>default=‘../Models/weights/resnet20_cifar.pt’</p>
+<p>该参数表示用户选择的防御后模型的参数文件。与model_dir参数类似，区别在于只有在使用对比评测算法时，才传入该参数，并设定IS_COMPARE_MODEL参数为True。</p>
+<p>参考格式：‘../Models/weights/resnet20_cifar.pt’</p>
+</div>
+<div class="section" id="is-compare-model">
+<h3>IS_COMPARE_MODEL<a class="headerlink" href="#is-compare-model" title="永久链接至标题">¶</a></h3>
+<p>该参数默认设置False，如果需要比较两个不同模型的话，设置为True</p>
+<p>目前平台已集成的，可用于比较两个模型的评测方法有：CCV，CAV，COS，CRR，CSR</p>
+</div>
+<div class="section" id="is-targetted">
+<h3>IS_TARGETTED<a class="headerlink" href="#is-targetted" title="永久链接至标题">¶</a></h3>
+<p>该参数表示使用的数据是否是目标攻击，False是非目标攻击，True是目标攻击方法</p>
+<p>对于不同的选择，用户需提供相应的预处理数据集并传入对应位置。</p>
+</div>
+<div class="section" id="data-type">
+<h3>data_type<a class="headerlink" href="#data-type" title="永久链接至标题">¶</a></h3>
+<p>default=“cifar10”，‘ImageNet’，[‘ImageNet’, “withoutNormalize”]</p>
+<p>该参数表示数据集的类型，目前平台共支持三种数据集：</p>
+<ol class="arabic simple">
+<li><p>‘cifar10’</p></li>
+<li><p>‘ImageNet’</p></li>
+<li><p>[‘ImageNet’, “withoutNormalize”]</p></li>
+</ol>
+<p>用户可根据实际需要注明类型，以方便预处理过程，另外使用ImageNet类型相似的数据一般不是原始的ImageNet数据集，选用[‘ImageNet’,
+“withoutNormalize”]时候，不对图像做归一化，用户自行预处理</p>
+</div>
+<div class="section" id="is-white">
+<h3>IS_WHITE<a class="headerlink" href="#is-white" title="永久链接至标题">¶</a></h3>
+<p>该参数表示攻击样本的生成是否经过平台提供的正在使用的攻击方法，默认
+True，即是通过攻击算法生成的，（攻击算法可以是白盒的方式，也可以是黑盒的方式，具体实现由用户添加黑盒的模拟梯度），False的时候，输入的样本应当是其他攻击算法训练生成得到的，可以直接用平台的测评过程对模型进行评测</p>
+</div>
+<div class="section" id="is-pythorch-white">
+<h3>IS_PYTHORCH_WHITE<a class="headerlink" href="#is-pythorch-white" title="永久链接至标题">¶</a></h3>
+<p>该参数表示评测过程是否要用到模型信息，目前平台已集成评测算法中，BD，RGB，RIC这三个评测方法，默认需要模型信息，是设定为True，其余算法均需设定为False。</p>
+<p>黑盒模式下，默认不需要模型信息，始终设定为False</p>
+</div>
+<div class="section" id="is-docker-black">
+<h3>IS_DOCKER_BLACK<a class="headerlink" href="#is-docker-black" title="永久链接至标题">¶</a></h3>
+<p>该参数表示是否使用Docker执行黑盒测试。在白盒方式下面，该参数默认设置False，在黑盒方式下，可将该参数设置为True，并通过外来数据（其他平台或者docker黑盒的结果）获取预测的结果</p>
+</div>
+<div class="section" id="only-genrate-black-sample">
+<h3>ONLY_GENRATE_BLACK_SAMPLE<a class="headerlink" href="#only-genrate-black-sample" title="永久链接至标题">¶</a></h3>
+<p>该参数表示是否仅采用黑盒样本。设置为True的时候，只用平台产生对应的攻击样本，并保存在save_path
+下面的路径中。得到的结果供黑盒的平台使用。</p>
+<p>设置为True时，只生成得到攻击样本，供用户使用到其他平台。</p>
+<p>l 在其他平台使用本平台的攻击样本和原始数据获得预测结果，并获得测评结果</p>
+<p>–ONLY_GENRATE_BLACK_SAMPLE 设置为False</p>
+<p>–IS_DOCKER_BLACK 同时设置为True</p>
+<p>用户使用原始的数据集和平台生成的样本，预测结果从他处获取，再计算测评指标</p>
+<p>格式说明：</p>
+<p>分为 json和npy格式的，json格式的例如FGSM的原始数据是</p>
+<p>（30,3,32,32）和对应的标签是(30,10)格式，那么输出用于其他黑盒平台的数据也是一样的格式。</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 4%" />
+<col style="width: 48%" />
+<col style="width: 48%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head" colspan="2"><p>参 | 描述
+数 |</p></th>
+<th class="head"><p>示例</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>B
+D
+P
+a
+t
+h</p></td>
+<td><p>原数据集路径。用户需
+要获得路径下面的子目录，子目录
+下为数据集，名称固定为inputs.*
+(格式支持npy和
+json两种；json格式的key为data)</p></td>
+<td><p>npy数据集：/dataset/ba
+sePath/1/inputs.npyJson数据集：
+/dataset/basePath/1/inputs.json</p></td>
+</tr>
+<tr class="row-odd"><td><p>C
+D
+P
+a
+t
+h</p></td>
+<td><p>攻击数据集路径。用户需要
+获得路径下面的子目录，子目录下
+通常又存在多个二级目录，此二级
+目录需要保存下来，作为返回结果
+的key，每个二级目录下会有对应的
+攻击数据集，名称固定为inputs.*
+(格式支持npy和json两种；json格
+式的key为data)对应我们保存输出
+的Attack_generation中的攻击样本</p></td>
+<td><p>以fgsm算法为
+例：npy数据集：/dataset/childP
+ath/1/fgsm_01/inputs.npy/datase
+t/childPath/1/fgsm_02/inputs.np
+yJson数据集：/dataset/childPath
+/1/fgsm_01/inputs.json/dataset/
+childPath/1/fgsm_02/inputs.json</p></td>
+</tr>
+<tr class="row-even"><td><p>R
+E
+S
+P
+a
+t
+h</p></td>
+<td><p>结果保存路径。
+用户需要将结果以json的格式保存
+到该目录下,就是black_Result_dir
+上面设置的数据</p></td>
+<td><p>/result</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="black-result-dir">
+<h3>black_Result_dir<a class="headerlink" href="#black-result-dir" title="永久链接至标题">¶</a></h3>
+<p>该参数表示黑盒测试的中间结果存储路径。在白盒方式下面，该参数默认设置’
+’空，黑盒会设置具体数据的路径。以FGSM+cifar10_30数据集为例，返回结果的格式如下：</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span>{
+    &quot;model&quot;:{
+        &quot;BDResult&quot;: Array[30],
+        &quot;CDResult&quot;: {
+            &quot;fgsm_01&quot;: Array[30],
+            &quot;fgsm_02&quot;: Array[30]
+        }
+    },
+    &quot;compare_model&quot;: {
+        &quot;BDResult&quot;: Array[30],
+        &quot;CDResult&quot;: {
+            &quot;fgsm_01&quot;: Array[30],
+            &quot;fgsm_02&quot;: Array[30]
+        }
+    }
+}
+</pre></div>
+</div>
+<p>以上结果具体键值说明：</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 13%" />
+<col style="width: 19%" />
+<col style="width: 68%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Key</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>说明</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>model</p></td>
+<td><p>原始模
+型预测结果</p></td>
+<td><p>原始模型预测结果放置在该Key下</p></td>
+</tr>
+<tr class="row-odd"><td><p>compar
+e_model</p></td>
+<td><p>对比模
+型预测结果</p></td>
+<td><p>对比模型预测结果放置在该Key下</p></td>
+</tr>
+<tr class="row-even"><td><p>B
+DResult</p></td>
+<td><p>原数
+据预测结果</p></td>
+<td><p>因为
+原始数据集仅有一个，所以结果放在该Key下即可</p></td>
+</tr>
+<tr class="row-odd"><td><p>C
+DResult</p></td>
+<td><p>对抗数
+据预测结果</p></td>
+<td><p>项目中的攻击算法
+预存有若干参数。如FGSM算法预设两个参数组合f
+gsm_01和fgsm_02。该Key下以二元字典的形式存储</p></td>
+</tr>
+<tr class="row-even"><td><p>fgsm</p></td>
+<td><p>对抗数据
+集预测结果</p></td>
+<td><p>以FGSM为例，该key为用户解析攻击数
+据集保存的上级目录，预测结果需要与该key对应</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="is-save">
+<h3>IS_SAVE<a class="headerlink" href="#is-save" title="永久链接至标题">¶</a></h3>
+<p>该参数表示是否保存生成的攻击样本，True则保存攻击后的样本和对攻击样本的预测值，和原始预测值，格式和输入的一致，npy类型的还是npy，ImageNet类型的还是图片和类别列表文件。</p>
+<p>ImageNet的攻击后的样本和预测类别会存在指定的路径下</p>
+</div>
+<div class="section" id="save-path">
+<h3>save_path<a class="headerlink" href="#save-path" title="永久链接至标题">¶</a></h3>
+<p>该参数用于给出存储攻击结果的具体路径</p>
+<p>如果使用的是形如cifar10的npy格式数据集，则最终存储形如以下目录树：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>AISafety
+├── EvalBox
+├── Models
+├── utils
+├── test
+│   ├── Attack_generation
+│   │   ├── attack_param_FGSM_fgsm_01
+│   │   │   ├──FGSM_30_adv_preds_labels.json
+│   │   │   ├──FGSM_30_adv_preds_labels.npy   # 对抗预测标签
+│   │   │   ├──FGSM_30_advs.json
+│   │   │   ├──FGSM_30_advs.npy     # 对抗样本
+│   │   ├── attack_param_FGSM_fgsm_02
+├── Datasets
+</pre></div>
+</div>
+<p>如果使用的是形如ImageNet的原始图像格式数据集，则最终存储形式，为攻击图像和标签。如将save_path设置为“ImageNet_Attack_generation/”
+。则攻击成功后会在该路径下生成形如下方的目录树：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>AISafety
+├── EvalBox
+├── Models
+├── utils
+├── test
+│   ├── Attack_generation
+│   │   ├── attack_param_FGSM_fgsm_01
+│   │   ├── attack_param_FGSM_fgsm_02
+│   │   │   ├── Adv_Images  # 对抗图像
+│   │   │   │   ├── Adv_ILSVRC2012_val_00000001.JPEG
+│   │   │   │   ├── Adv_ILSVRC2012_val_00000002.JPEG
+│   │   │   │   ├── ...
+│   │   │   │   ├── Adv_ILSVRC2012_val_00000010.JPEG
+│   │   │   ├── adv_preds_val_10.txt   # 对抗样本标签
+│   │   │   ├── origins_val_10.txt   # 原始样本标签
+├── Datasets
+</pre></div>
+</div>
+<p>攻击后的样本图像将被放在Adv_Images中，如图所示：</p>
+<p><img alt="image1" src="../_images/图片4.png" /></p>
+<p>adv_preds_val_10.txt和origins_val_10.txt文件中内容形如：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Adv_ILSVRC2012_val_00000001</span><span class="o">.</span><span class="n">JPEG</span> <span class="mi">69</span>
+<span class="n">Adv_ILSVRC2012_val_00000002</span><span class="o">.</span><span class="n">JPEG</span> <span class="mi">970</span>
+<span class="o">...</span>
+<span class="n">Adv_ILSVRC2012_val_00000010</span><span class="o">.</span><span class="n">JPEG</span> <span class="mi">669</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="save-method">
+<h3>save_method<a class="headerlink" href="#save-method" title="永久链接至标题">¶</a></h3>
+<p>该参数表示若用户选择保存对抗攻击样本时，使用那种格式存储相应样本。默认是npy，numpy格式的，保存结果例如上述，如果设置是’ImageNet’就例如上述所示图片方式保存</p>
+<p>参考格式为：“.npy”</p>
+</div>
+<div class="section" id="scale-imagesize">
+<h3>Scale_ImageSize<a class="headerlink" href="#scale-imagesize" title="永久链接至标题">¶</a></h3>
+<p>该参数表示归一化尺寸。cifar10，cifar100
+默认到32,ImageNet推荐归一化到224X224
+同时也支持用户自定义，用户自行决定放缩到多少后再裁减</p>
+<p>参考格式：（32,32）、（224,224）</p>
+</div>
+<div class="section" id="crop-imagesize">
+<h3>Crop_ImageSize<a class="headerlink" href="#crop-imagesize" title="永久链接至标题">¶</a></h3>
+<p>该参数表示用户定义好缩放尺寸后，进行裁减的尺寸</p>
+<p>参考格式：（32,32）、（224,224）</p>
+</div>
+<div class="section" id="batch-size">
+<h3>batch_size<a class="headerlink" href="#batch-size" title="永久链接至标题">¶</a></h3>
+<p>该参数表示数据每次批量处理的数目，仅用于攻击算法生成对抗样本阶段使用。</p>
+<p>参考格式：64</p>
+</div>
+<div class="section" id="cam-layer">
+<h3>CAM_layer<a class="headerlink" href="#cam-layer" title="永久链接至标题">¶</a></h3>
+<p>该参数表示可视化热力图的过程中，设置展示敏感和feature的第几层。</p>
+<p>参考格式：28</p>
+</div>
+<div class="section" id="gpu-config">
+<h3>GPU_Config<a class="headerlink" href="#gpu-config" title="永久链接至标题">¶</a></h3>
+<p>该参数表示项目使用GPU设置。第一个值表示，GPU的数目，第二个表示可以使用的GPU的编号，目前支持，在判断和实际设备中信息一致的设备中任意选取一个使用。</p>
+<p>参考格式：[“2”,“0,1”]。释义：共有2个GPU，编号为0和1，调用时程序会随机选择GPU使用。</p>
+</div>
+<div class="section" id="save-visualization-base-path">
+<h3>save_visualization_base_path<a class="headerlink" href="#save-visualization-base-path" title="永久链接至标题">¶</a></h3>
+<p>该参数表示计算的评测结果和可视化的存储根目录的设置路径。</p>
+<p>参考格式：‘./temp/’</p>
+<p>以下为执行评测后相应的temp路径结果：topk是模型预测使用攻击前后的样本的一个预测概率前k的一个比较，</p>
+<p>对应的如果是ImageNet下面数据可视化结果还会生成热力图，详情请参阅可视化展示部分内容。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>SUIBUAA_AIEP
+├── EvalBox
+├── Models
+├── utils
+├── test
+│   ├── temp
+│   │   ├── FGSM
+│   │   │   ├──fgsm01
+│   │   │   │   ├──topk
+│   │   │   │   ├──AttackSample_torchvision.models.vgg16_cam_0.jpg
+│   │   │   │   ├──....jpg
+│   │   │   ├──fgsm02
+│   │   │   ├──...
+│   │   ├── result.txt
+│   ├── attack_param
+├── Datasets
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="id5">
+<h2><span class="section-number">6.4. </span>接口文件调用流程<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h2>
+<p>设置好上述所有参数后，执行</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">testimport</span><span class="o">.</span><span class="n">py</span>
+</pre></div>
+</div>
+<p>即可运行接口，并在控制台实时获取项目运行进度，以及相应的评测结果。</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="07_example.html" class="btn btn-neutral float-right" title="7. 评测完整实例" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="04_docker.html" class="btn btn-neutral float-left" title="5. Docker模式和设置说明" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; 版权所有 2020, DIG
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

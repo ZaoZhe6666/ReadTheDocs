@@ -92,7 +92,11 @@
 <li class="toctree-l1"><a class="reference internal" href="../Evaluation/index.html">评测算法介绍</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Defense/index.html">防御算法介绍</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">平台模型介绍</a><ul class="current">
-<li class="toctree-l2 current"><a class="current reference internal" href="#">1. 测试模型</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">1. 测试模型</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id2">1.1. 已集成内容</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">1.2. 自定义模型</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="02_extend.html">2. 扩展模型</a></li>
 </ul>
 </li>
@@ -165,12 +169,14 @@
             
   <div class="section" id="id1">
 <h1><span class="section-number">1. </span>测试模型<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
-<p>平台已集成的测试模型共有以下几个</p>
+<div class="section" id="id2">
+<h2><span class="section-number">1.1. </span>已集成内容<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
+<p>目前项目已集成的测试模型共有以下几个：</p>
 <ul class="simple">
 <li><p>针对Cifar-10数据集的ResNet20，FP_ResNet，VGG16</p></li>
 <li><p>针对ImageNet数据集的VGG19</p></li>
 </ul>
-<p>平台已集成的模型参数共有以下几个</p>
+<p>目前项目已集成的模型参数共有以下几个：</p>
 <ul class="simple">
 <li><p>resnet20模型在cifar10原始训练集上模型参数</p></li>
 <li><p>resnet20模型通过RAND加固算法加固后模型参数</p></li>
@@ -178,6 +184,16 @@
 <li><p>VGG16模型在cifar10原始训练集上模型参数</p></li>
 <li><p>VGG16模型通过RAND加固算法加固后模型参数</p></li>
 </ul>
+</div>
+<div class="section" id="id3">
+<h2><span class="section-number">1.2. </span>自定义模型<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h2>
+<p>用户可按照模型扩展要求，实现并上传自定义模型。</p>
+<p>也可默认l 使用pytorch自带的模型，以及默认的预训练模型，具体有例如：</p>
+<ul class="simple">
+<li><p>torchvision.model.vgg19</p></li>
+<li><p>torchvision.model.alexnet</p></li>
+</ul>
+</div>
 </div>
 
 

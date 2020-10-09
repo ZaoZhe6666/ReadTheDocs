@@ -94,8 +94,7 @@
 <li class="toctree-l2"><a class="reference internal" href="01_introduce.html">1. 测试模型</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">2. 扩展模型</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#id2">2.1. 模型存储位置</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#actc">2.2. 扩展实例——ACTC算法</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id3">2.3. 扩展说明</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">2.2. 模型扩展要求</a></li>
 </ul>
 </li>
 </ul>
@@ -175,10 +174,12 @@
 ├── Models
 │   ├── TestModels    测试用模型存储路径
 │   ├── UserModels    用户个人模型存储路径
-│   │   ├──utils
-│   │   ├──ResNet2.py
+│   │   ├── utils
+│   │   ├── ResNet2.py
+│   │   ├── new_model.py  用户新上传模型
 │   ├── weights
-│   │   ├──resnet20_cifar.pt
+│   │   ├── resnet20_cifar.pt
+│   │   ├── new_weights.pt  用户新上传模型对应参数文件
 │   ├── basic_module
 ├── utils
 ├── test
@@ -186,105 +187,39 @@
 </pre></div>
 </div>
 </div>
-<div class="section" id="actc">
-<h2><span class="section-number">2.2. </span>扩展实例——ACTC算法<a class="headerlink" href="#actc" title="永久链接至标题">¶</a></h2>
-<p>ACTC算法路径为：</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">~/</span><span class="n">AISafety</span><span class="o">/</span><span class="n">EvalBox</span><span class="o">/</span><span class="n">Evaluation</span><span class="o">/</span><span class="n">actc</span><span class="o">.</span><span class="n">py</span>
-</pre></div>
-</div>
-<p>ACTC算法源代码:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">ACTC</span><span class="p">(</span><span class="n">Evaluation</span><span class="p">):</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">outputs_origin</span><span class="p">,</span> <span class="n">outputs_adv</span><span class="p">,</span> <span class="n">device</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">        @description:</span>
-<span class="sd">        @param {</span>
-<span class="sd">            model:</span>
-<span class="sd">            device:</span>
-<span class="sd">            kwargs:</span>
-<span class="sd">        }</span>
-<span class="sd">        @return: None</span>
-<span class="sd">        &#39;&#39;&#39;</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">ACTC</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">outputs_origin</span><span class="p">,</span> <span class="n">outputs_adv</span><span class="p">,</span> <span class="n">device</span><span class="p">)</span>
-
-        <span class="bp">self</span><span class="o">.</span><span class="n">_parsing_parameters</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-    <span class="k">def</span> <span class="nf">_parsing_parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">        @description:</span>
-<span class="sd">        @param {</span>
-<span class="sd">        }</span>
-<span class="sd">        @return:</span>
-<span class="sd">        &#39;&#39;&#39;</span>
-
-    <span class="k">def</span> <span class="nf">evaluate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">adv_xs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">cln_xs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">cln_ys</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">adv_ys</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">target_preds</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">target_flag</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">        @description:</span>
-<span class="sd">        @param {</span>
-<span class="sd">            adv_xs: 攻击样本</span>
-<span class="sd">            cln_xs：原始样本</span>
-<span class="sd">            cln_ys: 原始类别，非目标攻击下原始样本的类型</span>
-<span class="sd">            adv_ys: 攻击样本的预测类别</span>
-<span class="sd">            target_preds： 目标攻击下希望原始样本攻击的目标类别</span>
-<span class="sd">            target_flag：是否是目标攻击</span>
-<span class="sd">        }</span>
-<span class="sd">        @return: actc {Average Confidence of True Class}</span>
-<span class="sd">        &#39;&#39;&#39;</span>
-        <span class="n">total</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">adv_xs</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;total&quot;</span><span class="p">,</span> <span class="n">total</span><span class="p">)</span>
-        <span class="n">outputs</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">outputs_adv</span><span class="p">)</span>
-        <span class="n">number</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="n">prob</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="n">outputs_softmax</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">functional</span><span class="o">.</span><span class="n">softmax</span><span class="p">(</span><span class="n">outputs</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-        <span class="n">preds</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">outputs</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-        <span class="n">outputs_softmax</span> <span class="o">=</span> <span class="n">outputs_softmax</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
-        <span class="n">preds</span> <span class="o">=</span> <span class="n">preds</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
-        <span class="n">labels</span> <span class="o">=</span> <span class="n">target_preds</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">target_flag</span><span class="p">:</span>
-            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">preds</span><span class="o">.</span><span class="n">size</span><span class="p">):</span>
-                <span class="k">if</span> <span class="n">preds</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="n">labels</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
-                    <span class="n">number</span> <span class="o">+=</span> <span class="mi">1</span>
-                    <span class="n">prob</span> <span class="o">+=</span> <span class="n">outputs_softmax</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">labels</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">preds</span><span class="o">.</span><span class="n">size</span><span class="p">):</span>
-                <span class="k">if</span> <span class="n">preds</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">labels</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
-                    <span class="n">number</span> <span class="o">+=</span> <span class="mi">1</span>
-                    <span class="n">prob</span> <span class="o">+=</span> <span class="n">outputs_softmax</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">labels</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">number</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="n">actc</span> <span class="o">=</span> <span class="n">prob</span> <span class="o">/</span> <span class="n">number</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">actc</span> <span class="o">=</span> <span class="n">prob</span><span class="o">/</span><span class="p">(</span><span class="n">number</span><span class="o">+</span><span class="n">MIN_COMPENSATION</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">actc</span>
-</pre></div>
-</div>
-</div>
 <div class="section" id="id3">
-<h2><span class="section-number">2.3. </span>扩展说明<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h2>
-<ol class="arabic simple">
-<li><p>用户需要实现个人模型，并添加getModel方法，返回用户个人模型</p></li>
-<li><p>用户需要将待扩展的模型文件，如user_model.py，放置于以下路径中</p></li>
-</ol>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">~/</span><span class="n">AISafety</span><span class="o">/</span><span class="n">Models</span><span class="o">/</span><span class="n">UserModel</span>
+<h2><span class="section-number">2.2. </span>模型扩展要求<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h2>
+<p>如下为一个可使用模型实例：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">...</span>
+
+<span class="kn">from</span> <span class="nn">Models.basic_module</span> <span class="kn">import</span> <span class="n">BasicModule</span>
+
+<span class="c1"># 用户可自定义若干辅助方法</span>
+<span class="k">def</span> <span class="nf">adjust_learning_rate</span><span class="p">(</span><span class="n">epoch</span><span class="p">,</span> <span class="n">optimizer</span><span class="p">):</span>
+    <span class="o">...</span>
+
+<span class="k">def</span> <span class="nf">conv3x3</span><span class="p">(</span><span class="n">in_planes</span><span class="p">,</span> <span class="n">out_planes</span><span class="p">,</span> <span class="n">stride</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="o">...</span>
+
+<span class="c1"># 用户可通过类，定义若干个人模型</span>
+<span class="k">class</span> <span class="nc">BasicBlock</span><span class="p">(</span><span class="n">BasicModule</span><span class="p">):</span>
+    <span class="o">...</span>
+
+<span class="k">class</span> <span class="nc">ResNet_Cifar</span><span class="p">(</span><span class="n">BasicModule</span><span class="p">):</span>
+    <span class="o">...</span>
+
+<span class="c1"># 用户自定义实现的获取模型的方法</span>
+<span class="k">def</span> <span class="nf">resnet20_cifar</span><span class="p">(</span><span class="n">thermometer</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">level</span> <span class="o">=</span> <span class="mi">1</span><span class="p">):</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">ResNet_Cifar</span><span class="p">(</span><span class="n">BasicBlock</span><span class="p">,</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="n">thermometer</span> <span class="o">=</span> <span class="n">thermometer</span><span class="p">,</span> <span class="n">level</span> <span class="o">=</span> <span class="n">level</span><span class="p">)</span>
+    <span class="c1"># 返回值应为用户实现的模型文件中模型</span>
+    <span class="k">return</span> <span class="n">model</span>
+
+<span class="c1"># 必须实现的公用方法getModel</span>
+<span class="k">def</span> <span class="nf">getModel</span><span class="p">():</span>
+    <span class="k">return</span> <span class="n">resnet20_cifar</span><span class="p">()</span>
 </pre></div>
 </div>
-<ol class="arabic simple" start="3">
-<li><p>用户需要将待扩展的模型文件对应参数信息，如user_model.pth，放置于以下路径中</p></li>
-</ol>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">~/</span><span class="n">AISafety</span><span class="o">/</span><span class="n">Models</span><span class="o">/</span><span class="n">weights</span>
-</pre></div>
-</div>
-<ol class="arabic simple" start="4">
-<li><p>用户可在集成调用文件testimport.py中，修改model参数为”Models.UserModel.user_model”,修改model_dir参数为”../Models/weights/user_model.pth”</p></li>
-<li><p>因为模型继承了BasicModule,注意传参有一个**kwargs,为了可以用户通过字典或xml文件方式配置模型需要的参数。例如使用xml方式配置优化器：</p></li>
-</ol>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">method</span> <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;RAND&#39;</span><span class="o">&gt;</span>
-<span class="o">&lt;</span><span class="n">param</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;optimizer&#39;</span><span class="o">&gt;</span>
-  <span class="o">&lt;</span><span class="n">optimizer</span><span class="o">&gt;</span><span class="n">optim</span><span class="o">.</span><span class="n">Adam</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="mf">1e-2</span><span class="p">)</span><span class="o">&lt;/</span><span class="n">optimizer</span><span class="o">&gt;</span>
-<span class="o">&lt;/</span><span class="n">param</span><span class="o">&gt;</span>
-<span class="o">&lt;</span><span class="n">param</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;scheduler&#39;</span><span class="o">&gt;</span>
-  <span class="o">&lt;</span><span class="n">scheduler</span><span class="o">&gt;</span><span class="n">optim</span><span class="o">.</span><span class="n">lr_scheduler</span><span class="o">.</span><span class="n">StepLR</span><span class="p">(</span><span class="n">optimizer</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="n">gamma</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span><span class="o">&lt;/</span><span class="n">scheduler</span><span class="o">&gt;</span>
-<span class="o">&lt;/</span><span class="n">param</span><span class="o">&gt;</span>
-<span class="o">&lt;/</span><span class="n">method</span><span class="o">&gt;</span>
-</pre></div>
-</div>
+<p>模型的格式仅需要遵循，实现getModel函数，返回模型。</p>
 </div>
 </div>
 

@@ -114,12 +114,13 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#rand">1.5. RAND加固算法</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#id10">算法介绍</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id15">参数说明</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id11">参数说明</a></li>
 </ul>
 </li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="02_extend.html">2. 扩展防御算法</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_defense.html">3. 加固防御模型调用说明</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../Models/index.html">平台模型介绍</a></li>
@@ -377,13 +378,13 @@ maxL是优化目标，即寻找使损失函数最大的扰动，简单来讲就�
 <p>Rand方法利用随机化的方法来对输入图片引入随机性操作，作为一个预处理模块，该方法可以有效的提升深度神经网络对于对抗样本噪音的防御能力和鲁棒性。</p>
 <p>该方法的具体操作有如下两种方式：</p>
 <ol class="arabic simple">
-<li><p>对于原始图片X，对其大小W*H*3进行随机修改，变化为W’<a href="#id11"><span class="problematic" id="id12">*</span></a>H’<a href="#id13"><span class="problematic" id="id14">*</span></a>3，这其中大小的变换要在合理范围内（如：2个像素值）；</p></li>
+<li><p>对于原始图片X，对其大小W·H·3进行随机修改，变化为W’·H’·3，这其中大小的变换要在合理范围内（如：2个像素值）；</p></li>
 <li><p>第二种方式是对原始图片X进行随机填充。使用值为0的像素在原始图片的四周进行填充。</p></li>
 </ol>
 <p>这两种方式对于输入图片引入很多随机性，从而削弱了对抗攻击的效果，提升了模型对抗鲁棒性。</p>
 </div>
-<div class="section" id="id15">
-<h3>参数说明<a class="headerlink" href="#id15" title="永久链接至标题">¶</a></h3>
+<div class="section" id="id11">
+<h3>参数说明<a class="headerlink" href="#id11" title="永久链接至标题">¶</a></h3>
 <table class="docutils align-default">
 <colgroup>
 <col style="width: 21%" />

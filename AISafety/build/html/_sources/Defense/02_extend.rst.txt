@@ -4,7 +4,7 @@
 防御算法类图
 ------------------------------------------------------------------------
 
-此处应该有个图片
+|image1|
 
 如上图所示，上图为防御算法NAT和防御算法PAT继承Defense类示意图。防御算法内部可自行实现防御过程具体函数，仅需覆写train方法，valid方法，generate方法即可。
 
@@ -239,3 +239,5 @@ ACTC算法源代码:
   from .new_defense_method import NEW_DEFENSE_METHOD
 
 4. 用户可在集成调用文件testimport_defense.py中，修改对应方法名，方法参数路径信息
+
+.. |image1| image:: ../Pic/图片3.png

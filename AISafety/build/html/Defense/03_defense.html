@@ -1,0 +1,483 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-CN" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>3. 加固防御模型调用说明 &mdash; AISafety 1.0 文档</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/translations.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="平台模型介绍" href="../Models/index.html" />
+    <link rel="prev" title="2. 扩展防御算法" href="02_extend.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> AISafety
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../Start/index.html">开始使用</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Dataset/index.html">数据集介绍</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Attack/index.html">攻击算法介绍</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Evaluation/index.html">评测算法介绍</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">防御算法介绍</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="01_introduce.html">1. 防御算法介绍</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_extend.html">2. 扩展防御算法</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">3. 加固防御模型调用说明</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id2">3.1. 加固防御模型调用参数说明</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#defense-method">defense_method</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#data-path">Data_path</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dict-path">Dict_path</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#model">model</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#batch-size">batch_size</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enhanced-model-save-path">Enhanced_model_save_path</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#config-defense-param-xml-dir">config_defense_param_xml_dir</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#config-model-dir-path">config_model_dir_path</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#optim-config-dir">optim_config_dir</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#data-type">data_type</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#scale-imagesize">Scale_ImageSize</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#crop-imagesize">Crop_ImageSize</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gpu-config">GPU_Config</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">3.2. 加固防御模型调用运行说明</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id4">相关文件路径</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id5">执行过程</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id6">防御结果</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Models/index.html">平台模型介绍</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">AISafety</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">防御算法介绍</a> &raquo;</li>
+        
+      <li><span class="section-number">3. </span>加固防御模型调用说明</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/Defense/03_defense.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="id1">
+<h1><span class="section-number">3. </span>加固防御模型调用说明<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
+<p>平台已给出加固模型功能的集成调用文件，集成调用文件路径如下：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">~/</span><span class="n">AISafety</span><span class="o">/</span><span class="n">test</span><span class="o">/</span><span class="n">test_defense</span><span class="o">.</span><span class="n">py</span>
+</pre></div>
+</div>
+<p>下面将就Cifar-10数据集，给出一个完整的调用接口说明</p>
+<div class="section" id="id2">
+<h2><span class="section-number">3.1. </span>加固防御模型调用参数说明<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
+<p>test_defense.py文件中，主要逻辑代码如下：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s1">&#39;The Defense Model Generation&#39;</span><span class="p">)</span>
+    <span class="c1"># common arguments</span>
+    <span class="c1"># 用户所选用的加固算法缩写</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s1">&#39;--defense_method&#39;</span><span class="p">,</span>
+        <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span>
+        <span class="n">nargs</span><span class="o">=</span><span class="s1">&#39;*&#39;</span><span class="p">,</span>
+        <span class="n">default</span> <span class="o">=</span> <span class="s2">&quot;RAND&quot;</span><span class="p">)</span>
+    <span class="c1"># 用户使用的数据集路径</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s1">&#39;--Data_path&#39;</span><span class="p">,</span>
+        <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span>
+        <span class="n">nargs</span><span class="o">=</span><span class="s1">&#39;*&#39;</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;../Datasets/CIFAR_cln_data/cifar10_300_origin_inputs.npy&quot;</span><span class="p">,</span>
+                 <span class="s2">&quot;../Datasets/CIFAR_cln_data/cifar10_300_origin_labels.npy&quot;</span><span class="p">,</span>
+                 <span class="s2">&quot;../Datasets/CIFAR_cln_data/cifar10_300_origin_inputs.npy&quot;</span><span class="p">,</span>
+                 <span class="s2">&quot;../Datasets/CIFAR_cln_data/cifar10_300_origin_labels.npy&quot;</span> <span class="p">])</span>
+    <span class="c1"># 用户使用的数据集对应的字典文件</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s1">&#39;--Dict_path&#39;</span><span class="p">,</span>
+        <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="s2">&quot;./dict_lists/cifar10_dict.txt&quot;</span><span class="p">)</span>
+    <span class="c1"># 用户使用的模型文件</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s1">&#39;--model&#39;</span><span class="p">,</span>
+        <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span>
+        <span class="n">default</span> <span class="o">=</span><span class="s1">&#39;Models.UserModel.ResNet2&#39;</span><span class="p">)</span>
+    <span class="c1"># 执行攻击过程的batch_size大小</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s1">&#39;--batch_size&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mi">64</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">&#39;batch size&#39;</span><span class="p">)</span>
+    <span class="c1"># arguments for the particular attack</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s1">&#39;--Scale_ImageSize&#39;</span><span class="p">,</span>
+        <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="p">(</span><span class="mi">32</span><span class="p">,</span><span class="mi">32</span><span class="p">))</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s1">&#39;--Crop_ImageSize&#39;</span><span class="p">,</span>
+        <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="p">(</span><span class="mi">32</span><span class="p">,</span><span class="mi">32</span><span class="p">))</span>
+    <span class="c1"># 防御后结果文件存储路径</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s1">&#39;--Enhanced_model_save_path&#39;</span><span class="p">,</span>
+        <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="s2">&quot;./defense/&quot;</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s1">&#39;--config_defense_param_xml_dir&#39;</span><span class="p">,</span>
+        <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="s2">&quot;./defense/EAT/EAT.xml&quot;</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s1">&#39;--optim_config_dir&#39;</span><span class="p">,</span>
+        <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="s2">&quot;./defense/EAT/EAT_optim.xml&quot;</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s1">&#39;--config_model_dir_path&#39;</span><span class="p">,</span>
+        <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="s2">&quot;./defense/EAT/EAT_model.xml&quot;</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s1">&#39;--data_type&#39;</span><span class="p">,</span>
+        <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="s1">&#39;CIFAR10&#39;</span><span class="p">)</span>
+    <span class="c1"># GPU设置</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s1">&#39;--GPU_Config&#39;</span><span class="p">,</span>
+        <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span>
+        <span class="c1"># 数目，index设置</span>
+        <span class="n">default</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;2&quot;</span><span class="p">,</span><span class="s2">&quot;0,1&quot;</span><span class="p">])</span>
+    <span class="n">arguments</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+    <span class="n">main</span><span class="p">(</span><span class="n">args</span><span class="o">=</span><span class="n">arguments</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>其中涉及到的主要参数及说明如下：</p>
+<div class="section" id="defense-method">
+<h3>defense_method<a class="headerlink" href="#defense-method" title="永久链接至标题">¶</a></h3>
+<p>该参数为防御算法的名称。目前已集成的防御算法为EAT，NAT，OAT，PAT以及RAND。详细说明请见防御算法具体说明一章。</p>
+</div>
+<div class="section" id="data-path">
+<h3>Data_path<a class="headerlink" href="#data-path" title="永久链接至标题">¶</a></h3>
+<p>共包含四个参数位，分别表示：</p>
+<ol class="arabic simple">
+<li><p>样本的数据集文件
+（白盒攻击下是原始样本，黑盒攻击下是攻击后的攻击样本）</p></li>
+<li><p>对应的标签的文件
+（非目标攻击下是groundtruth，目标攻击下是攻击目标类别）</p></li>
+<li><p>原始样本的数据集文件</p></li>
+<li><p>对应的groundtruth标签文件</p></li>
+</ol>
+</div>
+<div class="section" id="dict-path">
+<h3>Dict_path<a class="headerlink" href="#dict-path" title="永久链接至标题">¶</a></h3>
+<p>对应的数据集的分类类别号码和类别名称的编号
+default=“./dict_lists/cifar10_dict.txt”</p>
+</div>
+<div class="section" id="model">
+<h3>model<a class="headerlink" href="#model" title="永久链接至标题">¶</a></h3>
+<p>用户打算使用的加固防御网络模型</p>
+</div>
+<div class="section" id="batch-size">
+<h3>batch_size<a class="headerlink" href="#batch-size" title="永久链接至标题">¶</a></h3>
+<p>default =64，读入数据每次批量处理的数目</p>
+</div>
+<div class="section" id="enhanced-model-save-path">
+<h3>Enhanced_model_save_path<a class="headerlink" href="#enhanced-model-save-path" title="永久链接至标题">¶</a></h3>
+<p>设置用来保存防御模型的路径，同时，设置相应的配置参数文件的位置</p>
+</div>
+<div class="section" id="config-defense-param-xml-dir">
+<h3>config_defense_param_xml_dir<a class="headerlink" href="#config-defense-param-xml-dir" title="永久链接至标题">¶</a></h3>
+<p>用来设置防御方法的内部参数的配置文件，以EAT加固算法配套的EAT.xml文件为例：</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;method</span> <span class="na">type=</span><span class="s">&#39;EAT&#39;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;param</span> <span class="na">title=</span><span class="s">&#39;dataset&#39;</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;dataset&gt;</span>CIFAR10<span class="nt">&lt;/dataset&gt;</span>
+    <span class="nt">&lt;/param&gt;</span>
+
+    <span class="nt">&lt;param</span> <span class="na">title=</span><span class="s">&#39;epsilon&#39;</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;epsilon&gt;</span>0.6<span class="nt">&lt;/epsilon&gt;</span>
+    <span class="nt">&lt;/param&gt;</span>
+
+    <span class="nt">&lt;param</span> <span class="na">title=</span><span class="s">&#39;train_externals&#39;</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;train_externals&gt;</span>False<span class="nt">&lt;/train_externals&gt;</span>
+    <span class="nt">&lt;/param&gt;</span>
+<span class="nt">&lt;/method&gt;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="config-model-dir-path">
+<h3>config_model_dir_path<a class="headerlink" href="#config-model-dir-path" title="永久链接至标题">¶</a></h3>
+<p>用来设置加固防御用的模型的内部参数的配置文件，以EAT加固算法配套的EAT_model.xml文件为例：</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;method</span> <span class="na">type=</span><span class="s">&#39;ANP_VGG16&#39;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;param</span> <span class="na">title=</span><span class="s">&#39;batch_size&#39;</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;batch_size&gt;</span>64<span class="nt">&lt;/batch_size&gt;</span>
+    <span class="nt">&lt;/param&gt;</span>
+
+    <span class="nt">&lt;param</span> <span class="na">title=</span><span class="s">&#39;enable_lat&#39;</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;enable_lat&gt;</span>False<span class="nt">&lt;/enable_lat&gt;</span>
+    <span class="nt">&lt;/param&gt;</span>
+<span class="nt">&lt;/method&gt;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="optim-config-dir">
+<h3>optim_config_dir<a class="headerlink" href="#optim-config-dir" title="永久链接至标题">¶</a></h3>
+<p>用来设置训练加固防御用的模型的优化器的配置文件，以EAT加固算法配套的EAT_optim.xml文件为例：</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;method</span> <span class="na">type=</span><span class="s">&#39;EAT&#39;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;param</span> <span class="na">title=</span><span class="s">&#39;optimizer&#39;</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;optimizer&gt;</span>optim. Adam(model.parameters(), lr=1e-2)<span class="nt">&lt;/optimizer&gt;</span>
+    <span class="nt">&lt;/param&gt;</span>
+
+    <span class="nt">&lt;param</span> <span class="na">title=</span><span class="s">&#39;scheduler&#39;</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;scheduler&gt;</span>optim. lr_scheduler.StepLR(optimizer, 40, gamma=0.1)<span class="nt">&lt;/scheduler&gt;</span>
+    <span class="nt">&lt;/param&gt;</span>
+<span class="nt">&lt;/method&gt;</span>
+</pre></div>
+</div>
+<p>这里因为优化器的函数比较多，用户需要写成字符串的表达式方式，进入计算的时候会用eval()函数调用该方法和设置的值</p>
+</div>
+<div class="section" id="data-type">
+<h3>data_type<a class="headerlink" href="#data-type" title="永久链接至标题">¶</a></h3>
+<p>数据集类型，目前平台共支持以下三种：</p>
+<ol class="arabic simple">
+<li><p>CIFAR-10：default=“cifar10”</p></li>
+<li><p>ImageNet：[‘ImageNet’, “withoutNormalize”]</p></li>
+<li><p>ImageCustom</p></li>
+</ol>
+<p>数据集的类型，目前是三种，根据实际注明类型，以方便预处理过程，另外使用ImageNet类型相似的数据一般不是原始的ImageNet数据集，选用[‘ImageNet’,
+“withoutNormalize”]时候，不对图像做归一化，用户自行预处理</p>
+</div>
+<div class="section" id="scale-imagesize">
+<h3>Scale_ImageSize<a class="headerlink" href="#scale-imagesize" title="永久链接至标题">¶</a></h3>
+<p>default=（32,32）（224,224）</p>
+<p>cifar10，cifar100
+默认到32,ImageNet推荐归一化到224X224。剩下的用户可以自定义，放缩到多少后再裁减</p>
+</div>
+<div class="section" id="crop-imagesize">
+<h3>Crop_ImageSize<a class="headerlink" href="#crop-imagesize" title="永久链接至标题">¶</a></h3>
+<p>default=（32,32）（224,224）</p>
+<p>用户定义好的尺寸的缩放后，再裁减的后的尺寸</p>
+</div>
+<div class="section" id="gpu-config">
+<h3>GPU_Config<a class="headerlink" href="#gpu-config" title="永久链接至标题">¶</a></h3>
+<p>default=[“2”,“0,1”]</p>
+<p>第一个表示，GPU的数目，第二个表示可以使用的GPU的编号。目前支持，在判断和实际设备中信息一致的设备中任意选取一个使用</p>
+</div>
+</div>
+<div class="section" id="id3">
+<h2><span class="section-number">3.2. </span>加固防御模型调用运行说明<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h2>
+<p>以CIFAR-10数据集在ResNet2模型上进行加固为例：</p>
+<div class="section" id="id4">
+<h3>相关文件路径<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>├── EvalBox
+├── Models
+│   ├── TestrModels
+│   ├── UserModels
+│   │   ├── utils
+│   │   ├── **ResNet2.py** // 使用的模型
+│   ├── weights
+│   ├── basic_module
+├── utils
+├── test
+│   ├── defense
+│   │   ├── EAT
+│   │   ├── **NAT** // 使用的防御算法
+│   │   ├── ...
+├── Datasets
+</pre></div>
+</div>
+</div>
+<div class="section" id="id5">
+<h3>执行过程<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h3>
+<p>参照该文档前述的加固模型调用参数说明，修改对应参数内容，使用Python语言，执行对应加固训练过程。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">test_defense</span><span class="o">.</span><span class="n">py</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id6">
+<h3>防御结果<a class="headerlink" href="#id6" title="永久链接至标题">¶</a></h3>
+<p>防御算法使用的是NAT，结果将会被保存在</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">~/</span><span class="n">AISafety</span><span class="o">/</span><span class="n">test</span><span class="o">/</span><span class="n">defense</span><span class="o">/</span><span class="n">NAT</span><span class="o">/</span><span class="n">CIFAR10_NAT_enhanced</span><span class="o">.</span><span class="n">pt</span>
+</pre></div>
+</div>
+<p>使用攻击算法FGSM执行测试，首先测试原始的resnet20_cifar.pt模型参数文件，得到攻击后准确率为0.1024
+再对CIFAR10_NAT_enhanced.pt参数文件进行测试，得到攻击后准确率为0.2464
+可以看出，加固后的网络对对抗样本的攻击防御有一部分上升</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../Models/index.html" class="btn btn-neutral float-right" title="平台模型介绍" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="02_extend.html" class="btn btn-neutral float-left" title="2. 扩展防御算法" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; 版权所有 2020, DIG
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

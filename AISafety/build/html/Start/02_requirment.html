@@ -92,10 +92,19 @@
 <li class="toctree-l2 current"><a class="current reference internal" href="#">3. 开始运行项目</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#python">3.1. 基础Python环境</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#id2">3.2. 辅助环境</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">3.3. 环境配置安装</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id4">新建空环境</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#torch">安装torch</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">3.4. 依赖安装</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id6">3.5. 程序安装说明</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="03_cpu_config.html">4. CPU/GPU模式和设置说明</a></li>
 <li class="toctree-l2"><a class="reference internal" href="04_docker.html">5. Docker模式和设置说明</a></li>
+<li class="toctree-l2"><a class="reference internal" href="06_interface.html">6. 完整集成调用过程</a></li>
+<li class="toctree-l2"><a class="reference internal" href="07_example.html">7. 评测完整实例</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../Dataset/index.html">数据集介绍</a></li>
@@ -172,9 +181,7 @@
             
   <div class="section" id="id1">
 <h1><span class="section-number">3. </span>开始运行项目<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
-<blockquote>
-<div><p>运行项目前，需要先安装项目对应依赖环境</p>
-</div></blockquote>
+<p>运行项目前，需要先安装项目对应依赖环境</p>
 <div class="section" id="python">
 <h2><span class="section-number">3.1. </span>基础Python环境<a class="headerlink" href="#python" title="永久链接至标题">¶</a></h2>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span><span class="o">==</span><span class="mf">3.6</span><span class="o">.</span><span class="mi">5</span>
@@ -210,6 +217,65 @@
 <span class="n">Wand</span><span class="o">==</span><span class="mf">0.5</span><span class="o">.</span><span class="mi">2</span>
 </pre></div>
 </div>
+</div>
+<div class="section" id="id3">
+<h2><span class="section-number">3.3. </span>环境配置安装<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h2>
+<div class="section" id="id4">
+<h3>新建空环境<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h3>
+<p><img alt="image1" src="../_images/图片15.png" /></p>
+</div>
+<div class="section" id="torch">
+<h3>安装torch<a class="headerlink" href="#torch" title="永久链接至标题">¶</a></h3>
+<p>torch的安装参照<a class="reference external" href="https://pytorch.org/get-started/locally/">官网</a>，根据用户的环境选择合适的，例如在gpu下，要选择cuda的方式，cpu就按照cpu方式。</p>
+<p><img alt="image2" src="../_images/图片16.png" /></p>
+<p><img alt="image3" src="../_images/图片17.png" /></p>
+</div>
+</div>
+<div class="section" id="id5">
+<h2><span class="section-number">3.4. </span>依赖安装<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h2>
+<p>安装的包参见 requirements.txt</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">r</span> <span class="n">requirement</span><span class="o">.</span><span class="n">txt</span>
+</pre></div>
+</div>
+<p>在GPU的方式下，需要根据硬件信息，安装对应的硬件驱动，cuda和cudnn版本</p>
+<p>cpu下安装完成后的python安装包环境如下：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Package</span>                <span class="n">Version</span>
+<span class="o">-------------------</span>    <span class="o">-------------</span>
+<span class="n">certifi</span>                <span class="mf">2020.6</span><span class="o">.</span><span class="mi">20</span>
+<span class="n">cloudpickle</span>            <span class="mf">1.6</span><span class="o">.</span><span class="mi">0</span>
+<span class="n">cycler</span>                 <span class="mf">0.10</span><span class="o">.</span><span class="mi">0</span>
+<span class="n">dask</span>                   <span class="mf">2.27</span><span class="o">.</span><span class="mi">0</span>
+<span class="n">decorator</span>              <span class="mf">4.4</span><span class="o">.</span><span class="mi">2</span>
+<span class="n">future</span>                 <span class="mf">0.18</span><span class="o">.</span><span class="mi">2</span>
+<span class="n">imageio</span>                <span class="mf">2.9</span><span class="o">.</span><span class="mi">0</span>
+<span class="n">kiwisolver</span>             <span class="mf">1.2</span><span class="o">.</span><span class="mi">0</span>
+<span class="n">matplotlib</span>             <span class="mf">3.3</span><span class="o">.</span><span class="mi">0</span>
+<span class="n">networkx</span>               <span class="mf">2.5</span>
+<span class="n">numpy</span>                  <span class="mf">1.19</span><span class="o">.</span><span class="mi">2</span>
+<span class="n">opencv</span><span class="o">-</span><span class="n">python</span>          <span class="mf">3.4</span><span class="o">.</span><span class="mf">2.16</span>
+<span class="n">pandas</span>                 <span class="mf">0.23</span><span class="o">.</span><span class="mi">4</span>
+<span class="n">Pillow</span>                 <span class="mf">7.2</span><span class="o">.</span><span class="mi">0</span>
+<span class="n">pip</span>                    <span class="mf">10.0</span><span class="o">.</span><span class="mi">1</span>
+<span class="n">pyparsing</span>              <span class="mf">2.4</span><span class="o">.</span><span class="mi">7</span>
+<span class="n">python</span><span class="o">-</span><span class="n">dateutil</span>        <span class="mf">2.8</span><span class="o">.</span><span class="mi">1</span>
+<span class="n">pytz</span>                   <span class="mf">2020.1</span>
+<span class="n">PyWavelets</span>             <span class="mf">1.1</span><span class="o">.</span><span class="mi">1</span>
+<span class="n">PyYAML</span>                 <span class="mf">5.3</span><span class="o">.</span><span class="mi">1</span>
+<span class="n">scikit</span><span class="o">-</span><span class="n">image</span>           <span class="mf">0.17</span><span class="o">.</span><span class="mi">2</span>
+<span class="n">scipy</span>                  <span class="mf">1.5</span><span class="o">.</span><span class="mi">2</span>
+<span class="n">setuptools</span>             <span class="mf">39.1</span><span class="o">.</span><span class="mi">0</span>
+<span class="n">six</span>                    <span class="mf">1.15</span><span class="o">.</span><span class="mi">0</span>
+<span class="n">tifffile</span>               <span class="mf">2020.9</span><span class="o">.</span><span class="mi">3</span>
+<span class="n">toolz</span>                  <span class="mf">0.10</span><span class="o">.</span><span class="mi">0</span>
+<span class="n">torch</span>                  <span class="mf">1.6</span><span class="o">.</span><span class="mi">0</span><span class="o">+</span><span class="n">cpu</span>
+<span class="n">torchvision</span>            <span class="mf">0.7</span><span class="o">.</span><span class="mi">0</span><span class="o">+</span><span class="n">cpu</span>
+<span class="n">Wand</span>                   <span class="mf">0.5</span><span class="o">.</span><span class="mi">2</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id6">
+<h2><span class="section-number">3.5. </span>程序安装说明<a class="headerlink" href="#id6" title="永久链接至标题">¶</a></h2>
+<p>使用GitHub在开源地址下clone或者fork源码，并参考环境安装配置</p>
 </div>
 </div>
 

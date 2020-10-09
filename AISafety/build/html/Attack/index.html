@@ -38,7 +38,7 @@
     
     <link rel="index" title="索引" href="../genindex.html" />
     <link rel="search" title="搜索" href="../search.html" />
-    <link rel="next" title="1. 攻击算法说明" href="01_introduce.html" />
+    <link rel="next" title="1. 攻击算法详细介绍" href="01_introduce.html" />
     <link rel="prev" title="2. 扩展数据集" href="../Dataset/02_extend.html" /> 
 </head>
 
@@ -89,8 +89,19 @@
 <li class="toctree-l1"><a class="reference internal" href="../Start/index.html">开始使用</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Dataset/index.html">数据集介绍</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">攻击算法介绍</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="01_introduce.html">1. 攻击算法说明</a></li>
-<li class="toctree-l2"><a class="reference internal" href="02_extend.html">2. 扩展攻击算法</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id2">攻击方法</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id3">攻击方法（黑白盒</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id4">白盒攻击</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id5">黑盒攻击</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id6">攻击方法（目标/非目标</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id7">目标攻击</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id8">非目标攻击</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../Evaluation/index.html">评测算法介绍</a></li>
@@ -163,11 +174,52 @@
             
   <div class="section" id="id1">
 <h1>攻击算法介绍<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
-<p>这一部分主要说明平台中已集成的攻击算法，以及如何扩展用户个人攻击算法</p>
+<div class="section" id="id2">
+<h2>攻击方法<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
+<p>这一部分主要说明平台中已集成的攻击算法，以及如何扩展用户个人攻击算法。</p>
+<div class="section" id="id3">
+<h3>攻击方法（黑白盒<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h3>
+<div class="section" id="id4">
+<h4>白盒攻击<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h4>
+<p>项目的部分攻击算法是白盒的攻击方式，需要完整的知道model的结构和对应的梯度等信息。</p>
+</div>
+<div class="section" id="id5">
+<h4>黑盒攻击<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h4>
+<p>项目的部分攻击算法是黑盒的攻击方式，不需要完整的知道model的结构和对应的梯度等信息，只需要知道经过该模型的预测结果，用于作为评测的数据输入。</p>
+</div>
+</div>
+<div class="section" id="id6">
+<h3>攻击方法（目标/非目标<a class="headerlink" href="#id6" title="永久链接至标题">¶</a></h3>
+<div class="section" id="id7">
+<h4>目标攻击<a class="headerlink" href="#id7" title="永久链接至标题">¶</a></h4>
+<p>目标攻击是指将原始样本通过攻击后，指定攻击后的结果类别</p>
+</div>
+<div class="section" id="id8">
+<h4>非目标攻击<a class="headerlink" href="#id8" title="永久链接至标题">¶</a></h4>
+<p>非目标攻击是指将原始样本通过攻击后，结果类别与原有的模型类别不同即可</p>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="01_introduce.html">1. 攻击算法说明</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="01_introduce.html#id2">1.1. 攻击算法总览</a></li>
+<li class="toctree-l1"><a class="reference internal" href="01_introduce.html">1. 攻击算法详细介绍</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="01_introduce.html#ba">1.1. BA算法</a></li>
+<li class="toctree-l2"><a class="reference internal" href="01_introduce.html#bim">1.2. BIM算法</a></li>
+<li class="toctree-l2"><a class="reference internal" href="01_introduce.html#blb">1.3. BLB算法</a></li>
+<li class="toctree-l2"><a class="reference internal" href="01_introduce.html#corrupt">1.4. Corrupt算法</a></li>
+<li class="toctree-l2"><a class="reference internal" href="01_introduce.html#cw2">1.5. CW2算法</a></li>
+<li class="toctree-l2"><a class="reference internal" href="01_introduce.html#deepfool">1.6. Deepfool算法</a></li>
+<li class="toctree-l2"><a class="reference internal" href="01_introduce.html#ead">1.7. EAD算法</a></li>
+<li class="toctree-l2"><a class="reference internal" href="01_introduce.html#fgsm">1.8. FGSM算法</a></li>
+<li class="toctree-l2"><a class="reference internal" href="01_introduce.html#illc">1.9. ILLC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="01_introduce.html#jsm">1.10. JSM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="01_introduce.html#llc">1.11. LLC算法</a></li>
+<li class="toctree-l2"><a class="reference internal" href="01_introduce.html#nes">1.12. NES算法</a></li>
+<li class="toctree-l2"><a class="reference internal" href="01_introduce.html#om">1.13. OM算法</a></li>
+<li class="toctree-l2"><a class="reference internal" href="01_introduce.html#pgd">1.14. PGD算法</a></li>
+<li class="toctree-l2"><a class="reference internal" href="01_introduce.html#rfgsm">1.15. RFGSM算法</a></li>
+<li class="toctree-l2"><a class="reference internal" href="01_introduce.html#rllc">1.16. RLLC算法</a></li>
+<li class="toctree-l2"><a class="reference internal" href="01_introduce.html#spsa">1.17. SPSA算法</a></li>
+<li class="toctree-l2"><a class="reference internal" href="01_introduce.html#uap">1.18. UAP算法</a></li>
+<li class="toctree-l2"><a class="reference internal" href="01_introduce.html#umifgsm">1.19. UMIFGSM算法</a></li>
+<li class="toctree-l2"><a class="reference internal" href="01_introduce.html#zoo">1.20. ZOO算法</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="02_extend.html">2. 扩展攻击算法</a><ul>
@@ -180,6 +232,9 @@
 </ul>
 </div>
 </div>
+</div>
+</div>
+</div>
 
 
            </div>
@@ -189,7 +244,7 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="01_introduce.html" class="btn btn-neutral float-right" title="1. 攻击算法说明" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="01_introduce.html" class="btn btn-neutral float-right" title="1. 攻击算法详细介绍" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="../Dataset/02_extend.html" class="btn btn-neutral float-left" title="2. 扩展数据集" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
