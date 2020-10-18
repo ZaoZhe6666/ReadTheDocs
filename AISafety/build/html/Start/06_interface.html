@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>6. 完整集成调用过程 &mdash; AISafety 1.0 文档</title>
+  <title>7. 完整集成调用过程 &mdash; AISafety 1.0 文档</title>
   
 
   
@@ -38,8 +38,8 @@
     
     <link rel="index" title="索引" href="../genindex.html" />
     <link rel="search" title="搜索" href="../search.html" />
-    <link rel="next" title="7. 评测完整实例" href="07_example.html" />
-    <link rel="prev" title="5. Docker模式和设置说明" href="04_docker.html" /> 
+    <link rel="next" title="8. 评测完整实例" href="07_example.html" />
+    <link rel="prev" title="6. Docker模式和设置说明" href="04_docker.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -88,14 +88,15 @@
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">开始使用</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="01_introduce.html">1. 项目简介</a></li>
-<li class="toctree-l2"><a class="reference internal" href="05_frame.html">2. 算法内核简介</a></li>
-<li class="toctree-l2"><a class="reference internal" href="02_requirment.html">3. 开始运行项目</a></li>
-<li class="toctree-l2"><a class="reference internal" href="03_cpu_config.html">4. CPU/GPU模式和设置说明</a></li>
-<li class="toctree-l2"><a class="reference internal" href="04_docker.html">5. Docker模式和设置说明</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">6. 完整集成调用过程</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id2">6.1. 接口文件存储位置</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id3">6.2. 接口文件参数参考</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id4">6.3. 接口文件参数说明</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="01_introduce.html#id4">2. 主要研究内容</a></li>
+<li class="toctree-l2"><a class="reference internal" href="05_frame.html">3. 算法内核简介</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_requirment.html">4. 开始运行项目</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_cpu_config.html">5. CPU/GPU模式和设置说明</a></li>
+<li class="toctree-l2"><a class="reference internal" href="04_docker.html">6. Docker模式和设置说明</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">7. 完整集成调用过程</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id2">7.1. 接口文件存储位置</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">7.2. 接口文件参数参考</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">7.3. 接口文件参数说明</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#attack-method">attack_method</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#evaluation-method">evaluation_method</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#data-path">Data_path</a></li>
@@ -123,10 +124,10 @@
 <li class="toctree-l4"><a class="reference internal" href="#save-visualization-base-path">save_visualization_base_path</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#id5">6.4. 接口文件调用流程</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">7.4. 接口文件调用流程</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="07_example.html">7. 评测完整实例</a></li>
+<li class="toctree-l2"><a class="reference internal" href="07_example.html">8. 评测完整实例</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../Dataset/index.html">数据集介绍</a></li>
@@ -182,7 +183,7 @@
         
           <li><a href="index.html">开始使用</a> &raquo;</li>
         
-      <li><span class="section-number">6. </span>完整集成调用过程</li>
+      <li><span class="section-number">7. </span>完整集成调用过程</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -202,9 +203,9 @@
            <div itemprop="articleBody">
             
   <div class="section" id="id1">
-<h1><span class="section-number">6. </span>完整集成调用过程<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
+<h1><span class="section-number">7. </span>完整集成调用过程<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
 <div class="section" id="id2">
-<h2><span class="section-number">6.1. </span>接口文件存储位置<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
+<h2><span class="section-number">7.1. </span>接口文件存储位置<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
 <p>平台已集成有完整的攻击评测接口文件testimport.py。接口文件路径如下：</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>├── EvalBox
 ├── Models
@@ -216,7 +217,7 @@
 </div>
 </div>
 <div class="section" id="id3">
-<h2><span class="section-number">6.2. </span>接口文件参数参考<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h2>
+<h2><span class="section-number">7.2. </span>接口文件参数参考<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h2>
 <p>如下为在cifar-10数据集上，执行一个完整攻击+评测过程，所使用的对应参数：</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s1">&#39;The Attack and Evaluate Generation&#39;</span><span class="p">)</span>
 <span class="c1"># common arguments</span>
@@ -317,7 +318,7 @@
 </div>
 </div>
 <div class="section" id="id4">
-<h2><span class="section-number">6.3. </span>接口文件参数说明<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h2>
+<h2><span class="section-number">7.3. </span>接口文件参数说明<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h2>
 <div class="section" id="attack-method">
 <h3>attack_method<a class="headerlink" href="#attack-method" title="永久链接至标题">¶</a></h3>
 <p>该参数表示攻击算法名称，目前平台已集成的所有攻击算法，均可通过缩写调用。</p>
@@ -672,7 +673,7 @@ gsm_01和fgsm_02。该Key下以二元字典的形式存储</p></td>
 </div>
 </div>
 <div class="section" id="id5">
-<h2><span class="section-number">6.4. </span>接口文件调用流程<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h2>
+<h2><span class="section-number">7.4. </span>接口文件调用流程<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h2>
 <p>设置好上述所有参数后，执行</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">testimport</span><span class="o">.</span><span class="n">py</span>
 </pre></div>
@@ -689,10 +690,10 @@ gsm_01和fgsm_02。该Key下以二元字典的形式存储</p></td>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="07_example.html" class="btn btn-neutral float-right" title="7. 评测完整实例" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="07_example.html" class="btn btn-neutral float-right" title="8. 评测完整实例" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="04_docker.html" class="btn btn-neutral float-left" title="5. Docker模式和设置说明" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="04_docker.html" class="btn btn-neutral float-left" title="6. Docker模式和设置说明" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

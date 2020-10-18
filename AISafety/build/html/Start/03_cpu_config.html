@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>4. CPU/GPU模式和设置说明 &mdash; AISafety 1.0 文档</title>
+  <title>5. CPU/GPU模式和设置说明 &mdash; AISafety 1.0 文档</title>
   
 
   
@@ -38,8 +38,8 @@
     
     <link rel="index" title="索引" href="../genindex.html" />
     <link rel="search" title="搜索" href="../search.html" />
-    <link rel="next" title="5. Docker模式和设置说明" href="04_docker.html" />
-    <link rel="prev" title="3. 开始运行项目" href="02_requirment.html" /> 
+    <link rel="next" title="6. Docker模式和设置说明" href="04_docker.html" />
+    <link rel="prev" title="4. 开始运行项目" href="02_requirment.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -88,16 +88,17 @@
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">开始使用</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="01_introduce.html">1. 项目简介</a></li>
-<li class="toctree-l2"><a class="reference internal" href="05_frame.html">2. 算法内核简介</a></li>
-<li class="toctree-l2"><a class="reference internal" href="02_requirment.html">3. 开始运行项目</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">4. CPU/GPU模式和设置说明</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#cpu">4.1. 使用CPU运行程序</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#gpu">4.2. 使用单一/多GPU运行程序</a></li>
+<li class="toctree-l2"><a class="reference internal" href="01_introduce.html#id4">2. 主要研究内容</a></li>
+<li class="toctree-l2"><a class="reference internal" href="05_frame.html">3. 算法内核简介</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_requirment.html">4. 开始运行项目</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">5. CPU/GPU模式和设置说明</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#cpu">5.1. 使用CPU运行程序</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gpu">5.2. 使用单一/多GPU运行程序</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="04_docker.html">5. Docker模式和设置说明</a></li>
-<li class="toctree-l2"><a class="reference internal" href="06_interface.html">6. 完整集成调用过程</a></li>
-<li class="toctree-l2"><a class="reference internal" href="07_example.html">7. 评测完整实例</a></li>
+<li class="toctree-l2"><a class="reference internal" href="04_docker.html">6. Docker模式和设置说明</a></li>
+<li class="toctree-l2"><a class="reference internal" href="06_interface.html">7. 完整集成调用过程</a></li>
+<li class="toctree-l2"><a class="reference internal" href="07_example.html">8. 评测完整实例</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../Dataset/index.html">数据集介绍</a></li>
@@ -153,7 +154,7 @@
         
           <li><a href="index.html">开始使用</a> &raquo;</li>
         
-      <li><span class="section-number">4. </span>CPU/GPU模式和设置说明</li>
+      <li><span class="section-number">5. </span>CPU/GPU模式和设置说明</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -173,18 +174,18 @@
            <div itemprop="articleBody">
             
   <div class="section" id="cpu-gpu">
-<h1><span class="section-number">4. </span>CPU/GPU模式和设置说明<a class="headerlink" href="#cpu-gpu" title="永久链接至标题">¶</a></h1>
+<h1><span class="section-number">5. </span>CPU/GPU模式和设置说明<a class="headerlink" href="#cpu-gpu" title="永久链接至标题">¶</a></h1>
 <blockquote>
 <div><p>该平台会自动检测运行的环境是否存在GPU，默认需要安装cuda的环境中才可以使用GPU。</p>
 </div></blockquote>
 <div class="section" id="cpu">
-<h2><span class="section-number">4.1. </span>使用CPU运行程序<a class="headerlink" href="#cpu" title="永久链接至标题">¶</a></h2>
+<h2><span class="section-number">5.1. </span>使用CPU运行程序<a class="headerlink" href="#cpu" title="永久链接至标题">¶</a></h2>
 <blockquote>
 <div><p>无需设置，可自动识别</p>
 </div></blockquote>
 </div>
 <div class="section" id="gpu">
-<h2><span class="section-number">4.2. </span>使用单一/多GPU运行程序<a class="headerlink" href="#gpu" title="永久链接至标题">¶</a></h2>
+<h2><span class="section-number">5.2. </span>使用单一/多GPU运行程序<a class="headerlink" href="#gpu" title="永久链接至标题">¶</a></h2>
 <blockquote>
 <div><p>用户需要在集成调度接口<code class="docutils literal notranslate"><span class="pre">~/test/testimport.py</span></code>中，对参数<code class="docutils literal notranslate"><span class="pre">--GPU_Config</span></code>进行设置</p>
 </div></blockquote>
@@ -210,10 +211,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="04_docker.html" class="btn btn-neutral float-right" title="5. Docker模式和设置说明" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="04_docker.html" class="btn btn-neutral float-right" title="6. Docker模式和设置说明" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="02_requirment.html" class="btn btn-neutral float-left" title="3. 开始运行项目" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="02_requirment.html" class="btn btn-neutral float-left" title="4. 开始运行项目" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

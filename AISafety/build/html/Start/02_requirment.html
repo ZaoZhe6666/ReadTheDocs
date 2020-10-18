@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>3. 开始运行项目 &mdash; AISafety 1.0 文档</title>
+  <title>4. 开始运行项目 &mdash; AISafety 1.0 文档</title>
   
 
   
@@ -38,8 +38,8 @@
     
     <link rel="index" title="索引" href="../genindex.html" />
     <link rel="search" title="搜索" href="../search.html" />
-    <link rel="next" title="4. CPU/GPU模式和设置说明" href="03_cpu_config.html" />
-    <link rel="prev" title="2. 算法内核简介" href="05_frame.html" /> 
+    <link rel="next" title="5. CPU/GPU模式和设置说明" href="03_cpu_config.html" />
+    <link rel="prev" title="3. 算法内核简介" href="05_frame.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -88,23 +88,24 @@
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">开始使用</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="01_introduce.html">1. 项目简介</a></li>
-<li class="toctree-l2"><a class="reference internal" href="05_frame.html">2. 算法内核简介</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">3. 开始运行项目</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#python">3.1. 基础Python环境</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id2">3.2. 辅助环境</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id3">3.3. 环境配置安装</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="01_introduce.html#id4">2. 主要研究内容</a></li>
+<li class="toctree-l2"><a class="reference internal" href="05_frame.html">3. 算法内核简介</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">4. 开始运行项目</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#python">4.1. 基础Python环境</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">4.2. 辅助环境</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">4.3. 环境配置安装</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#id4">新建空环境</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#torch">安装torch</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#id5">3.4. 依赖安装</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id6">3.5. 程序安装说明</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">4.4. 依赖安装</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id6">4.5. 程序安装说明</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="03_cpu_config.html">4. CPU/GPU模式和设置说明</a></li>
-<li class="toctree-l2"><a class="reference internal" href="04_docker.html">5. Docker模式和设置说明</a></li>
-<li class="toctree-l2"><a class="reference internal" href="06_interface.html">6. 完整集成调用过程</a></li>
-<li class="toctree-l2"><a class="reference internal" href="07_example.html">7. 评测完整实例</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_cpu_config.html">5. CPU/GPU模式和设置说明</a></li>
+<li class="toctree-l2"><a class="reference internal" href="04_docker.html">6. Docker模式和设置说明</a></li>
+<li class="toctree-l2"><a class="reference internal" href="06_interface.html">7. 完整集成调用过程</a></li>
+<li class="toctree-l2"><a class="reference internal" href="07_example.html">8. 评测完整实例</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../Dataset/index.html">数据集介绍</a></li>
@@ -160,7 +161,7 @@
         
           <li><a href="index.html">开始使用</a> &raquo;</li>
         
-      <li><span class="section-number">3. </span>开始运行项目</li>
+      <li><span class="section-number">4. </span>开始运行项目</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -180,16 +181,16 @@
            <div itemprop="articleBody">
             
   <div class="section" id="id1">
-<h1><span class="section-number">3. </span>开始运行项目<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
+<h1><span class="section-number">4. </span>开始运行项目<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
 <p>运行项目前，需要先安装项目对应依赖环境</p>
 <div class="section" id="python">
-<h2><span class="section-number">3.1. </span>基础Python环境<a class="headerlink" href="#python" title="永久链接至标题">¶</a></h2>
+<h2><span class="section-number">4.1. </span>基础Python环境<a class="headerlink" href="#python" title="永久链接至标题">¶</a></h2>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span><span class="o">==</span><span class="mf">3.6</span><span class="o">.</span><span class="mi">5</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="id2">
-<h2><span class="section-number">3.2. </span>辅助环境<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
+<h2><span class="section-number">4.2. </span>辅助环境<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">certifi</span><span class="o">==</span><span class="mf">2020.6</span><span class="o">.</span><span class="mi">20</span>
 <span class="n">cloudpickle</span><span class="o">==</span><span class="mf">1.6</span><span class="o">.</span><span class="mi">0</span>
 <span class="n">cycler</span><span class="o">==</span><span class="mf">0.10</span><span class="o">.</span><span class="mi">0</span>
@@ -219,7 +220,7 @@
 </div>
 </div>
 <div class="section" id="id3">
-<h2><span class="section-number">3.3. </span>环境配置安装<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h2>
+<h2><span class="section-number">4.3. </span>环境配置安装<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h2>
 <div class="section" id="id4">
 <h3>新建空环境<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h3>
 <p><img alt="image1" src="../_images/图片15.png" /></p>
@@ -232,7 +233,7 @@
 </div>
 </div>
 <div class="section" id="id5">
-<h2><span class="section-number">3.4. </span>依赖安装<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h2>
+<h2><span class="section-number">4.4. </span>依赖安装<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h2>
 <p>安装的包参见 requirements.txt</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">r</span> <span class="n">requirement</span><span class="o">.</span><span class="n">txt</span>
 </pre></div>
@@ -274,7 +275,7 @@
 </div>
 </div>
 <div class="section" id="id6">
-<h2><span class="section-number">3.5. </span>程序安装说明<a class="headerlink" href="#id6" title="永久链接至标题">¶</a></h2>
+<h2><span class="section-number">4.5. </span>程序安装说明<a class="headerlink" href="#id6" title="永久链接至标题">¶</a></h2>
 <p>使用GitHub在开源地址下clone或者fork源码，并参考环境安装配置</p>
 </div>
 </div>
@@ -287,10 +288,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="03_cpu_config.html" class="btn btn-neutral float-right" title="4. CPU/GPU模式和设置说明" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="03_cpu_config.html" class="btn btn-neutral float-right" title="5. CPU/GPU模式和设置说明" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="05_frame.html" class="btn btn-neutral float-left" title="2. 算法内核简介" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="05_frame.html" class="btn btn-neutral float-left" title="3. 算法内核简介" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

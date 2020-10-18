@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>7. 评测完整实例 &mdash; AISafety 1.0 文档</title>
+  <title>8. 评测完整实例 &mdash; AISafety 1.0 文档</title>
   
 
   
@@ -39,7 +39,7 @@
     <link rel="index" title="索引" href="../genindex.html" />
     <link rel="search" title="搜索" href="../search.html" />
     <link rel="next" title="数据集介绍" href="../Dataset/index.html" />
-    <link rel="prev" title="6. 完整集成调用过程" href="06_interface.html" /> 
+    <link rel="prev" title="7. 完整集成调用过程" href="06_interface.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -88,13 +88,14 @@
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">开始使用</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="01_introduce.html">1. 项目简介</a></li>
-<li class="toctree-l2"><a class="reference internal" href="05_frame.html">2. 算法内核简介</a></li>
-<li class="toctree-l2"><a class="reference internal" href="02_requirment.html">3. 开始运行项目</a></li>
-<li class="toctree-l2"><a class="reference internal" href="03_cpu_config.html">4. CPU/GPU模式和设置说明</a></li>
-<li class="toctree-l2"><a class="reference internal" href="04_docker.html">5. Docker模式和设置说明</a></li>
-<li class="toctree-l2"><a class="reference internal" href="06_interface.html">6. 完整集成调用过程</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">7. 评测完整实例</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id2">7.1. 参考实例1（白盒攻击）</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="01_introduce.html#id4">2. 主要研究内容</a></li>
+<li class="toctree-l2"><a class="reference internal" href="05_frame.html">3. 算法内核简介</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_requirment.html">4. 开始运行项目</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_cpu_config.html">5. CPU/GPU模式和设置说明</a></li>
+<li class="toctree-l2"><a class="reference internal" href="04_docker.html">6. Docker模式和设置说明</a></li>
+<li class="toctree-l2"><a class="reference internal" href="06_interface.html">7. 完整集成调用过程</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">8. 评测完整实例</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id2">8.1. 参考实例1（白盒攻击）</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#id3">参数设置</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#id4">输出存储</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#id5">评测结果</a></li>
@@ -103,7 +104,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#id7">攻击前后热力图敏感区域可视化</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#id8">7.2. 参考示例2（黑盒攻击）</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id8">8.2. 参考示例2（黑盒攻击）</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#id9">参数设置</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#id11">输出存储</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#id13">评测结果</a></li>
@@ -167,7 +168,7 @@
         
           <li><a href="index.html">开始使用</a> &raquo;</li>
         
-      <li><span class="section-number">7. </span>评测完整实例</li>
+      <li><span class="section-number">8. </span>评测完整实例</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -187,9 +188,9 @@
            <div itemprop="articleBody">
             
   <div class="section" id="id1">
-<h1><span class="section-number">7. </span>评测完整实例<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
+<h1><span class="section-number">8. </span>评测完整实例<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
 <div class="section" id="id2">
-<h2><span class="section-number">7.1. </span>参考实例1（白盒攻击）<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
+<h2><span class="section-number">8.1. </span>参考实例1（白盒攻击）<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
 <div class="section" id="id3">
 <h3>参数设置<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h3>
 <p>testimport.py中parser设置：</p>
@@ -296,7 +297,7 @@
 </div>
 </div>
 <div class="section" id="id8">
-<h2><span class="section-number">7.2. </span>参考示例2（黑盒攻击）<a class="headerlink" href="#id8" title="永久链接至标题">¶</a></h2>
+<h2><span class="section-number">8.2. </span>参考示例2（黑盒攻击）<a class="headerlink" href="#id8" title="永久链接至标题">¶</a></h2>
 <div class="section" id="id9">
 <span id="id10"></span><h3>参数设置<a class="headerlink" href="#id9" title="永久链接至标题">¶</a></h3>
 <p>testimport_black.py中parser设置，arg1的：</p>
@@ -411,7 +412,7 @@ testimport.py中Save_Eval_Visualization_Result()函数的topl_show_list参数，
         <a href="../Dataset/index.html" class="btn btn-neutral float-right" title="数据集介绍" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="06_interface.html" class="btn btn-neutral float-left" title="6. 完整集成调用过程" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="06_interface.html" class="btn btn-neutral float-left" title="7. 完整集成调用过程" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
